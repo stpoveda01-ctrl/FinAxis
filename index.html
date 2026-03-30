@@ -3,36 +3,1252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FinAxis Premium</title>
-<link rel="stylesheet" href="style.css">
+<title>FinAxis · PYC Consultoría Integral</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════
+   FINAXIS · PYC CONSULTORÍA INTEGRAL
+   Luxury Dark Editorial · Bloomberg × Vogue Business
+   Palette: Deep Obsidian · Warm Gold · Ivory
+════════════════════════════════════════════════ */
+:root {
+  --ob:    #0d0d0b;
+  --ob2:   #131310;
+  --ob3:   #1a1a16;
+  --ob4:   #222220;
+  --ob5:   #2e2e2a;
+  --ob6:   #3a3a35;
+  --gold:  #c9a84c;
+  --gold2: #e2bf6e;
+  --gold3: #f0d48a;
+  --goldf: rgba(201,168,76,.12);
+  --ivory: #f4f0e6;
+  --iv2:   #e8e3d5;
+  --iv3:   #ccc5b0;
+  --iv4:   #a09880;
+  --em:    #2d6e50;
+  --em2:   #3d8f68;
+  --em3:   #52b082;
+  --emf:   rgba(45,110,80,.15);
+  --rd:    #8b3a3a;
+  --rd2:   #b04e4e;
+  --rdf:   rgba(139,58,58,.12);
+  --bl:    #2a4a7a;
+  --blf:   rgba(42,74,122,.12);
+  --border: rgba(201,168,76,.15);
+  --bord2:  rgba(201,168,76,.08);
+  --bord3:  rgba(244,240,230,.06);
+  --r: 12px; --rs: 7px;
+}
+ 
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+ 
+body {
+  font-family:'Syne',sans-serif;
+  background:var(--ob);
+  color:var(--ivory);
+  min-height:100vh;
+  font-size:13px;
+  line-height:1.6;
+  cursor:default;
+}
+ 
+/* ── Noise texture overlay ── */
+body::after {
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:.4;
+}
+ 
+/* ── Ambient glow ── */
+.glow-top {
+  position:fixed;top:-200px;left:50%;transform:translateX(-50%);
+  width:800px;height:400px;
+  background:radial-gradient(ellipse,rgba(201,168,76,.07) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+.glow-left {
+  position:fixed;bottom:20%;left:-100px;
+  width:400px;height:400px;
+  background:radial-gradient(ellipse,rgba(45,110,80,.08) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+ 
+/* ════ HEADER ════ */
+header {
+  position:sticky;top:0;z-index:200;
+  background:rgba(13,13,11,.92);
+  backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--border);
+  padding:0 48px;
+  height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+ 
+/* Logo PYC */
+.logo {display:flex;align-items:center;gap:18px;}
+.pyc-mark {
+  position:relative;
+  width:46px;height:46px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.pyc-mark::before {
+  content:'';position:absolute;inset:0;
+  border:1px solid var(--gold);
+  border-radius:10px;
+  opacity:.5;
+}
+.pyc-mark::after {
+  content:'';position:absolute;inset:3px;
+  background:linear-gradient(135deg,var(--em) 0%,var(--ob3) 100%);
+  border-radius:7px;
+}
+.pyc-mark span {
+  font-family:'Cormorant Garamond',serif;
+  font-size:17px;font-weight:600;
+  color:var(--gold2);letter-spacing:2px;
+  position:relative;z-index:1;
+}
+.logo-info {line-height:1.2;}
+.logo-firm {
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;font-weight:400;font-style:italic;
+  color:var(--iv3);letter-spacing:.5px;
+}
+.logo-firm strong{font-style:normal;font-weight:600;color:var(--ivory);}
+.logo-sep {
+  width:1px;height:32px;
+  background:linear-gradient(to bottom,transparent,var(--gold),transparent);
+  margin:0 18px;opacity:.4;
+}
+.fin-wordmark {
+  display:flex;align-items:baseline;gap:0;
+}
+.fin-f {
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:300;font-style:italic;
+  color:var(--gold2);line-height:1;letter-spacing:-1px;
+}
+.fin-rest {
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:700;
+  color:var(--ivory);letter-spacing:3px;text-transform:uppercase;
+}
+.fin-line {
+  width:1px;height:22px;
+  background:var(--gold);
+  margin:0 8px;opacity:.5;
+  align-self:center;
+}
+.fin-sub {
+  font-size:9px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--iv4);
+  align-self:center;
+}
+ 
+.hdr-right {
+  display:flex;align-items:center;gap:16px;
+}
+.hdr-pill {
+  font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--border);
+  padding:4px 12px;border-radius:20px;
+  background:var(--goldf);
+}
+.hdr-date {
+  font-size:11px;color:var(--iv4);letter-spacing:.5px;
+}
+ 
+/* ════ HERO BAND ════ */
+.hero {
+  position:relative;overflow:hidden;
+  padding:52px 48px 44px;
+  border-bottom:1px solid var(--bord3);
+  background:linear-gradient(180deg,rgba(201,168,76,.04) 0%,transparent 100%);
+}
+.hero-grid {
+  max-width:1080px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto;
+  align-items:end;gap:40px;
+}
+.hero-eyebrow {
+  font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{
+  content:'';width:28px;height:1px;background:var(--gold);opacity:.6;
+}
+.hero-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,5vw,60px);
+  font-weight:300;line-height:1.08;
+  letter-spacing:-1px;
+  color:var(--ivory);
+}
+.hero-title em {
+  font-style:italic;
+  background:linear-gradient(90deg,var(--gold2),var(--gold3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-desc {
+  margin-top:14px;font-size:13px;
+  color:var(--iv4);max-width:520px;line-height:1.7;
+}
+.hero-stats {
+  display:flex;gap:1px;flex-shrink:0;
+}
+.hstat {
+  padding:16px 22px;text-align:center;
+  background:var(--ob3);border:1px solid var(--bord3);
+  position:relative;
+}
+.hstat:first-child{border-radius:var(--r) 0 0 var(--r);}
+.hstat:last-child{border-radius:0 var(--r) var(--r) 0;}
+.hstat::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.4;
+}
+.hstat-n {
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:300;
+  color:var(--gold2);line-height:1;margin-bottom:4px;
+}
+.hstat-l{font-size:9px;color:var(--iv4);letter-spacing:1.5px;text-transform:uppercase;}
+ 
+/* ════ MAIN ════ */
+main {
+  max-width:1080px;margin:0 auto;
+  padding:40px 48px 80px;
+  position:relative;z-index:1;
+}
+@media(max-width:768px){
+  header{padding:0 20px;}
+  .hero{padding:36px 20px 32px;}
+  main{padding:28px 20px 60px;}
+}
+ 
+/* ════ TABS ════ */
+.tabs {
+  display:flex;
+  border-bottom:1px solid var(--bord3);
+  margin-bottom:36px;
+  gap:0;
+  position:relative;
+}
+.tabs::after {
+  content:'';
+  position:absolute;bottom:0;left:0;
+  height:1px;width:100%;
+  background:var(--bord3);
+}
+.tab-btn {
+  padding:14px 22px 13px;
+  border:none;background:transparent;
+  font-family:'Syne',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--iv4);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all .2s;white-space:nowrap;
+  position:relative;z-index:1;
+}
+.tab-btn:hover:not(.active){color:var(--iv2);}
+.tab-btn.active {
+  color:var(--gold2);
+  border-bottom-color:var(--gold);
+}
+ 
+.tab-content{display:none;}
+.tab-content.active{display:block;animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+ 
+/* ════ SECTION CARD ════ */
+.card {
+  background:var(--ob2);
+  border:1px solid var(--bord3);
+  border-radius:var(--r);
+  margin-bottom:16px;
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.card:hover{border-color:var(--border);}
+ 
+.card-head {
+  padding:22px 26px;
+  display:flex;align-items:center;gap:16px;
+  border-bottom:1px solid var(--bord3);
+  background:rgba(255,255,255,.015);
+}
+.card-ico {
+  width:38px;height:38px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;flex-shrink:0;
+}
+.ico-em{background:var(--emf);box-shadow:0 0 0 1px rgba(82,176,130,.2);}
+.ico-bl{background:var(--blf);box-shadow:0 0 0 1px rgba(100,140,200,.2);}
+.ico-rd{background:var(--rdf);box-shadow:0 0 0 1px rgba(176,78,78,.2);}
+.ico-gd{background:var(--goldf);box-shadow:0 0 0 1px rgba(201,168,76,.2);}
+.ico-pr{background:rgba(120,80,200,.1);box-shadow:0 0 0 1px rgba(160,110,220,.2);}
+ 
+.card-title{font-size:13px;font-weight:700;color:var(--ivory);letter-spacing:.3px;}
+.card-sub{font-size:11px;color:var(--iv4);margin-top:2px;}
+ 
+.tag {
+  display:inline-block;font-size:8px;font-weight:700;
+  padding:2px 8px;border-radius:20px;margin-left:8px;
+  letter-spacing:1.2px;text-transform:uppercase;vertical-align:middle;
+}
+.t-em{background:var(--emf);color:var(--em3);border:1px solid rgba(82,176,130,.25);}
+.t-bl{background:var(--blf);color:#7fa8e0;border:1px solid rgba(100,160,220,.25);}
+.t-rd{background:var(--rdf);color:var(--rd2);border:1px solid rgba(176,78,78,.25);}
+.t-gd{background:var(--goldf);color:var(--gold2);border:1px solid rgba(201,168,76,.25);}
+.t-pr{background:rgba(120,80,200,.1);color:#c09cff;border:1px solid rgba(160,110,220,.2);}
+ 
+.card-body{padding:24px 26px 22px;}
+ 
+/* ════ INPUTS ════ */
+.ig {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:14px;
+}
+.igrp{display:flex;flex-direction:column;gap:6px;}
+.igrp label {
+  font-size:10px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+  color:var(--iv4);
+}
+.igrp input {
+  background:var(--ob3);
+  border:1px solid var(--bord3);
+  border-radius:var(--rs);
+  padding:11px 14px;
+  font-family:'Syne',sans-serif;font-size:13px;
+  color:var(--ivory);
+  transition:all .2s;width:100%;
+}
+.igrp input:focus{
+  outline:none;
+  border-color:rgba(201,168,76,.4);
+  box-shadow:0 0 0 3px rgba(201,168,76,.06);
+  background:var(--ob4);
+}
+.igrp input::placeholder{color:var(--ob6);}
+.igrp input:not(:placeholder-shown){
+  border-color:var(--bord3);
+  color:var(--ivory);
+}
+ 
+/* ════ TOTALS CHIPS ════ */
+.totrow {
+  display:flex;flex-wrap:wrap;gap:10px;
+  padding:18px 26px;
+  border-top:1px solid var(--bord3);
+  background:rgba(0,0,0,.15);
+}
+.chip {
+  display:flex;flex-direction:column;
+  border-radius:var(--rs);padding:12px 18px;
+  flex:1;min-width:160px;
+  border:1px solid var(--bord3);
+  background:var(--ob3);
+  position:relative;overflow:hidden;
+}
+.chip::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  opacity:.5;
+}
+.chip-l{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--iv4);margin-bottom:5px;}
+.chip-v{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;}
+.c-em .chip-v{color:var(--em3);}
+.c-em::after{background:var(--em3);}
+.c-bl .chip-v{color:#7fa8e0;}
+.c-bl::after{background:#7fa8e0;}
+.c-rd .chip-v{color:var(--rd2);}
+.c-rd::after{background:var(--rd2);}
+.c-gd .chip-v{color:var(--gold2);}
+.c-gd::after{background:var(--gold2);}
+.c-pr .chip-v{color:#c09cff;}
+.c-pr::after{background:#c09cff;}
+ 
+/* ════ BUTTONS ════ */
+.actions{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap;}
+.btn {
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border-radius:var(--rs);
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  border:none;cursor:pointer;transition:all .22s;
+  position:relative;overflow:hidden;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.06) 0%,transparent 100%);
+}
+.btn-em {
+  background:linear-gradient(135deg,var(--em) 0%,#1f5a3c 100%);
+  color:#fff;
+  box-shadow:0 2px 16px rgba(45,110,80,.3);
+}
+.btn-em:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(45,110,80,.45);}
+.btn-gd {
+  background:linear-gradient(135deg,#8a6320 0%,var(--gold) 100%);
+  color:var(--ob);
+  box-shadow:0 2px 16px rgba(201,168,76,.25);
+}
+.btn-gd:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,168,76,.4);}
+.btn-gh {
+  background:var(--ob3);color:var(--iv4);
+  border:1px solid var(--bord3);
+}
+.btn-gh:hover{color:var(--ivory);border-color:var(--border);}
+ 
+/* ════ KPI GRID ════ */
+.kpi-section-title {
+  font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);margin:28px 0 14px;
+  display:flex;align-items:center;gap:12px;
+}
+.kpi-section-title::before{content:'';width:3px;height:14px;background:var(--gold);border-radius:2px;}
+.kpi-section-title::after{content:'';flex:1;height:1px;background:var(--bord3);}
+ 
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:6px;}
+.kpi {
+  background:var(--ob2);
+  border:1px solid var(--bord3);
+  border-radius:var(--r);
+  padding:18px 16px;
+  position:relative;overflow:hidden;
+  transition:all .25s;
+  cursor:default;
+}
+.kpi:hover{
+  border-color:var(--border);
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
+}
+.kpi::before{
+  content:'';position:absolute;top:0;left:0;bottom:0;width:2px;
+}
+.kpi-em::before{background:linear-gradient(to bottom,var(--em3),transparent);}
+.kpi-rd::before{background:linear-gradient(to bottom,var(--rd2),transparent);}
+.kpi-gd::before{background:linear-gradient(to bottom,var(--gold2),transparent);}
+.kpi-bl::before{background:linear-gradient(to bottom,#7fa8e0,transparent);}
+.kpi-pr::before{background:linear-gradient(to bottom,#c09cff,transparent);}
+ 
+.kpi-lbl{font-size:9px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--iv4);margin-bottom:10px;}
+.kpi-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:300;color:var(--ivory);
+  margin-bottom:2px;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.kpi-sub{font-size:10px;color:var(--ob6);}
+.kpi-badge{
+  display:inline-block;font-size:9px;font-weight:700;
+  padding:2px 8px;border-radius:20px;margin-top:10px;
+}
+.s-ok  {background:rgba(82,176,130,.12);color:var(--em3);}
+.s-warn{background:rgba(201,168,76,.12);color:var(--gold2);}
+.s-bad {background:rgba(176,78,78,.12);color:var(--rd2);}
+ 
+/* ════ BALANCE TABLE ════ */
+.bwrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+@media(max-width:660px){.bwrap{grid-template-columns:1fr;}}
+ 
+.bcol-hd{
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid;
+}
+.bh-em{color:var(--em3);border-color:rgba(82,176,130,.3);}
+.bh-rd{color:var(--rd2);border-color:rgba(176,78,78,.3);}
+ 
+.bgrp{margin-bottom:18px;}
+.bgrp-t{
+  font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--iv4);margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.bgrp-t::after{content:'';flex:1;height:1px;background:var(--bord3);}
+ 
+.brow{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:6px 10px;border-radius:6px;
+  font-size:12px;color:var(--iv3);
+  transition:background .15s;
+}
+.brow:hover{background:var(--ob3);}
+.brow .amt{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;font-weight:600;
+  color:var(--ivory);font-variant-numeric:tabular-nums;
+}
+ 
+.bsub{
+  display:flex;justify-content:space-between;
+  padding:8px 10px 0;margin-top:4px;
+  border-top:1px solid var(--bord3);
+  font-size:11px;font-weight:700;
+}
+.bsub span:last-child{
+  font-family:'Cormorant Garamond',serif;
+  font-size:14px;font-variant-numeric:tabular-nums;
+}
+ 
+.bgrand{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 10px;margin-top:14px;
+  border-top:1px solid;
+}
+.bg-em{border-color:rgba(82,176,130,.4);}
+.bg-rd{border-color:rgba(176,78,78,.4);}
+.bgrand-l{
+  font-family:'Syne',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+}
+.bgrand-v{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:600;font-variant-numeric:tabular-nums;
+}
+.bg-em .bgrand-l,.bg-em .bgrand-v{color:var(--em3);}
+.bg-rd .bgrand-l,.bg-rd .bgrand-v{color:var(--rd2);}
+ 
+.cuadre{
+  margin-top:20px;padding:12px 18px;border-radius:var(--rs);
+  font-size:11px;font-weight:600;letter-spacing:.3px;
+  display:none;
+}
+.cq-ok{background:rgba(82,176,130,.08);border:1px solid rgba(82,176,130,.2);color:var(--em3);}
+.cq-err{background:rgba(176,78,78,.08);border:1px solid rgba(176,78,78,.2);color:var(--rd2);}
+ 
+/* ════ AI PANEL ════ */
+.ai-panel {
+  background:var(--ob2);border:1px solid var(--bord3);border-radius:var(--r);
+  overflow:hidden;
+}
+.ai-hdr {
+  padding:18px 26px;border-bottom:1px solid var(--bord3);
+  background:rgba(201,168,76,.03);
+  display:flex;align-items:center;gap:14px;
+}
+.ai-pulse{
+  width:9px;height:9px;border-radius:50%;background:var(--em3);
+  animation:aiPulse 2.5s infinite;flex-shrink:0;
+}
+@keyframes aiPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(82,176,130,.5);}
+  50%{box-shadow:0 0 0 6px rgba(82,176,130,0);}
+}
+.ai-lbl{font-size:12px;font-weight:700;color:var(--ivory);letter-spacing:.3px;}
+.ai-lbl-sub{font-size:10px;color:var(--iv4);}
+.ai-model-tag{
+  margin-left:auto;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);border:1px solid var(--border);padding:3px 10px;border-radius:20px;
+  background:var(--goldf);
+}
+ 
+.ai-out{
+  padding:28px;min-height:220px;
+  font-size:13px;line-height:1.9;
+  color:var(--iv2);white-space:pre-wrap;
+  position:relative;
+}
+.ai-ph{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center;width:70%;
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-style:italic;font-weight:300;
+  color:var(--ob6);line-height:1.9;
+}
+.ai-ph strong{font-style:normal;color:var(--iv4);}
+.ai-spin{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  display:flex;gap:6px;align-items:center;
+}
+.ai-spin span{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);animation:spin 1.2s infinite;
+}
+.ai-spin span:nth-child(2){animation-delay:.2s;}
+.ai-spin span:nth-child(3){animation-delay:.4s;}
+@keyframes spin{0%,80%,100%{transform:scale(.5);opacity:.3;}40%{transform:scale(1);opacity:1;}}
+ 
+/* ════ FOOTER ════ */
+footer {
+  background:var(--ob2);
+  border-top:1px solid var(--border);
+  padding:44px 48px 32px;
+  position:relative;
+  overflow:hidden;
+}
+footer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.3;
+}
+.ft-inner{
+  max-width:1080px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1px 1fr;gap:0;align-items:start;
+}
+@media(max-width:640px){.ft-inner{grid-template-columns:1fr;}}
+.ft-divider{
+  background:linear-gradient(to bottom,transparent,var(--border),transparent);
+  margin:0 40px;
+}
+ 
+/* Left col */
+.ft-brand {}
+.ft-brand-logo{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.ft-emb{
+  width:40px;height:40px;border-radius:9px;
+  background:linear-gradient(135deg,var(--em) 0%,var(--ob3) 100%);
+  border:1px solid rgba(201,168,76,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-weight:600;color:var(--gold2);letter-spacing:1.5px;
+  flex-shrink:0;
+}
+.ft-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-weight:600;color:var(--ivory);
+}
+.ft-name span{color:var(--gold2);}
+.ft-credits{
+  display:flex;flex-direction:column;gap:6px;
+}
+.ft-row{
+  display:flex;align-items:baseline;gap:8px;
+  font-size:11px;
+}
+.ft-row-label{
+  font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--iv4);white-space:nowrap;flex-shrink:0;min-width:88px;
+}
+.ft-row-val{color:var(--iv3);}
+.ft-row-val strong{color:var(--ivory);font-weight:600;}
+.ft-link{color:var(--gold);text-decoration:none;}
+.ft-link:hover{color:var(--gold2);}
+ 
+/* Right col */
+.ft-elab{}
+.ft-elab-title{
+  font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;
+}
+.ft-elab-title::before{content:'';width:16px;height:1px;background:var(--gold);opacity:.6;}
+.ft-fields{display:flex;flex-direction:column;gap:12px;}
+.ft-fld label{
+  display:block;font-size:9px;font-weight:700;
+  letter-spacing:1.2px;text-transform:uppercase;
+  color:var(--iv4);margin-bottom:5px;
+}
+.ft-fld input{
+  width:100%;
+  background:var(--ob3);
+  border:1px solid var(--bord3);
+  border-radius:var(--rs);padding:11px 14px;
+  font-family:'Syne',sans-serif;font-size:13px;color:var(--ivory);
+  transition:all .2s;
+}
+.ft-fld input::placeholder{color:var(--ob6);}
+.ft-fld input:focus{
+  outline:none;border-color:rgba(201,168,76,.4);
+  box-shadow:0 0 0 3px rgba(201,168,76,.06);
+  background:var(--ob4);
+}
+ 
+.ft-bottom{
+  max-width:1080px;margin:28px auto 0;
+  padding-top:16px;border-top:1px solid var(--bord3);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:10px;
+}
+.ft-copy{font-size:10px;color:var(--iv4);letter-spacing:.5px;}
+.ft-finaxis{
+  font-family:'Cormorant Garamond',serif;
+  font-size:13px;font-style:italic;color:var(--iv4);
+}
+.ft-finaxis span{color:var(--gold);}
+</style>
 </head>
 <body>
-<div class="container">
-  <h1>FinAxis - Diagnóstico Financiero</h1>
-  
-  <div class="panel">
-    <h2>Ingresar datos financieros</h2>
-
-    <!-- Balance general -->
-    <input id="activos" placeholder="Activos totales">
-    <input id="pasivos" placeholder="Pasivos totales">
-    <input id="patrimonio" placeholder="Patrimonio">
-
-    <!-- PYG -->
-    <input id="ingresos" placeholder="Ingresos">
-    <input id="costos" placeholder="Costos">
-    <input id="gastos" placeholder="Gastos">
-
-    <button onclick="analizarIA()">Generar diagnóstico con IA</button>
+ 
+<div class="glow-top"></div>
+<div class="glow-left"></div>
+ 
+<!-- ═══════ HEADER ═══════ -->
+<header>
+  <div class="logo">
+    <div class="pyc-mark"><span>PYC</span></div>
+    <div class="logo-info">
+      <div class="logo-firm"><strong>PYC</strong> Consultoría Integral SAS</div>
+    </div>
+    <div class="logo-sep"></div>
+    <div class="fin-wordmark">
+      <span class="fin-f">F</span><span class="fin-rest">INAXIS</span>
+      <div class="fin-line"></div>
+      <span class="fin-sub">Diagnóstico</span>
+    </div>
   </div>
-
-  <div id="resultadoIA" class="resultado"></div>
-
-  <footer>
-    <p>Creado por: PYC Consultoría Integral SAS | Revisado por: Estiven Poveda | Elaborado por: <span id="autor">Cualquier persona con el link</span></p>
-  </footer>
+  <div class="hdr-right">
+    <div class="hdr-pill">Finanzas · Colombia</div>
+  </div>
+</header>
+ 
+<!-- ═══════ HERO ═══════ -->
+<div class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Diagnóstico Financiero Profesional</div>
+      <h1 class="hero-title">
+        Análisis financiero<br><em>integral e inteligente</em>
+      </h1>
+      <p class="hero-desc">Clasifique sus cuentas, visualice el balance, analice indicadores clave y reciba un diagnóstico experto con inteligencia artificial.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-n">16</div>
+        <div class="hstat-l">Indicadores</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">4</div>
+        <div class="hstat-l">Categorías</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">AI</div>
+        <div class="hstat-l">Powered</div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<script src="script.js"></script>
+ 
+<!-- ═══════ MAIN ═══════ -->
+<main>
+ 
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="go('ingreso')">Ingresar Datos</button>
+    <button class="tab-btn" onclick="go('balance')">Balance General</button>
+    <button class="tab-btn" onclick="go('indicadores')">Indicadores</button>
+    <button class="tab-btn" onclick="go('ia')">Análisis IA</button>
+  </div>
+ 
+  <!-- ══ TAB INGRESO ══ -->
+  <div id="tab-ingreso" class="tab-content active">
+ 
+    <!-- AC -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-ico ico-em">💵</div>
+        <div>
+          <div class="card-title">Activos Corrientes<span class="tag t-em">Corriente</span></div>
+          <div class="card-sub">Recursos líquidos o convertibles en efectivo en menos de 12 meses</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="ig">
+          <div class="igrp"><label>Efectivo y Equivalentes</label><input type="number" id="efectivo" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Inversiones Corrientes</label><input type="number" id="invCorriente" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Cuentas por Cobrar (CxC)</label><input type="number" id="cxc" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Inventarios</label><input type="number" id="inventarios" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Gastos Pagados por Anticipado</label><input type="number" id="anticipados" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Otros Activos Corrientes</label><input type="number" id="otrosAC" placeholder="0" oninput="calc()"></div>
+        </div>
+      </div>
+      <div class="totrow">
+        <div class="chip c-em"><span class="chip-l">Total Activos Corrientes</span><span class="chip-v" id="tAC">$ 0</span></div>
+      </div>
+    </div>
+ 
+    <!-- ANC -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-ico ico-bl">🏢</div>
+        <div>
+          <div class="card-title">Activos No Corrientes<span class="tag t-bl">No Corriente</span></div>
+          <div class="card-sub">Recursos de largo plazo, realizables en más de 12 meses</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="ig">
+          <div class="igrp"><label>Propiedad, Planta y Equipo (PPE)</label><input type="number" id="ppe" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Depreciación Acumulada (−)</label><input type="number" id="depreciacion" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Inversiones a Largo Plazo</label><input type="number" id="invLP" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Intangibles (Goodwill, Marcas)</label><input type="number" id="intangibles" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Diferidos</label><input type="number" id="diferidos" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Otros Activos No Corrientes</label><input type="number" id="otrosANC" placeholder="0" oninput="calc()"></div>
+        </div>
+      </div>
+      <div class="totrow">
+        <div class="chip c-bl"><span class="chip-l">Total No Corrientes</span><span class="chip-v" id="tANC">$ 0</span></div>
+        <div class="chip c-em"><span class="chip-l">Total Activos</span><span class="chip-v" id="tA">$ 0</span></div>
+      </div>
+    </div>
+ 
+    <!-- PC -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-ico ico-rd">📤</div>
+        <div>
+          <div class="card-title">Pasivos Corrientes<span class="tag t-rd">Corriente</span></div>
+          <div class="card-sub">Obligaciones con vencimiento menor a 12 meses</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="ig">
+          <div class="igrp"><label>Obligaciones Financieras CP</label><input type="number" id="obliFinCP" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Cuentas por Pagar (CxP)</label><input type="number" id="cxp" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Impuestos por Pagar</label><input type="number" id="impuestos" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Laborales y Nómina</label><input type="number" id="nomina" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Ingresos Diferidos</label><input type="number" id="ingDiferidos" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Otros Pasivos Corrientes</label><input type="number" id="otrosPC" placeholder="0" oninput="calc()"></div>
+        </div>
+      </div>
+      <div class="totrow">
+        <div class="chip c-rd"><span class="chip-l">Total Pasivos Corrientes</span><span class="chip-v" id="tPC">$ 0</span></div>
+      </div>
+    </div>
+ 
+    <!-- PNC -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-ico ico-rd">🏦</div>
+        <div>
+          <div class="card-title">Pasivos No Corrientes<span class="tag t-rd">No Corriente</span></div>
+          <div class="card-sub">Obligaciones y deudas de largo plazo, más de 12 meses</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="ig">
+          <div class="igrp"><label>Obligaciones Financieras LP</label><input type="number" id="obliFinLP" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Bonos y Títulos Emitidos</label><input type="number" id="bonos" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Provisiones LP</label><input type="number" id="provisiones" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Otros Pasivos No Corrientes</label><input type="number" id="otrosPNC" placeholder="0" oninput="calc()"></div>
+        </div>
+      </div>
+      <div class="totrow">
+        <div class="chip c-rd"><span class="chip-l">Total No Corrientes</span><span class="chip-v" id="tPNC">$ 0</span></div>
+        <div class="chip c-rd"><span class="chip-l">Total Pasivos</span><span class="chip-v" id="tP">$ 0</span></div>
+      </div>
+    </div>
+ 
+    <!-- PATRIMONIO -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-ico ico-gd">👑</div>
+        <div>
+          <div class="card-title">Patrimonio<span class="tag t-gd">Equity</span></div>
+          <div class="card-sub">Valor neto perteneciente a los socios o accionistas</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="ig">
+          <div class="igrp"><label>Capital Social</label><input type="number" id="capitalSocial" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Prima en Colocación de Acciones</label><input type="number" id="prima" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Reservas</label><input type="number" id="reservas" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Utilidades Retenidas / (Déficit)</label><input type="number" id="utilRetenidas" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Utilidad del Ejercicio</label><input type="number" id="utilEjercicio" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>ORI (Otro Resultado Integral)</label><input type="number" id="ori" placeholder="0" oninput="calc()"></div>
+        </div>
+      </div>
+      <div class="totrow">
+        <div class="chip c-gd"><span class="chip-l">Total Patrimonio</span><span class="chip-v" id="tPat">$ 0</span></div>
+        <div class="chip c-gd"><span class="chip-l">Total Pasivos + Patrimonio</span><span class="chip-v" id="tPP">$ 0</span></div>
+      </div>
+    </div>
+ 
+    <!-- P&G -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-ico ico-pr">📊</div>
+        <div>
+          <div class="card-title">Estado de Resultados<span class="tag t-pr">P&G</span></div>
+          <div class="card-sub">Ingresos, costos y gastos del período contable</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="ig">
+          <div class="igrp"><label>Ingresos Operacionales</label><input type="number" id="ingresosOp" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Ingresos No Operacionales</label><input type="number" id="ingresosNoOp" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Costo de Ventas / Producción</label><input type="number" id="costoVentas" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Gastos de Administración</label><input type="number" id="gastoAdmin" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Gastos de Ventas</label><input type="number" id="gastoVentas" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Gastos Financieros</label><input type="number" id="gastoFinanciero" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Impuesto de Renta</label><input type="number" id="impRenta" placeholder="0" oninput="calc()"></div>
+          <div class="igrp"><label>Otros Ingresos / (Gastos) Netos</label><input type="number" id="otrosPG" placeholder="0" oninput="calc()"></div>
+        </div>
+      </div>
+      <div class="totrow">
+        <div class="chip c-pr"><span class="chip-l">Utilidad Bruta</span><span class="chip-v" id="tUB">$ 0</span></div>
+        <div class="chip c-pr"><span class="chip-l">EBITDA Aprox.</span><span class="chip-v" id="tEB">$ 0</span></div>
+        <div class="chip c-gd"><span class="chip-l">Utilidad Neta</span><span class="chip-v" id="tUN">$ 0</span></div>
+      </div>
+    </div>
+ 
+    <div class="actions">
+      <button class="btn btn-em" onclick="go('balance');scrollTo(0,0)">Ver Balance General →</button>
+      <button class="btn btn-gd" onclick="go('indicadores');scrollTo(0,0)">Ver Indicadores →</button>
+      <button class="btn btn-gh" onclick="limpiar()">Limpiar Todo</button>
+    </div>
+  </div>
+ 
+  <!-- ══ TAB BALANCE ══ -->
+  <div id="tab-balance" class="tab-content">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-ico ico-em">📋</div>
+        <div>
+          <div class="card-title">Balance General Clasificado</div>
+          <div class="card-sub">Estructura financiera · generado automáticamente</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="bwrap">
+          <div>
+            <div class="bcol-hd bh-em">Activos</div>
+            <div class="bgrp">
+              <div class="bgrp-t">Corrientes</div>
+              <div class="brow"><span>Efectivo y Equivalentes</span><span class="amt" id="b-efectivo">$ 0</span></div>
+              <div class="brow"><span>Inversiones Corrientes</span><span class="amt" id="b-invCorriente">$ 0</span></div>
+              <div class="brow"><span>Cuentas por Cobrar</span><span class="amt" id="b-cxc">$ 0</span></div>
+              <div class="brow"><span>Inventarios</span><span class="amt" id="b-inventarios">$ 0</span></div>
+              <div class="brow"><span>Anticipados</span><span class="amt" id="b-anticipados">$ 0</span></div>
+              <div class="brow"><span>Otros Corrientes</span><span class="amt" id="b-otrosAC">$ 0</span></div>
+              <div class="bsub"><span>Subtotal Activos Corrientes</span><span id="b-tAC" style="color:var(--em3)">$ 0</span></div>
+            </div>
+            <div class="bgrp">
+              <div class="bgrp-t">No Corrientes</div>
+              <div class="brow"><span>PPE (neto de depreciación)</span><span class="amt" id="b-ppe">$ 0</span></div>
+              <div class="brow"><span>Inversiones LP</span><span class="amt" id="b-invLP">$ 0</span></div>
+              <div class="brow"><span>Intangibles</span><span class="amt" id="b-intangibles">$ 0</span></div>
+              <div class="brow"><span>Diferidos</span><span class="amt" id="b-diferidos">$ 0</span></div>
+              <div class="brow"><span>Otros No Corrientes</span><span class="amt" id="b-otrosANC">$ 0</span></div>
+              <div class="bsub"><span>Subtotal Activos No Corrientes</span><span id="b-tANC" style="color:#7fa8e0">$ 0</span></div>
+            </div>
+            <div class="bgrand bg-em">
+              <span class="bgrand-l">Total Activos</span>
+              <span class="bgrand-v" id="b-tA">$ 0</span>
+            </div>
+          </div>
+          <div>
+            <div class="bcol-hd bh-rd">Pasivos & Patrimonio</div>
+            <div class="bgrp">
+              <div class="bgrp-t">Pasivos Corrientes</div>
+              <div class="brow"><span>Obligaciones Fin. CP</span><span class="amt" id="b-obliFinCP">$ 0</span></div>
+              <div class="brow"><span>Cuentas por Pagar</span><span class="amt" id="b-cxp">$ 0</span></div>
+              <div class="brow"><span>Impuestos por Pagar</span><span class="amt" id="b-impuestos">$ 0</span></div>
+              <div class="brow"><span>Nómina</span><span class="amt" id="b-nomina">$ 0</span></div>
+              <div class="brow"><span>Ingresos Diferidos</span><span class="amt" id="b-ingDiferidos">$ 0</span></div>
+              <div class="brow"><span>Otros Corrientes</span><span class="amt" id="b-otrosPC">$ 0</span></div>
+              <div class="bsub"><span>Subtotal Pasivos Corrientes</span><span id="b-tPC" style="color:var(--rd2)">$ 0</span></div>
+            </div>
+            <div class="bgrp">
+              <div class="bgrp-t">Pasivos No Corrientes</div>
+              <div class="brow"><span>Obligaciones Fin. LP</span><span class="amt" id="b-obliFinLP">$ 0</span></div>
+              <div class="brow"><span>Bonos y Títulos</span><span class="amt" id="b-bonos">$ 0</span></div>
+              <div class="brow"><span>Provisiones LP</span><span class="amt" id="b-provisiones">$ 0</span></div>
+              <div class="brow"><span>Otros No Corrientes</span><span class="amt" id="b-otrosPNC">$ 0</span></div>
+              <div class="bsub"><span>Subtotal Pasivos No Corrientes</span><span id="b-tPNC" style="color:var(--rd2)">$ 0</span></div>
+            </div>
+            <div class="bgrp">
+              <div class="bgrp-t">Patrimonio</div>
+              <div class="brow"><span>Capital Social</span><span class="amt" id="b-capitalSocial">$ 0</span></div>
+              <div class="brow"><span>Prima en Colocación</span><span class="amt" id="b-prima">$ 0</span></div>
+              <div class="brow"><span>Reservas</span><span class="amt" id="b-reservas">$ 0</span></div>
+              <div class="brow"><span>Utilidades Retenidas</span><span class="amt" id="b-utilRetenidas">$ 0</span></div>
+              <div class="brow"><span>Utilidad del Ejercicio</span><span class="amt" id="b-utilEjercicio">$ 0</span></div>
+              <div class="brow"><span>ORI</span><span class="amt" id="b-ori">$ 0</span></div>
+              <div class="bsub"><span>Subtotal Patrimonio</span><span id="b-tPat" style="color:var(--gold2)">$ 0</span></div>
+            </div>
+            <div class="bgrand bg-rd">
+              <span class="bgrand-l">Total Pas. + Pat.</span>
+              <span class="bgrand-v" id="b-tPP">$ 0</span>
+            </div>
+          </div>
+        </div>
+        <div class="cuadre" id="cuadre"></div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ══ TAB INDICADORES ══ -->
+  <div id="tab-indicadores" class="tab-content">
+    <div class="kpi-section-title">Liquidez</div>
+    <div class="kpi-grid" id="k-liq"></div>
+    <div class="kpi-section-title">Endeudamiento</div>
+    <div class="kpi-grid" id="k-end"></div>
+    <div class="kpi-section-title">Rentabilidad</div>
+    <div class="kpi-grid" id="k-ren"></div>
+    <div class="kpi-section-title">Actividad</div>
+    <div class="kpi-grid" id="k-act"></div>
+    <div class="actions" style="margin-top:32px">
+      <button class="btn btn-em" onclick="go('ia');scrollTo(0,0);ia()">Generar Análisis con IA →</button>
+    </div>
+  </div>
+ 
+  <!-- ══ TAB IA ══ -->
+  <div id="tab-ia" class="tab-content">
+    <div class="ai-panel">
+      <div class="ai-hdr">
+        <div class="ai-pulse"></div>
+        <div>
+          <div class="ai-lbl">Diagnóstico con Inteligencia Artificial</div>
+          <div class="ai-lbl-sub">Análisis de CFO experto · Riesgos · Recomendaciones estratégicas</div>
+        </div>
+        <div class="ai-model-tag">Gemini · PYC</div>
+      </div>
+      <div class="ai-out" id="aiOut">
+        <div class="ai-ph">
+          Ingrese los datos financieros<br>y presione <strong>Generar Diagnóstico</strong>
+        </div>
+      </div>
+    </div>
+    <div class="actions" style="margin-top:18px">
+      <button class="btn btn-em" onclick="ia()">Generar Diagnóstico</button>
+      <button class="btn btn-gh" onclick="resetIA()">Limpiar resultado</button>
+    </div>
+  </div>
+ 
+</main>
+ 
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="ft-inner">
+    <!-- LEFT -->
+    <div class="ft-brand">
+      <div class="ft-brand-logo">
+        <div class="ft-emb">PYC</div>
+        <div class="ft-name">PYC Consultoría <span>Integral</span> SAS</div>
+      </div>
+      <div class="ft-credits">
+        <div class="ft-row">
+          <span class="ft-row-label">Creado por</span>
+          <span class="ft-row-val"><strong>PYC Consultoría Integral SAS</strong></span>
+        </div>
+        <div class="ft-row">
+          <span class="ft-row-label">Revisado por</span>
+          <span class="ft-row-val"><strong>Estiven Poveda</strong> · Contador Público<br>Especialista en Finanzas</span>
+        </div>
+        <div class="ft-row">
+          <span class="ft-row-label">Sitio web</span>
+          <span class="ft-row-val"><a class="ft-link" href="https://pycconsultoria.com" target="_blank">pycconsultoria.com</a></span>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- DIVIDER -->
+    <div class="ft-divider"></div>
+ 
+    <!-- RIGHT -->
+    <div class="ft-elab" style="padding-left:40px">
+      <div class="ft-elab-title">Elaborado por</div>
+      <div class="ft-fields">
+        <div class="ft-fld">
+          <label>Nombre completo</label>
+          <input type="text" id="eNombre" placeholder="Ingrese su nombre completo">
+        </div>
+        <div class="ft-fld">
+          <label>Cargo / Rol</label>
+          <input type="text" id="eCargo" placeholder="Ej: Analista Financiero, Gerente...">
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2025 PYC Consultoría Integral SAS · Todos los derechos reservados</span>
+    <span class="ft-finaxis"><span>Fin</span>Axis</span>
+  </div>
+</footer>
+ 
+<script>
+/* ─── UTILS ─── */
+const $  = id => document.getElementById(id);
+const v  = id => parseFloat($(id)?.value)||0;
+const fm = n  => '$ '+(isNaN(n)||!isFinite(n)?'0':Math.round(n).toLocaleString('es-CO'));
+const st = (id,val)=>{ const e=$(id); if(e) e.textContent=fm(val); };
+ 
+/* ─── TABS ─── */
+const TABS=['ingreso','balance','indicadores','ia'];
+function go(name){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',TABS[i]===name));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  $('tab-'+name).classList.add('active');
+  if(name==='balance') updBal();
+  if(name==='indicadores') updKpi();
+}
+ 
+/* ─── TOTALES ─── */
+function tot(){
+  const AC =v('efectivo')+v('invCorriente')+v('cxc')+v('inventarios')+v('anticipados')+v('otrosAC');
+  const ANC=v('ppe')-v('depreciacion')+v('invLP')+v('intangibles')+v('diferidos')+v('otrosANC');
+  const A  =AC+ANC;
+  const PC =v('obliFinCP')+v('cxp')+v('impuestos')+v('nomina')+v('ingDiferidos')+v('otrosPC');
+  const PNC=v('obliFinLP')+v('bonos')+v('provisiones')+v('otrosPNC');
+  const P  =PC+PNC;
+  const Pat=v('capitalSocial')+v('prima')+v('reservas')+v('utilRetenidas')+v('utilEjercicio')+v('ori');
+  const ing=v('ingresosOp')+v('ingresosNoOp');
+  const UB =ing-v('costoVentas');
+  const EB =UB-v('gastoAdmin')-v('gastoVentas');
+  const UN =EB-v('gastoFinanciero')-v('impRenta')+v('otrosPG');
+  return{AC,ANC,A,PC,PNC,P,Pat,ing,UB,EB,UN};
+}
+ 
+function calc(){
+  const t=tot();
+  st('tAC',t.AC); st('tANC',t.ANC); st('tA',t.A);
+  st('tPC',t.PC); st('tPNC',t.PNC); st('tP',t.P);
+  st('tPat',t.Pat); st('tPP',t.P+t.Pat);
+  st('tUB',t.UB); st('tEB',t.EB); st('tUN',t.UN);
+}
+ 
+/* ─── BALANCE ─── */
+function updBal(){
+  const t=tot();
+  ['efectivo','invCorriente','cxc','inventarios','anticipados','otrosAC',
+   'invLP','intangibles','diferidos','otrosANC',
+   'obliFinCP','cxp','impuestos','nomina','ingDiferidos','otrosPC',
+   'obliFinLP','bonos','provisiones','otrosPNC',
+   'capitalSocial','prima','reservas','utilRetenidas','utilEjercicio','ori']
+  .forEach(id=>st('b-'+id,v(id)));
+  st('b-ppe',v('ppe')-v('depreciacion'));
+  st('b-tAC',t.AC); st('b-tANC',t.ANC); st('b-tA',t.A);
+  st('b-tPC',t.PC); st('b-tPNC',t.PNC);
+  st('b-tPat',t.Pat); st('b-tPP',t.P+t.Pat);
+  const el=$('cuadre'), d=Math.abs(t.A-(t.P+t.Pat));
+  if(t.A===0){el.style.display='none';return;}
+  el.style.display='block';
+  el.className='cuadre '+(d<1?'cq-ok':'cq-err');
+  el.textContent=d<1?'✦ Balance cuadrado · Activos = Pasivos + Patrimonio'
+    :`⚠ Diferencia de ${fm(d)} · Revise las cifras ingresadas`;
+}
+ 
+/* ─── KPIs ─── */
+function kpi(lb,val,un,sub,col,sc,sl){
+  const d=(isNaN(val)||!isFinite(val))?'N/D':(Number.isInteger(val)?val:val.toFixed(2))+(un||'');
+  return `<div class="kpi kpi-${col}">
+    <div class="kpi-lbl">${lb}</div>
+    <div class="kpi-val">${d}</div>
+    <div class="kpi-sub">${sub}</div>
+    ${sc?`<div class="kpi-badge s-${sc}">${sl}</div>`:''}
+  </div>`;
+}
+const sliq=r=>r>=1.5?['ok','Favorable']:r>=1?['warn','Ajustada']:['bad','Riesgo'];
+const send=r=>r<=0.5?['ok','Bajo']:r<=1?['warn','Moderado']:['bad','Alto'];
+const smet=(r,ok,wa)=>r>=ok?['ok','Favorable']:r>=wa?['warn','Regular']:['bad','Bajo'];
+ 
+function updKpi(){
+  const t=tot();
+  const{AC,ANC,A,PC,PNC,P,Pat,ing,UB,EB,UN}=t;
+  const inv=v('inventarios'),ef=v('efectivo'),cxc=v('cxc'),cxp=v('cxp'),cv=v('costoVentas'),gf=v('gastoFinanciero');
+ 
+  const rC=PC?AC/PC:0, pa=PC?(AC-inv)/PC:0, ps=PC?ef/PC:0;
+  $('k-liq').innerHTML=
+    kpi('Razón Corriente',rC,'x','AC / PC','em',...sliq(rC))+
+    kpi('Prueba Ácida',pa,'x','(AC − Inv) / PC','em',...sliq(pa))+
+    kpi('Prueba Superácida',ps,'x','Efectivo / PC','em',ps>=.3?'ok':ps>=.1?'warn':'bad',ps>=.3?'Favorable':ps>=.1?'Regular':'Baja')+
+    kpi('Capital de Trabajo',AC-PC,'','AC − PC','bl',AC-PC>=0?'ok':'bad',AC-PC>=0?'Positivo':'Negativo');
+ 
+  const et=A?P/A:0, ap=Pat?P/Pat:0, ci=gf?EB/gf:0;
+  $('k-end').innerHTML=
+    kpi('Endeudamiento',et*100,'%','Pasivos / Activos','rd',...send(et))+
+    kpi('Apalancamiento',ap,'x','Pasivos / Patrimonio','rd',...send(ap))+
+    kpi('Cobertura Intereses',ci,'x','EBITDA / Gastos Fin.','gd',ci>=3?'ok':ci>=1?'warn':'bad',ci>=3?'Sólida':ci>=1?'Ajustada':'Insuficiente')+
+    kpi('Deuda LP / Activos',A?PNC/A*100:0,'%','PNC / Activos','rd',null,'');
+ 
+  const mgb=ing?UB/ing*100:0,mge=ing?EB/ing*100:0,mgn=ing?UN/ing*100:0,roa=A?UN/A*100:0,roe=Pat?UN/Pat*100:0;
+  $('k-ren').innerHTML=
+    kpi('Margen Bruto',mgb,'%','Util. Bruta / Ingresos','pr',...smet(mgb,40,20))+
+    kpi('Margen EBITDA',mge,'%','EBITDA / Ingresos','pr',...smet(mge,15,5))+
+    kpi('Margen Neto',mgn,'%','Util. Neta / Ingresos','pr',...smet(mgn,10,0))+
+    kpi('ROA',roa,'%','Util. Neta / Activos','gd',...smet(roa,5,0))+
+    kpi('ROE',roe,'%','Util. Neta / Patrimonio','gd',...smet(roe,10,0));
+ 
+  const rc=ing?cxc/ing*365:0,ri=cv?inv/cv*365:0,rp=cv?cxp/cv*365:0;
+  $('k-act').innerHTML=
+    kpi('Rotación CxC',rc,' días','Días promedio cobro','bl',rc<30?'ok':rc<60?'warn':'bad',rc<30?'Rápido':rc<60?'Normal':'Lento')+
+    kpi('Rotación Inventario',ri,' días','Días promedio inv.','bl',ri<60?'ok':ri<120?'warn':'bad',ri<60?'Ágil':ri<120?'Normal':'Lento')+
+    kpi('Rotación CxP',rp,' días','Días promedio pago','bl',null,'')+
+    kpi('Ciclo Operativo',rc+ri,' días','CxC + Inventario','gd',null,'');
+}
+ 
+/* ─── IA ─── */
+async function ia(){
+  go('ia');
+  const t=tot();
+  if(t.A===0&&t.ing===0){alert('Por favor ingrese los datos financieros primero.');return;}
+  const out=$('aiOut');
+  out.innerHTML='<div class="ai-spin"><span></span><span></span><span></span></div>';
+  const elab=$('eNombre').value||'No especificado';
+  const cargo=$('eCargo').value||'No especificado';
+  const rC=t.PC?t.AC/t.PC:0;
+  const prompt=`Actúa como CFO y consultor financiero senior. Analiza estos datos en español profesional.
+ 
+BALANCE GENERAL:
+· Activos Corrientes: ${fm(t.AC)} | No Corrientes: ${fm(t.ANC)} | Total: ${fm(t.A)}
+· Pasivos Corrientes: ${fm(t.PC)} | No Corrientes: ${fm(t.PNC)} | Total: ${fm(t.P)}
+· Patrimonio: ${fm(t.Pat)}
+ 
+ESTADO DE RESULTADOS:
+· Ingresos: ${fm(t.ing)} | Ut. Bruta: ${fm(t.UB)} | EBITDA: ${fm(t.EB)} | Ut. Neta: ${fm(t.UN)}
+ 
+INDICADORES:
+· Razón Corriente: ${rC.toFixed(2)}x | Endeudamiento: ${t.A?(t.P/t.A*100).toFixed(1):'N/A'}%
+· Margen EBITDA: ${t.ing?(t.EB/t.ing*100).toFixed(1):'N/A'}% | Margen Neto: ${t.ing?(t.UN/t.ing*100).toFixed(1):'N/A'}%
+· ROE: ${t.Pat?(t.UN/t.Pat*100).toFixed(1):'N/A'}%
+ 
+Elaborado por: ${elab} · Cargo: ${cargo}
+Revisado por: Estiven Poveda · Contador Público Especialista en Finanzas
+Empresa: PYC Consultoría Integral SAS
+ 
+Estructura tu respuesta con estos bloques:
+1. 📊 DIAGNÓSTICO GENERAL (2-3 párrafos)
+2. 💡 FORTALEZAS (3-4 puntos)
+3. ⚠️ RIESGOS Y ALERTAS (3-4 puntos)
+4. 🎯 RECOMENDACIONES ESTRATÉGICAS (4-5 acciones)
+5. 📈 PERSPECTIVA Y CONCLUSIÓN`;
+ 
+  try{
+    const res=await fetch('https://finaxis-gemini-proxy.vercel.app/api/gemini',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({prompt})
+    });
+    const data=await res.json();
+    const txt=data.texto||data.text||data.response||JSON.stringify(data);
+    out.style.whiteSpace='pre-wrap';
+    out.textContent=txt;
+  }catch(e){
+    out.style.whiteSpace='pre-wrap';
+    out.textContent='Error al conectar con la IA: '+e.message+'\n\nVerifique que el proxy de Vercel esté activo.';
+  }
+}
+ 
+function resetIA(){
+  const o=$('aiOut');
+  o.style.whiteSpace='';
+  o.innerHTML='<div class="ai-ph">Ingrese los datos y presione <strong>Generar Diagnóstico</strong></div>';
+}
+function limpiar(){
+  if(!confirm('¿Desea borrar todos los datos?'))return;
+  document.querySelectorAll('input[type="number"]').forEach(i=>i.value='');
+  calc();
+}
+ 
+// Fecha dinámica en header
+const d=new Date();
+const opts={year:'numeric',month:'long',day:'numeric'};
+const hd=$('hdr-date');
+if(hd) hd.textContent=d.toLocaleDateString('es-CO',opts);
+ 
+calc();
+</script>
 </body>
 </html>
+ 

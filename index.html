@@ -1,993 +1,466 @@
 <!DOCTYPE html>
-
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FinAxis — Análisis Financiero Estratégico</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>FinAxis 3.0 – AI Financial Intelligence</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
-:root {
-  --bg: #0a0c0f;
-  --surface: #111318;
-  --surface2: #181c24;
-  --border: #1e2430;
-  --accent: #00e5b0;
-  --accent2: #ff6b35;
-  --accent3: #4d9fff;
-  --text: #e8ecf4;
-  --text-muted: #6b7a99;
-  --text-dim: #3a4560;
-  --positive: #00e5b0;
-  --negative: #ff4d6b;
-  --warning: #ffb830;
+
+:root{
+--bg:#0f172a;
+--card:#111827;
+--sidebar:#020617;
+--border:#1f2937;
+--accent:#22c55e;
+--text:#e5e7eb;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,176,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,176,0.012) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
 
-header{position:sticky;top:0;z-index:100;padding:20px 48px;border-bottom:1px solid var(–border);display:flex;align-items:center;justify-content:space-between;background:rgba(10,12,15,0.97);backdrop-filter:blur(20px);}
-footer{position:relative;z-index:1;border-top:1px solid var(–border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,12,15,0.97);margin-top:48px;}
-.footer-brand{font-family:‘Playfair Display’,serif;font-size:13px;color:var(–text-muted);}
-.footer-brand strong{color:var(–accent);}
-.footer-wa{display:flex;align-items:center;gap:10px;text-decoration:none;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);padding:8px 18px;border-radius:24px;transition:all 0.2s;}
-.footer-wa:hover{background:rgba(37,211,102,0.2);transform:translateY(-1px);}
-.footer-wa-icon{width:18px;height:18px;fill:#25d366;}
-.footer-wa-text{font-family:‘IBM Plex Mono’,monospace;font-size:12px;color:#25d366;font-weight:500;letter-spacing:0.5px;}
-.logo{font-family:‘Playfair Display’,serif;font-size:22px;font-weight:900;letter-spacing:-0.5px;}
-.logo span{color:var(–accent);}
-.header-right{display:flex;align-items:center;gap:20px;}
-.header-tag{font-family:‘IBM Plex Mono’,monospace;font-size:11px;color:var(–text-muted);text-transform:uppercase;letter-spacing:2px;}
-.version-badge{background:rgba(0,229,176,0.1);border:1px solid rgba(0,229,176,0.3);color:var(–accent);font-family:‘IBM Plex Mono’,monospace;font-size:10px;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
+*{box-sizing:border-box}
 
-.main{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:48px;}
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+background:var(--bg);
+color:var(--text);
+display:flex;
+}
 
-.page{display:none;animation:fadeUp 0.4s ease;}
-.page.active{display:block;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.sidebar{
+width:240px;
+background:var(--sidebar);
+height:100vh;
+padding:25px;
+border-right:1px solid var(--border);
+}
 
-.hero{margin-bottom:40px;}
-.hero h1{font-family:‘Playfair Display’,serif;font-size:clamp(32px,4vw,56px);font-weight:900;line-height:1.05;margin-bottom:14px;}
-.hero h1 em{font-style:italic;color:var(–accent);}
-.hero p{font-size:15px;color:var(–text-muted);max-width:560px;line-height:1.7;}
+.sidebar h2{margin-top:0}
 
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
-.form-panel{background:var(–surface);border:1px solid var(–border);border-radius:16px;padding:28px;position:relative;overflow:hidden;}
-.form-panel::before{content:’’;position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(–accent),transparent);}
-.panel-label{font-family:‘IBM Plex Mono’,monospace;font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(–accent);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-.panel-label::after{content:’’;flex:1;height:1px;background:var(–border);}
-.panel-title{font-family:‘Playfair Display’,serif;font-size:19px;font-weight:700;margin-bottom:20px;}
-.field-group{margin-bottom:14px;}
-.field-label{font-size:12px;color:var(–text-muted);margin-bottom:5px;display:block;font-weight:500;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-input[type=“number”],input[type=“text”],select{width:100%;background:var(–bg);border:1px solid var(–border);border-radius:8px;padding:9px 12px;color:var(–text);font-family:‘IBM Plex Mono’,monospace;font-size:13px;transition:border-color 0.2s;outline:none;-moz-appearance:textfield;}
-input[type=“number”]::-webkit-outer-spin-button,input[type=“number”]::-webkit-inner-spin-button{-webkit-appearance:none;}
-input:focus,select:focus{border-color:var(–accent);box-shadow:0 0 0 3px rgba(0,229,176,0.08);}
-select option{background:var(–surface);}
-.section-divider{height:1px;background:var(–border);margin:16px 0;}
-.section-header{font-size:11px;font-weight:600;color:var(–text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;margin-top:16px;}
+.sidebar a{
+display:block;
+padding:10px;
+color:white;
+text-decoration:none;
+opacity:.7;
+}
 
-.year-toggle{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding:16px;background:var(–surface2);border:1px solid var(–border);border-radius:10px;}
-.toggle-switch{position:relative;width:44px;height:24px;cursor:pointer;}
-.toggle-switch input{opacity:0;width:0;height:0;}
-.toggle-slider{position:absolute;inset:0;background:var(–border);border-radius:24px;transition:0.3s;}
-.toggle-slider:before{content:’’;position:absolute;height:18px;width:18px;left:3px;bottom:3px;background:var(–text-muted);border-radius:50%;transition:0.3s;}
-.toggle-switch input:checked + .toggle-slider{background:var(–accent);}
-.toggle-switch input:checked + .toggle-slider:before{transform:translateX(20px);background:var(–bg);}
+.sidebar a:hover{opacity:1}
 
-.analyze-btn{width:100%;padding:18px;background:var(–accent);color:var(–bg);border:none;border-radius:12px;font-family:‘IBM Plex Sans’,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;}
-.analyze-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,229,176,0.35);}
-.analyze-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
+.main{
+flex:1;
+padding:30px;
+}
 
-.loading-overlay{display:none;text-align:center;padding:60px;background:var(–surface);border:1px solid var(–border);border-radius:16px;margin-bottom:24px;}
-.loading-overlay.active{display:block;}
-.spinner{width:48px;height:48px;border:2px solid var(–border);border-top-color:var(–accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 24px;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.loading-steps{margin-top:16px;}
-.loading-step{font-family:‘IBM Plex Mono’,monospace;font-size:12px;color:var(–text-dim);margin:4px 0;transition:color 0.3s;}
-.loading-step.active{color:var(–accent);}
-.loading-step.done{color:var(–text-muted);}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
 
-.results-wrap{display:none;}
-.results-wrap.visible{display:block;animation:fadeUp 0.5s ease;}
-.results-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(–border);}
-.results-title{font-family:‘Playfair Display’,serif;font-size:36px;font-weight:900;}
-.results-meta{text-align:right;}
-.results-meta .company{font-size:13px;color:var(–text-muted);margin-bottom:4px;}
-.timestamp{font-family:‘IBM Plex Mono’,monospace;font-size:11px;color:var(–text-muted);}
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:14px;
+padding:20px;
+}
 
-.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:28px;}
-.kpi-card{background:var(–surface);border:1px solid var(–border);border-radius:12px;padding:20px;position:relative;overflow:hidden;transition:transform 0.2s;}
-.kpi-card:hover{transform:translateY(-2px);}
-.kpi-card.positive::after,.kpi-card.negative::after,.kpi-card.warning::after{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;}
-.kpi-card.positive::after{background:var(–positive);}
-.kpi-card.negative::after{background:var(–negative);}
-.kpi-card.warning::after{background:var(–warning);}
-.kpi-label{font-size:10px;color:var(–text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-family:‘IBM Plex Mono’,monospace;}
-.kpi-value{font-family:‘Playfair Display’,serif;font-size:24px;font-weight:900;margin-bottom:3px;}
-.kpi-value.positive{color:var(–positive);}
-.kpi-value.negative{color:var(–negative);}
-.kpi-value.warning{color:var(–warning);}
-.kpi-sub{font-size:11px;color:var(–text-muted);}
-.kpi-yoy{font-size:11px;margin-top:4px;font-family:‘IBM Plex Mono’,monospace;}
-.kpi-yoy.up{color:var(–positive);}
-.kpi-yoy.down{color:var(–negative);}
+.panel{
+margin-top:30px;
+background:var(--card);
+padding:25px;
+border-radius:14px;
+border:1px solid var(--border);
+}
 
-.analysis-panel{background:var(–surface);border:1px solid var(–border);border-radius:16px;padding:28px;position:relative;overflow:hidden;}
-.ap-label{font-family:‘IBM Plex Mono’,monospace;font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(–accent3);margin-bottom:10px;}
-.ap-title{font-family:‘Playfair Display’,serif;font-size:20px;font-weight:700;margin-bottom:20px;}
+input{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:1px solid var(--border);
+background:#020617;
+color:white;
+margin-top:8px;
+}
 
-.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:24px;margin-bottom:24px;}
-.grid-1-1{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;}
+button{
+background:var(--accent);
+border:none;
+padding:12px 20px;
+border-radius:8px;
+margin-top:15px;
+cursor:pointer;
+font-weight:600;
+}
 
-.ai-content{font-size:13.5px;line-height:1.8;color:var(–text);}
-.ai-content h3{font-family:‘Playfair Display’,serif;font-size:16px;font-weight:700;margin:20px 0 8px;color:var(–accent);}
-.ai-content h4{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin:16px 0 6px;color:var(–text-muted);}
-.ai-content p{margin-bottom:10px;}
-.ai-content ul{margin:6px 0 14px;padding:0;list-style:none;}
-.ai-content ul li{padding:7px 0 7px 18px;position:relative;border-bottom:1px solid var(–border);font-size:13px;}
-.ai-content ul li:last-child{border-bottom:none;}
-.ai-content ul li::before{content:‘▸’;position:absolute;left:0;color:var(–accent);font-size:11px;}
+.chat-box{
+height:250px;
+overflow:auto;
+background:#020617;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+}
 
-.score-circle{width:130px;height:130px;margin:0 auto 14px;position:relative;}
-.score-circle svg{transform:rotate(-90deg);}
-.score-number{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;}
-.score-num{font-family:‘Playfair Display’,serif;font-size:32px;font-weight:900;}
-.score-lbl{font-family:‘IBM Plex Mono’,monospace;font-size:10px;color:var(–text-muted);text-transform:uppercase;letter-spacing:1px;}
-.score-cat{font-family:‘Playfair Display’,serif;font-size:17px;font-weight:700;text-align:center;margin-bottom:6px;}
-.score-desc{font-size:12px;color:var(–text-muted);line-height:1.6;text-align:center;}
+footer{
+margin-top:40px;
+font-size:14px;
+opacity:.7;
+}
 
-.ratio-table{width:100%;border-collapse:collapse;}
-.ratio-table tr{border-bottom:1px solid var(–border);}
-.ratio-table tr:last-child{border-bottom:none;}
-.ratio-table td{padding:10px 8px;font-size:12.5px;}
-.ratio-table td:first-child{color:var(–text-muted);}
-.ratio-table td:last-child{font-family:‘IBM Plex Mono’,monospace;font-weight:500;text-align:right;}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;font-family:‘IBM Plex Mono’,monospace;}
-.badge.green{background:rgba(0,229,176,0.12);color:var(–positive);}
-.badge.red{background:rgba(255,77,107,0.12);color:var(–negative);}
-.badge.yellow{background:rgba(255,184,48,0.12);color:var(–warning);}
-
-.alert{border-radius:10px;padding:12px 16px;margin-bottom:10px;font-size:13px;line-height:1.5;border-left:3px solid;}
-.alert.critical{background:rgba(255,77,107,0.07);border-color:var(–negative);color:#ff8fa0;}
-.alert.warning{background:rgba(255,184,48,0.07);border-color:var(–warning);color:#ffd080;}
-.alert.good{background:rgba(0,229,176,0.07);border-color:var(–positive);color:#80ffda;}
-
-.chart-wrap{position:relative;height:240px;}
-.chart-wrap-tall{position:relative;height:300px;}
-
-.altman-score{text-align:center;padding:20px 0;}
-.altman-num{font-family:‘Playfair Display’,serif;font-size:48px;font-weight:900;margin-bottom:4px;}
-.altman-zone{font-size:14px;font-weight:600;margin-bottom:8px;}
-.altman-bar-wrap{background:linear-gradient(90deg,var(–negative) 0%,var(–negative) 33%,var(–warning) 33%,var(–warning) 50%,var(–positive) 50%,var(–positive) 100%);height:6px;border-radius:4px;margin:16px 0;position:relative;}
-.altman-marker{position:absolute;top:-5px;width:16px;height:16px;background:white;border-radius:50%;transform:translateX(-50%);border:2px solid var(–bg);box-shadow:0 2px 8px rgba(0,0,0,0.5);}
-.altman-labels{display:flex;justify-content:space-between;font-family:‘IBM Plex Mono’,monospace;font-size:10px;color:var(–text-muted);}
-.altman-comp{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(–border);font-size:12px;}
-.altman-comp:last-child{border-bottom:none;}
-.altman-comp span:last-child{font-family:‘IBM Plex Mono’,monospace;color:var(–accent3);}
-
-.sim-controls{display:grid;gap:16px;margin-bottom:20px;}
-.sim-control{background:var(–bg);border:1px solid var(–border);border-radius:10px;padding:16px;}
-.sim-label{font-size:12px;color:var(–text-muted);margin-bottom:8px;}
-.sim-slider{width:100%;accent-color:var(–accent);cursor:pointer;}
-.sim-value{font-family:‘IBM Plex Mono’,monospace;font-size:13px;color:var(–accent);float:right;}
-.sim-results{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.sim-result{background:var(–bg);border:1px solid var(–border);border-radius:8px;padding:14px;}
-.sim-result-label{font-size:11px;color:var(–text-muted);margin-bottom:6px;}
-.sim-result-val{font-family:‘Playfair Display’,serif;font-size:20px;font-weight:700;}
-.sim-result-delta{font-family:‘IBM Plex Mono’,monospace;font-size:11px;margin-top:2px;}
-
-.benchmark-item{margin-bottom:14px;}
-.bm-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.bm-name{font-size:12px;color:var(–text-muted);}
-.bm-vals{display:flex;gap:12px;font-family:‘IBM Plex Mono’,monospace;font-size:11px;}
-.bm-mine{color:var(–accent3);}
-.bm-bar-bg{height:6px;background:var(–border);border-radius:4px;position:relative;}
-.bm-bar-industry{height:6px;background:var(–text-dim);border-radius:4px;position:absolute;top:0;left:0;}
-.bm-bar-mine{height:6px;border-radius:4px;position:absolute;top:0;left:0;transition:width 1s ease;}
-
-.export-btn{background:transparent;border:1px solid var(–accent);color:var(–accent);padding:10px 24px;border-radius:8px;font-family:‘IBM Plex Sans’,sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;}
-.export-btn:hover{background:var(–accent);color:var(–bg);}
-.reset-btn{background:transparent;border:1px solid var(–border);color:var(–text-muted);padding:12px 32px;border-radius:8px;cursor:pointer;font-family:‘IBM Plex Sans’,sans-serif;font-size:13px;transition:all 0.2s;}
-.reset-btn:hover{border-color:var(–accent);color:var(–accent);}
-.actions-row{display:flex;gap:12px;align-items:center;margin-top:32px;justify-content:center;}
-
-@media(max-width:1100px){.kpi-grid{grid-template-columns:repeat(3,1fr)}.grid-2-1,.grid-1-1{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}}
-@media(max-width:700px){.main{padding:20px}.kpi-grid{grid-template-columns:1fr 1fr}}
 </style>
 
 </head>
+
 <body>
 
-<header>
-  <div class="logo">Fin<span>Axis</span></div>
-  <div class="header-right">
-    <div class="header-tag">// Análisis Financiero Estratégico</div>
-    <div class="version-badge">v2.0</div>
-  </div>
-</header>
+<div class="sidebar">
+
+<h2>FinAxis 3.0</h2>
+
+<a>Dashboard</a>
+<a>Análisis IA</a>
+<a>Simulación</a>
+<a>Excel</a>
+<a>Chat Financiero</a>
+<a>Reportes</a>
+
+</div>
 
 <div class="main">
 
-  <!-- INPUT -->
+<h1>Dashboard Financiero</h1>
 
-  <div class="page active" id="pageInput">
-    <div class="hero">
-      <h1>Diagnóstico<br><em>Financiero</em> Ejecutivo</h1>
-      <p>Ingresa los datos de tus estados financieros. Incluye el período anterior para análisis comparativo año vs año.</p>
-    </div>
+<div class="panel">
 
-```
-<div class="year-toggle">
-  <label class="toggle-switch">
-    <input type="checkbox" id="yoyToggle" onchange="toggleYoY()">
-    <span class="toggle-slider"></span>
-  </label>
-  <label for="yoyToggle" style="cursor:pointer;font-size:13px;color:var(--text);">Activar comparativo Año vs Año</label>
-  <span style="font-size:12px;color:var(--text-muted);margin-left:8px;">Ingresa datos de dos períodos para ver variaciones y tendencias</span>
+<h2>Datos del Analista</h2>
+
+Nombre
+<input id="nombreAnalista">
+
+Cargo
+<input id="cargoAnalista">
+
+<button onclick="guardarAnalista()">Guardar datos</button>
+
 </div>
 
-<div class="form-grid">
-  <!-- BALANCE -->
-  <div class="form-panel">
-    <div class="panel-label">01 — Balance General</div>
-    <div class="panel-title">Estado de Situación Financiera</div>
+<div class="grid">
 
-    <div class="section-header">Activos Corrientes</div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Efectivo y equivalentes</span><input type="number" id="cash" placeholder="0" min="0"></div>
-      <div class="field-group" id="cashY2Wrap" style="display:none;"><span class="field-label" style="color:var(--accent3);">Período anterior</span><input type="number" id="cashY2" placeholder="0" min="0"></div>
-    </div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Cuentas por cobrar</span><input type="number" id="receivables" placeholder="0" min="0"></div>
-      <div class="field-group" id="recY2Wrap" style="display:none;"><span class="field-label" style="color:var(--accent3);">Período anterior</span><input type="number" id="receivablesY2" placeholder="0" min="0"></div>
-    </div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Inventarios</span><input type="number" id="inventory" placeholder="0" min="0"></div>
-      <div class="field-group" id="invY2Wrap" style="display:none;"><span class="field-label" style="color:var(--accent3);">Período anterior</span><input type="number" id="inventoryY2" placeholder="0" min="0"></div>
-    </div>
-    <div class="field-group"><span class="field-label">Otros activos corrientes</span><input type="number" id="otherCA" placeholder="0" min="0"></div>
-
-    <div class="section-divider"></div>
-    <div class="section-header">Activos No Corrientes</div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">PPE neto</span><input type="number" id="ppe" placeholder="0" min="0"></div>
-      <div class="field-group"><span class="field-label">Intangibles / Goodwill</span><input type="number" id="intangibles" placeholder="0" min="0"></div>
-    </div>
-    <div class="field-group"><span class="field-label">Otros activos no corrientes</span><input type="number" id="otherNCA" placeholder="0" min="0"></div>
-
-    <div class="section-divider"></div>
-    <div class="section-header">Pasivos Corrientes</div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Cuentas por pagar</span><input type="number" id="payables" placeholder="0" min="0"></div>
-      <div class="field-group"><span class="field-label">Deuda corto plazo</span><input type="number" id="stdbt" placeholder="0" min="0"></div>
-    </div>
-    <div class="field-group"><span class="field-label">Otros pasivos corrientes</span><input type="number" id="otherCL" placeholder="0" min="0"></div>
-
-    <div class="section-divider"></div>
-    <div class="section-header">Pasivos LP & Patrimonio</div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Deuda largo plazo</span><input type="number" id="ltDebt" placeholder="0" min="0"></div>
-      <div class="field-group"><span class="field-label">Otros pasivos LP</span><input type="number" id="otherLTL" placeholder="0" min="0"></div>
-    </div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Capital social</span><input type="number" id="paidIn" placeholder="0" min="0"></div>
-      <div class="field-group"><span class="field-label">Utilidades retenidas</span><input type="number" id="retained" placeholder="0"></div>
-    </div>
-  </div>
-
-  <!-- P&L -->
-  <div class="form-panel">
-    <div class="panel-label">02 — P&L</div>
-    <div class="panel-title">Estado de Resultados</div>
-
-    <div class="section-header">Ingresos</div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Ingresos / Ventas</span><input type="number" id="revenue" placeholder="0" min="0"></div>
-      <div class="field-group" id="revY2Wrap" style="display:none;"><span class="field-label" style="color:var(--accent3);">Período anterior</span><input type="number" id="revenueY2" placeholder="0" min="0"></div>
-    </div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Costo de ventas (COGS)</span><input type="number" id="cogs" placeholder="0" min="0"></div>
-      <div class="field-group" id="cogsY2Wrap" style="display:none;"><span class="field-label" style="color:var(--accent3);">Período anterior</span><input type="number" id="cogsY2" placeholder="0" min="0"></div>
-    </div>
-
-    <div class="section-divider"></div>
-    <div class="section-header">Gastos Operativos</div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Gastos de ventas</span><input type="number" id="sellExp" placeholder="0" min="0"></div>
-      <div class="field-group"><span class="field-label">Gastos administrativos</span><input type="number" id="adminExp" placeholder="0" min="0"></div>
-    </div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Depreciación y amortización</span><input type="number" id="da" placeholder="0" min="0"></div>
-      <div class="field-group"><span class="field-label">Otros gastos operativos</span><input type="number" id="otherOpex" placeholder="0" min="0"></div>
-    </div>
-
-    <div class="section-divider"></div>
-    <div class="section-header">Partidas Financieras</div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Gastos financieros</span><input type="number" id="interestExp" placeholder="0" min="0"></div>
-      <div class="field-group"><span class="field-label">Ingresos financieros</span><input type="number" id="interestInc" placeholder="0" min="0"></div>
-    </div>
-    <div class="field-row">
-      <div class="field-group"><span class="field-label">Impuesto sobre la renta</span><input type="number" id="taxes" placeholder="0" min="0"></div>
-      <div class="field-group"><span class="field-label">Otros no operativos (neto)</span><input type="number" id="otherNonOp" placeholder="0"></div>
-    </div>
-
-    <div class="section-divider"></div>
-    <div class="section-header">Contexto</div>
-    <div class="field-group">
-      <span class="field-label">Industria / Sector</span>
-      <select id="industry">
-        <option value="">Seleccionar...</option>
-        <option value="retail">Retail / Comercio</option>
-        <option value="manufacturing">Manufactura / Industrial</option>
-        <option value="technology">Tecnología / Software</option>
-        <option value="financial">Servicios Financieros</option>
-        <option value="healthcare">Salud / Farmacéutico</option>
-        <option value="real_estate">Inmobiliario / Construcción</option>
-        <option value="hospitality">Hospitalidad / Turismo</option>
-        <option value="services">Servicios Profesionales</option>
-        <option value="agro">Agropecuario / Alimentos</option>
-        <option value="other">Otro</option>
-      </select>
-    </div>
-    <div class="field-row">
-      <div class="field-group">
-        <span class="field-label">Moneda</span>
-        <select id="currency">
-          <option value="COP">COP</option>
-          <option value="MXN">MXN</option>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="ARS">ARS</option>
-          <option value="CLP">CLP</option>
-          <option value="PEN">PEN</option>
-          <option value="BRL">BRL</option>
-        </select>
-      </div>
-      <div class="field-group"><span class="field-label">Período actual</span><input type="text" id="period" placeholder="Ej: 2024"></div>
-    </div>
-    <div class="field-group" id="period2Wrap" style="display:none;">
-      <span class="field-label" style="color:var(--accent3);">Período anterior</span>
-      <input type="text" id="period2" placeholder="Ej: 2023">
-    </div>
-    <div class="field-group"><span class="field-label">Nombre empresa (opcional)</span><input type="text" id="companyName" placeholder="Mi Empresa S.A."></div>
-    <div class="field-group"><span class="field-label">Elaborado por</span><input type="text" id="elaboradoPor" placeholder="Nombre del analista o profesional"></div>
-  </div>
+<div class="card">
+Liquidez
+<input id="liq" value="1.2">
 </div>
 
-<button class="analyze-btn" onclick="runAnalysis()" id="analyzeBtn">
-  ⟳ &nbsp; Ejecutar Análisis Financiero Completo
-</button>
-```
-
-  </div>
-
-  <!-- LOADING -->
-
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="spinner"></div>
-    <div style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:20px;">Procesando Estados Financieros</div>
-    <div class="loading-steps">
-      <div class="loading-step" id="ls1">○ Calculando ratios financieros...</div>
-      <div class="loading-step" id="ls2">○ Computando Altman Z-Score...</div>
-      <div class="loading-step" id="ls3">○ Generando benchmarks de industria...</div>
-      <div class="loading-step" id="ls4">○ Analizando con IA — Perspectiva CFO...</div>
-      <div class="loading-step" id="ls5">○ Construyendo plan de acción...</div>
-    </div>
-  </div>
-
-  <!-- RESULTS -->
-
-  <div class="results-wrap" id="resultsWrap">
-    <div class="results-header">
-      <div>
-        <div class="results-title">Informe Ejecutivo <span style="color:var(--accent)">CFO</span></div>
-        <div style="font-size:13px;color:var(--text-muted);margin-top:6px;" id="reportSubtitle"></div>
-      </div>
-      <div class="results-meta">
-        <div class="company" id="reportCompany"></div>
-        <div class="timestamp" id="reportTimestamp"></div>
-        <div id="reportElaborado" style="font-size:12px;color:var(--text-muted);margin-top:6px;font-family:'IBM Plex Mono',monospace;"></div>
-        <button class="export-btn" style="margin-top:10px;" onclick="exportPDF()">⬇ Exportar PDF</button>
-      </div>
-    </div>
-
-```
-<!-- Firma -->
-<div class="analysis-panel" id="firmaPanel" style="margin-bottom:24px;display:none;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:10px;overflow:hidden;">
-    <div style="padding:20px 24px;border-right:1px solid var(--border);">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;">Elaborado por</div>
-      <div style="font-size:15px;font-weight:600;" id="firmaElaborado">—</div>
-    </div>
-    <div style="padding:20px 24px;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:8px;">Revisado por</div>
-      <div style="font-size:15px;font-weight:600;">Estiven Poveda</div>
-      <div style="font-size:12px;color:var(--text-muted);margin-top:3px;">Contador Público Especialista en Finanzas</div>
-      <div style="display:flex;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap;">
-        <a href="https://www.pycconsultoria.com" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent3);text-decoration:none;">🌐 pycconsultoria.com</a>
-        <a href="https://wa.me/573228999193" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#25d366;text-decoration:none;">📱 322 899 9193</a>
-      </div>
-    </div>
-  </div>
+<div class="card">
+Endeudamiento
+<input id="end" value="0.65">
 </div>
 
-<div class="kpi-grid" id="kpiGrid"></div>
-
-<div class="grid-1-1">
-  <div class="analysis-panel">
-    <div class="ap-label">// Estructura Financiera</div>
-    <div class="ap-title">Composición del Balance</div>
-    <div class="chart-wrap"><canvas id="balanceChart"></canvas></div>
-  </div>
-  <div class="analysis-panel">
-    <div class="ap-label">// Cascada de Rentabilidad</div>
-    <div class="ap-title">Waterfall P&L</div>
-    <div class="chart-wrap"><canvas id="plChart"></canvas></div>
-  </div>
+<div class="card">
+ROA
+<input id="roa" value="0.08">
 </div>
 
-<div class="analysis-panel" id="yoyChartPanel" style="display:none;margin-bottom:24px;margin-top:24px;">
-  <div class="ap-label">// Comparativo</div>
-  <div class="ap-title">Año vs Año — Métricas Clave</div>
-  <div class="chart-wrap-tall"><canvas id="yoyChart"></canvas></div>
+<div class="card">
+Margen
+<input id="margen" value="0.14">
 </div>
 
-<div class="grid-2-1" style="align-items:start;margin-top:24px;">
-  <div class="analysis-panel">
-    <div class="ap-label">// Análisis IA — Director Financiero</div>
-    <div class="ap-title">Diagnóstico Estratégico</div>
-    <div class="ai-content" id="aiAnalysis"><em style="color:var(--text-muted)">Generando análisis...</em></div>
-  </div>
-  <div style="display:grid;gap:24px;">
-    <div class="analysis-panel">
-      <div class="ap-label">// Salud Financiera</div>
-      <div class="score-circle">
-        <svg width="130" height="130" viewBox="0 0 130 130">
-          <circle cx="65" cy="65" r="54" fill="none" stroke="var(--border)" stroke-width="7"/>
-          <circle cx="65" cy="65" r="54" fill="none" stroke="var(--accent)" stroke-width="7"
-            stroke-dasharray="339" stroke-dashoffset="339" id="scoreRing"
-            stroke-linecap="round" style="transition:stroke-dashoffset 1.5s ease;"/>
-        </svg>
-        <div class="score-number">
-          <div class="score-num" id="scoreNum">—</div>
-          <div class="score-lbl">/100</div>
-        </div>
-      </div>
-      <div class="score-cat" id="scoreCat"></div>
-      <div class="score-desc" id="scoreDesc"></div>
-    </div>
-    <div class="analysis-panel">
-      <div class="ap-label">// Ratios Clave</div>
-      <table class="ratio-table" id="ratioTable"></table>
-    </div>
-  </div>
 </div>
 
-<div class="grid-1-1" style="margin-top:24px;">
-  <div class="analysis-panel">
-    <div class="ap-label">// Riesgo de Quiebra</div>
-    <div class="ap-title">Altman Z-Score</div>
-    <div class="altman-score" id="altmanScore"></div>
-  </div>
-  <div class="analysis-panel">
-    <div class="ap-label">// Benchmarking</div>
-    <div class="ap-title">vs Promedio de Industria</div>
-    <div id="benchmarkContent"></div>
-  </div>
+<button onclick="actualizar()">Actualizar análisis</button>
+
+<div class="panel">
+
+<h2>Score Financiero</h2>
+
+<div id="score"></div>
+
 </div>
 
-<div class="analysis-panel" style="margin-top:24px;margin-bottom:24px;">
-  <div class="ap-label">// Simulador Estratégico</div>
-  <div class="ap-title">¿Qué Pasaría Si...?</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-    <div class="sim-controls" id="simControls"></div>
-    <div>
-      <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">Impacto Proyectado</div>
-      <div class="sim-results" id="simResults"></div>
-    </div>
-  </div>
+<div class="panel">
+
+<h2>Altman Z Score</h2>
+
+<div id="zscore"></div>
+
 </div>
 
-<div class="grid-1-1">
-  <div class="analysis-panel">
-    <div class="ap-label">// Alertas & Riesgos</div>
-    <div class="ap-title">Puntos Críticos</div>
-    <div id="alertsContainer"></div>
-  </div>
-  <div class="analysis-panel">
-    <div class="ap-label">// Plan de Acción CFO</div>
-    <div class="ap-title">Iniciativas Prioritarias</div>
-    <div class="ai-content" id="recsContent"><em style="color:var(--text-muted)">Generando recomendaciones...</em></div>
-  </div>
+<div class="panel">
+
+<h2>Radar Financiero</h2>
+
+<canvas id="radar"></canvas>
+
 </div>
 
-<div class="analysis-panel" style="margin-top:24px;margin-bottom:24px;">
-  <div class="ap-label">// Perfil Financiero</div>
-  <div class="ap-title">Análisis Multidimensional</div>
-  <div style="max-width:400px;margin:0 auto;"><div style="position:relative;height:320px;"><canvas id="radarChart"></canvas></div></div>
+<div class="panel">
+
+<h2>Simulación de Utilidad</h2>
+
+Ventas proyectadas
+<input id="ventas" value="100000">
+
+Margen esperado
+<input id="margenProy" value="0.15">
+
+<button onclick="simular()">Simular</button>
+
+<div id="resultadoSim"></div>
+
 </div>
 
-<div class="actions-row">
-  <button class="reset-btn" onclick="resetApp()">← Nuevo Análisis</button>
-  <button class="export-btn" onclick="exportPDF()">⬇ Exportar Informe PDF</button>
-</div>
-```
+<div class="panel">
 
-  </div>
+<h2>Cargar Excel</h2>
+
+<input type="file" id="excel">
+
+<button onclick="leerExcel()">Leer archivo</button>
+
+<div id="excelOut"></div>
+
+</div>
+
+<div class="panel">
+
+<h2>Diagnóstico con IA</h2>
+
+<button onclick="analizarIA()">Generar diagnóstico</button>
+
+<div id="resultadoIA"></div>
+
+</div>
+
+<div class="panel">
+
+<h2>Chat Financiero IA</h2>
+
+<input id="pregunta" placeholder="Pregunta financiera">
+
+<button onclick="preguntar()">Preguntar</button>
+
+<div class="chat-box" id="chat"></div>
+
+</div>
+
+<div class="panel">
+
+<h2>Exportar Reporte</h2>
+
+<button onclick="exportarPDF()">Generar PDF</button>
+
+</div>
+
+<footer>
+
+<p>Creado por PYC Consultoría Integral SAS</p>
+<p>Revisado por Estiven Poveda</p>
+<p id="analistaFooter">Elaborado por:</p>
+
+</footer>
+
 </div>
 
 <script>
-// ─── CONFIG ──────────────────────────────────────────────────────
-const GEMINI_API_KEY = 'AIzaSyD3j4F_0Q9RPOAOGAr6AWeO_XMWTlnhRMQ';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-// ─── STATE ───────────────────────────────────────────────────────
-let R = {}, R2 = {}, hasYoY = false;
-let charts = {};
+let analistaNombre=""
+let analistaCargo=""
 
-// ─── YOY TOGGLE ──────────────────────────────────────────────────
-function toggleYoY() {
-  hasYoY = document.getElementById('yoyToggle').checked;
-  const wraps = ['cashY2Wrap','recY2Wrap','invY2Wrap','revY2Wrap','cogsY2Wrap','period2Wrap'];
-  wraps.forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.style.display = hasYoY ? 'block' : 'none';
-  });
+function guardarAnalista(){
+
+analistaNombre=document.getElementById("nombreAnalista").value
+analistaCargo=document.getElementById("cargoAnalista").value
+
+document.getElementById("analistaFooter").innerText =
+"Elaborado por: "+analistaNombre+" – "+analistaCargo
+
 }
 
-// ─── HELPERS ─────────────────────────────────────────────────────
-const v  = id => parseFloat(document.getElementById(id)?.value) || 0;
-const t  = id => document.getElementById(id)?.value || '';
-const pct  = (n,d=1) => n!==null&&!isNaN(n) ? n.toFixed(d)+'%' : 'N/D';
-const ratio = (n,d=2) => n!==null&&!isNaN(n) ? n.toFixed(d)+'x' : 'N/D';
-const days  = n => n!==null&&!isNaN(n) ? n.toFixed(0)+' días' : 'N/D';
+/* SCORE */
 
-function fmt(n, cur='COP') {
-  const abs=Math.abs(n), sign=n<0?'-':'';
-  if(abs>=1e9) return `${sign}${cur} ${(abs/1e9).toFixed(2)}B`;
-  if(abs>=1e6) return `${sign}${cur} ${(abs/1e6).toFixed(2)}M`;
-  if(abs>=1e3) return `${sign}${cur} ${(abs/1e3).toFixed(1)}K`;
-  return `${sign}${cur} ${abs.toFixed(0)}`;
+function scoreFinanciero(liq,end,roa,margen){
+
+let score=0
+
+if(liq>1)score+=25
+if(end<0.6)score+=25
+if(roa>0.05)score+=25
+if(margen>0.1)score+=25
+
+return score
+
 }
 
-function yoyDelta(curr, prev) {
-  if(!prev||prev===0) return null;
-  return ((curr-prev)/Math.abs(prev))*100;
-}
-function yoyTag(delta) {
-  if(delta===null) return '';
-  const dir=delta>=0?'▲':'▼', cls=delta>=0?'up':'down';
-  return `<div class="kpi-yoy ${cls}">${dir} ${Math.abs(delta).toFixed(1)}% YoY</div>`;
+/* ALTMAN */
+
+function altman(liq,end,roa,margen){
+
+return (1.2*liq+1.4*roa+3.3*margen-0.6*end).toFixed(2)
+
 }
 
-// ─── CALC RATIOS ─────────────────────────────────────────────────
-function calcRatios(sfx='') {
-  const s=sfx==='Y2'?'Y2':'';
-  const cash=v('cash'+s),rec=v('receivables'+s),inv=v('inventory'+s);
-  const otherCA=v('otherCA'),ppe=v('ppe'),intang=v('intangibles'),otherNCA=v('otherNCA');
-  const payables=v('payables'),stdbt=v('stdbt'),otherCL=v('otherCL');
-  const ltDebt=v('ltDebt'),otherLTL=v('otherLTL'),paidIn=v('paidIn'),retained=v('retained');
-  const revenue=v('revenue'+s),cogs=v('cogs'+s);
-  const sellExp=v('sellExp'),adminExp=v('adminExp'),da=v('da'),otherOpex=v('otherOpex');
-  const interestExp=v('interestExp'),interestInc=v('interestInc'),taxes=v('taxes'),otherNonOp=v('otherNonOp');
-  const cur=t('currency')||'COP';
+function actualizar(){
 
-  const totalCA=cash+rec+inv+otherCA, totalNCA=ppe+intang+otherNCA, totalAssets=totalCA+totalNCA;
-  const totalCL=payables+stdbt+otherCL, totalLTL=ltDebt+otherLTL, totalLiabilities=totalCL+totalLTL;
-  const totalEquity=paidIn+retained, workingCapital=totalCA-totalCL;
-  const grossProfit=revenue-cogs, ebitda=grossProfit-sellExp-adminExp-otherOpex;
-  const ebit=ebitda-da, ebt=ebit-interestExp+interestInc+otherNonOp, netIncome=ebt-taxes;
+let liq=parseFloat(document.getElementById("liq").value)
+let end=parseFloat(document.getElementById("end").value)
+let roa=parseFloat(document.getElementById("roa").value)
+let margen=parseFloat(document.getElementById("margen").value)
 
-  return {
-    cash,rec,inv,otherCA,totalCA,ppe,intang,otherNCA,totalNCA,totalAssets,
-    payables,stdbt,otherCL,totalCL,ltDebt,otherLTL,totalLTL,totalLiabilities,
-    paidIn,retained,totalEquity,workingCapital,
-    revenue,cogs,grossProfit,sellExp,adminExp,da,otherOpex,ebitda,ebit,ebt,netIncome,
-    interestExp,interestInc,taxes,cur,
-    currentRatio: totalCL>0?totalCA/totalCL:null,
-    quickRatio:   totalCL>0?(cash+rec)/totalCL:null,
-    grossMargin:  revenue>0?(grossProfit/revenue)*100:null,
-    ebitdaMargin: revenue>0?(ebitda/revenue)*100:null,
-    ebitMargin:   revenue>0?(ebit/revenue)*100:null,
-    netMargin:    revenue>0?(netIncome/revenue)*100:null,
-    debtToEquity: totalEquity>0?totalLiabilities/totalEquity:null,
-    debtToAssets: totalAssets>0?totalLiabilities/totalAssets:null,
-    interestCoverage: interestExp>0?ebit/interestExp:null,
-    roa: totalAssets>0?(netIncome/totalAssets)*100:null,
-    roe: totalEquity>0?(netIncome/totalEquity)*100:null,
-    dso: revenue>0?(rec/(revenue/365)):null,
-    dio: cogs>0?(inv/(cogs/365)):null,
-    dpo: cogs>0?(payables/(cogs/365)):null,
-    ccc: (revenue>0&&cogs>0)?(rec/(revenue/365))+(inv/(cogs/365))-(payables/(cogs/365)):null,
-  };
+document.getElementById("score").innerText="Score: "+scoreFinanciero(liq,end,roa,margen)
+
+document.getElementById("zscore").innerText="Altman Z: "+altman(liq,end,roa,margen)
+
+radar(liq,end,roa,margen)
+
 }
 
-// ─── ALTMAN Z-SCORE ──────────────────────────────────────────────
-function calcAltman(r) {
-  if(!r.totalAssets) return null;
-  const X1=r.workingCapital/r.totalAssets, X2=r.retained/r.totalAssets;
-  const X3=r.ebit/r.totalAssets, X4=r.totalEquity/(r.totalLiabilities||1), X5=r.revenue/r.totalAssets;
-  return {Z:1.2*X1+1.4*X2+3.3*X3+0.6*X4+X5,X1,X2,X3,X4,X5};
+let chart
+
+function radar(liq,end,roa,margen){
+
+if(chart)chart.destroy()
+
+chart=new Chart(document.getElementById("radar"),{
+
+type:"radar",
+
+data:{
+
+labels:["Liquidez","Endeudamiento","ROA","Margen"],
+
+datasets:[{
+
+label:"Perfil financiero",
+
+data:[liq,end,roa,margen]
+
+}]
+
 }
 
-// ─── BENCHMARKS ──────────────────────────────────────────────────
-const BENCHMARKS = {
-  retail:       {grossMargin:28,ebitdaMargin:8, netMargin:3, roe:12,currentRatio:1.4,debtToEquity:1.2},
-  manufacturing:{grossMargin:32,ebitdaMargin:12,netMargin:6, roe:10,currentRatio:1.8,debtToEquity:0.9},
-  technology:   {grossMargin:65,ebitdaMargin:22,netMargin:12,roe:18,currentRatio:2.5,debtToEquity:0.5},
-  financial:    {grossMargin:45,ebitdaMargin:30,netMargin:15,roe:14,currentRatio:1.2,debtToEquity:2.5},
-  healthcare:   {grossMargin:55,ebitdaMargin:18,netMargin:9, roe:15,currentRatio:2.0,debtToEquity:0.7},
-  real_estate:  {grossMargin:38,ebitdaMargin:25,netMargin:14,roe:8, currentRatio:1.3,debtToEquity:1.5},
-  hospitality:  {grossMargin:72,ebitdaMargin:14,netMargin:5, roe:7, currentRatio:0.9,debtToEquity:1.8},
-  services:     {grossMargin:58,ebitdaMargin:16,netMargin:8, roe:16,currentRatio:1.6,debtToEquity:0.6},
-  agro:         {grossMargin:22,ebitdaMargin:10,netMargin:4, roe:8, currentRatio:1.7,debtToEquity:1.0},
-  other:        {grossMargin:40,ebitdaMargin:14,netMargin:6, roe:12,currentRatio:1.5,debtToEquity:1.0},
-};
+})
 
-// ─── HEALTH SCORE ────────────────────────────────────────────────
-function calcScore(r) {
-  let s=50;
-  if(r.currentRatio!==null) s+=r.currentRatio>=2?10:r.currentRatio>=1.5?7:r.currentRatio>=1?3:-15;
-  if(r.netMargin!==null)    s+=r.netMargin>=15?12:r.netMargin>=8?8:r.netMargin>=3?4:r.netMargin<0?-15:0;
-  if(r.debtToEquity!==null) s+=r.debtToEquity<0.5?8:r.debtToEquity<1?5:r.debtToEquity<2?2:-10;
-  if(r.roe!==null)          s+=r.roe>=20?8:r.roe>=12?5:r.roe>=5?2:r.roe<0?-8:0;
-  if(r.interestCoverage!==null) s+=r.interestCoverage>=5?7:r.interestCoverage>=3?4:r.interestCoverage<1.5?-10:0;
-  return Math.max(0,Math.min(100,Math.round(s)));
 }
 
-// ─── GEMINI API CALL ─────────────────────────────────────────────
-async function callGemini(prompt) {
-  const res = await fetch(GEMINI_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      contents: [{parts: [{text: prompt}]}],
-      generationConfig: {maxOutputTokens: 1000, temperature: 0.7}
-    })
-  });
-  const data = await res.json();
-  return data.candidates?.[0]?.content?.parts?.[0]?.text || 'No se pudo generar el análisis.';
+actualizar()
+
+function simular(){
+
+let ventas=document.getElementById("ventas").value
+let margen=document.getElementById("margenProy").value
+
+let utilidad=ventas*margen
+
+document.getElementById("resultadoSim").innerText="Utilidad proyectada: "+utilidad
+
 }
 
-// Convierte markdown básico a HTML
-function mdToHtml(text) {
-  return text
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm,  '<h3>$1</h3>')
-    .replace(/^# (.+)$/gm,   '<h3>$1</h3>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g,    '<em>$1</em>')
-    .replace(/^[-•]\s+(.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
-    .replace(/\n{2,}/g, '</p><p>')
-    .replace(/^(?!<[hup])/gm, '')
-    .replace(/(.+)(?!<\/[hup]>)/g, (m) => m.startsWith('<') ? m : `<p>${m}</p>`);
+function leerExcel(){
+
+let file=document.getElementById("excel").files[0]
+
+let reader=new FileReader()
+
+reader.onload=function(e){
+
+let data=new Uint8Array(e.target.result)
+
+let workbook=XLSX.read(data,{type:'array'})
+
+let sheet=workbook.Sheets[workbook.SheetNames[0]]
+
+let json=XLSX.utils.sheet_to_json(sheet)
+
+document.getElementById("excelOut").innerText=JSON.stringify(json,null,2)
+
 }
 
-// ─── BUILD UI ────────────────────────────────────────────────────
-function buildKPIs(r, r2) {
-  const cur=r.cur;
-  const kpis=[
-    {label:'Ingresos Netos',val:fmt(r.revenue,cur),sub:r.cogs>0?`COGS: ${fmt(r.cogs,cur)}`:'',cls:r.revenue>0?'positive':'',delta:r2?yoyDelta(r.revenue,r2.revenue):null},
-    {label:'Utilidad Neta',val:fmt(r.netIncome,cur),sub:r.netMargin!==null?`Margen: ${pct(r.netMargin)}`:'',cls:r.netIncome>0?'positive':r.netIncome<0?'negative':'warning',delta:r2?yoyDelta(r.netIncome,r2.netIncome):null},
-    {label:'EBITDA',val:fmt(r.ebitda,cur),sub:r.ebitdaMargin!==null?`Margen: ${pct(r.ebitdaMargin)}`:'',cls:r.ebitda>0?'positive':'negative',delta:r2?yoyDelta(r.ebitda,r2.ebitda):null},
-    {label:'Liquidez Corriente',val:ratio(r.currentRatio),sub:r.currentRatio?(r.currentRatio>=1.5?'Buena cobertura':r.currentRatio>=1?'Cobertura ajustada':'⚠ Riesgo liquidez'):'',cls:r.currentRatio?(r.currentRatio>=1.5?'positive':r.currentRatio>=1?'warning':'negative'):''},
-    {label:'Deuda / Patrimonio',val:ratio(r.debtToEquity),sub:r.debtToEquity!==null?(r.debtToEquity<1?'Bajo apalancamiento':r.debtToEquity<2?'Moderado':'Alto apalancamiento'):'',cls:r.debtToEquity!==null?(r.debtToEquity<1?'positive':r.debtToEquity<2?'warning':'negative'):''},
-  ];
-  document.getElementById('kpiGrid').innerHTML = kpis.map(k=>`
-    <div class="kpi-card ${k.cls}">
-      <div class="kpi-label">${k.label}</div>
-      <div class="kpi-value ${k.cls}">${k.val}</div>
-      <div class="kpi-sub">${k.sub}</div>
-      ${k.delta!==null?yoyTag(k.delta):''}
-    </div>`).join('');
+reader.readAsArrayBuffer(file)
+
 }
 
-function buildRatioTable(r) {
-  const rows=[
-    {n:'Razón Corriente',v:r.currentRatio,f:ratio,good:v=>v>=1.5},
-    {n:'Razón Rápida',v:r.quickRatio,f:ratio,good:v=>v>=1},
-    {n:'Margen Bruto',v:r.grossMargin,f:pct,good:v=>v>=30},
-    {n:'Margen EBITDA',v:r.ebitdaMargin,f:pct,good:v=>v>=15},
-    {n:'Margen Neto',v:r.netMargin,f:pct,good:v=>v>=5},
-    {n:'ROE',v:r.roe,f:pct,good:v=>v>=10},
-    {n:'ROA',v:r.roa,f:pct,good:v=>v>=5},
-    {n:'Deuda/Patrimonio',v:r.debtToEquity,f:ratio,good:v=>v<1},
-    {n:'Cob. Intereses',v:r.interestCoverage,f:ratio,good:v=>v>=3},
-    {n:'DSO',v:r.dso,f:days,good:v=>v<45},
-    {n:'DIO',v:r.dio,f:days,good:v=>v<60},
-    {n:'CCC',v:r.ccc,f:days,good:v=>v<60},
-  ].filter(row=>row.v!==null&&row.v!==undefined&&!isNaN(row.v));
+const API_KEY="TU_API_KEY"
 
-  document.getElementById('ratioTable').innerHTML = rows.map(row=>{
-    const ok=row.good(row.v);
-    return `<tr><td>${row.n}</td><td><span class="badge ${ok?'green':row.v<0?'red':'yellow'}">${ok?'✓':'⚠'}</span></td><td>${row.f(row.v)}</td></tr>`;
-  }).join('');
+async function analizarIA(){
+
+let liq=document.getElementById("liq").value
+let end=document.getElementById("end").value
+let roa=document.getElementById("roa").value
+let margen=document.getElementById("margen").value
+
+let prompt=`Actúa como CFO experto y analiza estos ratios: Liquidez ${liq}, Endeudamiento ${end}, ROA ${roa}, Margen ${margen}.`
+
+let r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,{
+
+method:"POST",
+
+headers:{"Content-Type":"application/json"},
+
+body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
+
+})
+
+let data=await r.json()
+
+let texto=data.candidates?.[0]?.content?.parts?.[0]?.text
+
+document.getElementById("resultadoIA").innerText=texto
+
 }
 
-function buildScore(score) {
-  const ring=document.getElementById('scoreRing');
-  const offset=339-(339*score/100);
-  setTimeout(()=>{ring.style.strokeDashoffset=offset;},100);
-  let cat,desc,color;
-  if(score>=80){cat='Excelente';desc='Empresa financieramente robusta con capacidad de crecimiento sostenible.';color='var(--positive)';}
-  else if(score>=65){cat='Bueno';desc='Situación sólida con áreas específicas de mejora.';color='var(--positive)';}
-  else if(score>=50){cat='Regular';desc='Situación aceptable con vulnerabilidades que requieren atención.';color='var(--warning)';}
-  else if(score>=35){cat='Débil';desc='Indicadores preocupantes. Plan de mejora urgente necesario.';color='var(--warning)';}
-  else{cat='Crítico';desc='Situación de alto riesgo. Reestructuración inmediata.';color='var(--negative)';}
-  ring.style.stroke=color;
-  document.getElementById('scoreNum').textContent=score;
-  document.getElementById('scoreNum').style.color=color;
-  document.getElementById('scoreCat').textContent=cat;
-  document.getElementById('scoreCat').style.color=color;
-  document.getElementById('scoreDesc').textContent=desc;
+async function preguntar(){
+
+let pregunta=document.getElementById("pregunta").value
+
+let chat=document.getElementById("chat")
+
+chat.innerHTML+="<p><b>Tú:</b> "+pregunta+"</p>"
+
+let r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,{
+
+method:"POST",
+
+headers:{"Content-Type":"application/json"},
+
+body:JSON.stringify({contents:[{parts:[{text:pregunta}]}]})
+
+})
+
+let data=await r.json()
+
+let resp=data.candidates?.[0]?.content?.parts?.[0]?.text
+
+chat.innerHTML+="<p><b>IA:</b> "+resp+"</p>"
+
 }
 
-function buildAltman(r) {
-  const alt=calcAltman(r);
-  if(!alt){document.getElementById('altmanScore').innerHTML='<p style="color:var(--text-muted);text-align:center">Datos insuficientes</p>';return;}
-  const Z=alt.Z;
-  let zone,color,desc;
-  if(Z>2.99){zone='Zona Segura';color='var(--positive)';desc='Riesgo de quiebra muy bajo en los próximos 2 años.';}
-  else if(Z>1.81){zone='Zona Gris';color='var(--warning)';desc='Empresa en zona de incertidumbre. Monitoreo estrecho requerido.';}
-  else{zone='Zona de Peligro';color='var(--negative)';desc='Alto riesgo de insolvencia. Acción inmediata necesaria.';}
-  const pct_pos=Math.min(100,Math.max(0,((Z-0)/4)*100));
-  document.getElementById('altmanScore').innerHTML=`
-    <div class="altman-num" style="color:${color}">${Z.toFixed(2)}</div>
-    <div class="altman-zone" style="color:${color}">${zone}</div>
-    <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">${desc}</div>
-    <div class="altman-bar-wrap"><div class="altman-marker" style="left:${pct_pos}%;background:${color}"></div></div>
-    <div class="altman-labels"><span>Peligro (&lt;1.81)</span><span>Gris</span><span>Seguro (&gt;2.99)</span></div>
-    <div style="margin-top:16px;">
-      ${[['X1 — Capital de Trabajo / Activos',alt.X1],['X2 — Ut. Retenidas / Activos',alt.X2],['X3 — EBIT / Activos',alt.X3],['X4 — Patrimonio / Pasivos',alt.X4],['X5 — Ventas / Activos',alt.X5]]
-        .map(([l,v])=>`<div class="altman-comp"><span>${l}</span><span>${v.toFixed(4)}</span></div>`).join('')}
-    </div>`;
+function exportarPDF(){
+
+const {jsPDF}=window.jspdf
+
+let doc=new jsPDF()
+
+doc.text("Reporte FinAxis",20,20)
+
+doc.text(document.getElementById("resultadoIA").innerText,20,40)
+
+doc.text("Elaborado por: "+analistaNombre+" – "+analistaCargo,20,260)
+
+doc.save("reporte_finaxis.pdf")
+
 }
 
-function buildBenchmarks(r) {
-  const industry=t('industry')||'other';
-  const bm=BENCHMARKS[industry]||BENCHMARKS.other;
-  const industryName=document.getElementById('industry').options[document.getElementById('industry').selectedIndex].text;
-  const items=[
-    {n:'Margen Bruto',mine:r.grossMargin,ind:bm.grossMargin,f:v=>pct(v)},
-    {n:'Margen EBITDA',mine:r.ebitdaMargin,ind:bm.ebitdaMargin,f:v=>pct(v)},
-    {n:'Margen Neto',mine:r.netMargin,ind:bm.netMargin,f:v=>pct(v)},
-    {n:'ROE',mine:r.roe,ind:bm.roe,f:v=>pct(v)},
-    {n:'Razón Corriente',mine:r.currentRatio,ind:bm.currentRatio,f:v=>ratio(v)},
-    {n:'Deuda/Patrimonio',mine:r.debtToEquity,ind:bm.debtToEquity,f:v=>ratio(v),inverted:true},
-  ].filter(i=>i.mine!==null&&i.mine!==undefined&&!isNaN(i.mine));
-
-  document.getElementById('benchmarkContent').innerHTML=`
-    <div style="font-size:11px;color:var(--text-muted);margin-bottom:16px;">Comparando vs promedio de <strong style="color:var(--text)">${industryName}</strong></div>
-    <div style="display:flex;gap:16px;margin-bottom:16px;font-size:11px;">
-      <span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:3px;background:var(--accent3);display:inline-block;border-radius:2px;"></span>Tu empresa</span>
-      <span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:3px;background:var(--text-dim);display:inline-block;border-radius:2px;"></span>Industria</span>
-    </div>
-    ${items.map(item=>{
-      const maxVal=Math.max(item.mine||0,item.ind||0,0.1)*1.3;
-      const mW=Math.min(100,((item.mine||0)/maxVal)*100);
-      const iW=Math.min(100,((item.ind||0)/maxVal)*100);
-      const better=item.inverted?(item.mine<=item.ind):(item.mine>=item.ind);
-      return `<div class="benchmark-item">
-        <div class="bm-header"><span class="bm-name">${item.n}</span>
-          <div class="bm-vals"><span style="color:${better?'var(--positive)':'var(--negative)'}">${item.f(item.mine)}</span><span class="bm-industry">Ind: ${item.f(item.ind)}</span></div>
-        </div>
-        <div class="bm-bar-bg">
-          <div class="bm-bar-industry" style="width:${iW}%"></div>
-          <div class="bm-bar-mine" style="width:${mW}%;background:${better?'var(--positive)':'var(--negative)'}"></div>
-        </div></div>`;
-    }).join('')}`;
-}
-
-function buildAlerts(r) {
-  const alerts=[];
-  if(r.currentRatio!==null&&r.currentRatio<1) alerts.push({type:'critical',msg:'Riesgo de liquidez crítico: el activo corriente no cubre el pasivo corriente.'});
-  else if(r.currentRatio!==null&&r.currentRatio<1.5) alerts.push({type:'warning',msg:`Liquidez ajustada (${ratio(r.currentRatio)}). Monitorear flujo de efectivo mensualmente.`});
-  if(r.netMargin!==null&&r.netMargin<0) alerts.push({type:'critical',msg:'La empresa opera con pérdida neta. Medidas urgentes de reducción de costos requeridas.'});
-  if(r.debtToEquity!==null&&r.debtToEquity>2) alerts.push({type:'critical',msg:`Apalancamiento excesivo (${ratio(r.debtToEquity)} D/E). Alta dependencia de deuda.`});
-  if(r.interestCoverage!==null&&r.interestCoverage<2) alerts.push({type:'critical',msg:`Cobertura de intereses insuficiente (${ratio(r.interestCoverage)}). Riesgo de incumplimiento.`});
-  if(r.grossMargin!==null&&r.grossMargin<20) alerts.push({type:'warning',msg:`Margen bruto bajo (${pct(r.grossMargin)}). Revisar estrategia de precios y costos.`});
-  if(r.dso!==null&&r.dso>60) alerts.push({type:'warning',msg:`Ciclo de cobro prolongado (${days(r.dso)}). Riesgo de cartera vencida.`});
-  if(hasYoY&&R2.revenue){const d=yoyDelta(r.revenue,R2.revenue);if(d!==null&&d<0)alerts.push({type:'warning',msg:`Caída en ingresos de ${Math.abs(d).toFixed(1)}% vs período anterior.`});if(d!==null&&d>0)alerts.push({type:'good',msg:`Crecimiento de ingresos de ${d.toFixed(1)}% vs período anterior. Tendencia positiva.`});}
-  if(alerts.length===0) alerts.push({type:'good',msg:'Los indicadores principales muestran una situación financiera saludable.'});
-  document.getElementById('alertsContainer').innerHTML=alerts.map(a=>`
-    <div class="alert ${a.type}"><span style="font-weight:700;margin-right:6px;">${a.type==='critical'?'🔴':a.type==='warning'?'🟡':'🟢'}</span>${a.msg}</div>`).join('');
-}
-
-function buildSimulator(r) {
-  document.getElementById('simControls').innerHTML=`
-    <div class="sim-control"><div class="sim-label">Incremento en Ingresos <span class="sim-value" id="simRevVal">+0%</span></div><input type="range" class="sim-slider" id="simRev" min="-20" max="50" value="0" oninput="updateSim()"></div>
-    <div class="sim-control"><div class="sim-label">Reducción en Costos Operativos <span class="sim-value" id="simCostVal">+0%</span></div><input type="range" class="sim-slider" id="simCost" min="-30" max="30" value="0" oninput="updateSim()"></div>
-    <div class="sim-control"><div class="sim-label">Reducción en Deuda <span class="sim-value" id="simDebtVal">+0%</span></div><input type="range" class="sim-slider" id="simDebt" min="0" max="50" value="0" oninput="updateSim()"></div>`;
-  updateSim();
-}
-
-function updateSim() {
-  const rv=parseInt(document.getElementById('simRev').value)/100;
-  const cv=parseInt(document.getElementById('simCost').value)/100;
-  const dv=parseInt(document.getElementById('simDebt').value)/100;
-  document.getElementById('simRevVal').textContent=(rv>=0?'+':'')+(rv*100).toFixed(0)+'%';
-  document.getElementById('simCostVal').textContent=(cv>=0?'+':'')+(cv*100).toFixed(0)+'%';
-  document.getElementById('simDebtVal').textContent=(dv>=0?'+':'')+(dv*100).toFixed(0)+'%';
-  const sR=R.revenue*(1+rv), sOpex=(R.sellExp+R.adminExp+R.otherOpex)*(1-cv);
-  const sE=(sR-R.cogs)-sOpex, sEbit=sE-R.da;
-  const sNet=sEbit-(R.interestExp*(1-dv))+R.interestInc-R.taxes;
-  const sNM=sR>0?(sNet/sR)*100:0;
-  const fields=[
-    {l:'Ingresos Proyectados',v:fmt(sR,R.cur),d:sR-R.revenue,isCur:true},
-    {l:'EBITDA Proyectado',v:fmt(sE,R.cur),d:sE-R.ebitda,isCur:true},
-    {l:'Utilidad Neta Proyectada',v:fmt(sNet,R.cur),d:sNet-R.netIncome,isCur:true},
-    {l:'Margen Neto Proyectado',v:pct(sNM),d:sNM-(R.netMargin||0),isCur:false},
-  ];
-  document.getElementById('simResults').innerHTML=fields.map(f=>`
-    <div class="sim-result"><div class="sim-result-label">${f.l}</div><div class="sim-result-val">${f.v}</div>
-    <div class="sim-result-delta" style="color:${f.d>=0?'var(--positive)':'var(--negative)'}">${f.d>=0?'+':''}${f.isCur?fmt(f.d,R.cur):f.d.toFixed(1)+'pp'}</div></div>`).join('');
-}
-
-// ─── CHARTS ──────────────────────────────────────────────────────
-function destroyCharts() {
-  Object.values(charts).forEach(c=>{try{c.destroy();}catch(e){}});
-  charts={};
-}
-
-function buildCharts(r, r2) {
-  destroyCharts();
-  const gridColor='rgba(30,36,48,0.8)', textColor='#6b7a99';
-
-  charts.balance=new Chart(document.getElementById('balanceChart').getContext('2d'),{
-    type:'doughnut',
-    data:{labels:['Activos Corrientes','Activos No Corrientes','Pasivos Corrientes','Pasivos LP','Patrimonio'],
-      datasets:[{data:[r.totalCA,r.totalNCA,r.totalCL,r.totalLTL,r.totalEquity].map(v=>Math.max(0,v)),
-        backgroundColor:['#00e5b0','#4d9fff','#ff4d6b','#ff6b35','#a855f7'],borderColor:'#0a0c0f',borderWidth:3,hoverOffset:8}]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'right',labels:{color:textColor,font:{size:11,family:'IBM Plex Mono'},boxWidth:10,padding:12}},
-      tooltip:{callbacks:{label:ctx=>` ${fmt(ctx.raw,r.cur)} (${((ctx.raw/r.totalAssets)*100).toFixed(1)}%)`}}}}});
-
-  const plVals=[r.revenue,r.grossProfit,r.ebitda,r.ebit,r.netIncome];
-  charts.pl=new Chart(document.getElementById('plChart').getContext('2d'),{
-    type:'bar',
-    data:{labels:['Ingresos','Margen Bruto','EBITDA','EBIT','Ut. Neta'],
-      datasets:[{data:plVals,backgroundColor:plVals.map(v=>v>=0?'rgba(0,229,176,0.7)':'rgba(255,77,107,0.7)'),
-        borderColor:plVals.map(v=>v>=0?'#00e5b0':'#ff4d6b'),borderWidth:1.5,borderRadius:6}]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${fmt(ctx.raw,r.cur)}`}}},
-      scales:{x:{grid:{color:gridColor},ticks:{color:textColor,font:{size:11}}},
-        y:{grid:{color:gridColor},ticks:{color:textColor,font:{size:11,family:'IBM Plex Mono'},callback:v=>fmt(v,r.cur)}}}}});
-
-  if(hasYoY&&r2&&r2.revenue){
-    document.getElementById('yoyChartPanel').style.display='block';
-    const y1=[r.revenue,r.grossProfit,r.ebitda,r.netIncome,r.totalAssets,r.totalEquity];
-    const y2=[r2.revenue,r2.grossProfit,r2.ebitda,r2.netIncome,r2.totalAssets,r2.totalEquity];
-    charts.yoy=new Chart(document.getElementById('yoyChart').getContext('2d'),{
-      type:'bar',
-      data:{labels:['Ingresos','Ut. Bruta','EBITDA','Ut. Neta','Activos','Patrimonio'],
-        datasets:[
-          {label:t('period')||'Actual',data:y1,backgroundColor:'rgba(0,229,176,0.75)',borderColor:'#00e5b0',borderWidth:1.5,borderRadius:5},
-          {label:t('period2')||'Anterior',data:y2,backgroundColor:'rgba(77,159,255,0.5)',borderColor:'#4d9fff',borderWidth:1.5,borderRadius:5}]},
-      options:{responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{labels:{color:textColor,font:{size:12}}},tooltip:{callbacks:{label:ctx=>` ${fmt(ctx.raw,r.cur)}`}}},
-        scales:{x:{grid:{color:gridColor},ticks:{color:textColor}},y:{grid:{color:gridColor},ticks:{color:textColor,font:{family:'IBM Plex Mono',size:11},callback:v=>fmt(v,r.cur)}}}}});
-  }
-
-  function normalize(val,min,max){if(val===null||isNaN(val))return 0;return Math.max(0,Math.min(100,((val-min)/(max-min))*100));}
-  charts.radar=new Chart(document.getElementById('radarChart').getContext('2d'),{
-    type:'radar',
-    data:{labels:['Liquidez','Margen Bruto','Margen Neto','ROE','Cobertura Deuda','Solvencia'],
-      datasets:[{label:t('period')||'Tu empresa',
-        data:[normalize(r.currentRatio,0,3),normalize(r.grossMargin,0,80),normalize(r.netMargin,-20,30),normalize(r.roe,-10,30),normalize(r.interestCoverage!==null?r.interestCoverage:0,0,10),normalize(r.debtToEquity!==null?Math.max(0,3-r.debtToEquity):0,0,3)],
-        backgroundColor:'rgba(0,229,176,0.15)',borderColor:'#00e5b0',borderWidth:2,pointBackgroundColor:'#00e5b0',pointRadius:4}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{r:{min:0,max:100,grid:{color:gridColor},angleLines:{color:gridColor},ticks:{display:false},pointLabels:{color:textColor,font:{size:12,family:'IBM Plex Sans'}}}}}});
-}
-
-// ─── LOADING STEPS ────────────────────────────────────────────────
-async function stepLoader(steps) {
-  for(let i=0;i<steps.length;i++){
-    const el=document.getElementById('ls'+(i+1));
-    if(el){el.classList.add('active');el.textContent='● '+el.textContent.substring(2);}
-    await new Promise(r=>setTimeout(r,450));
-    if(el){el.classList.remove('active');el.classList.add('done');el.textContent='✓ '+el.textContent.substring(2);}
-  }
-}
-
-// ─── MAIN ANALYSIS ───────────────────────────────────────────────
-async function runAnalysis() {
-  const btn=document.getElementById('analyzeBtn');
-  btn.disabled=true;
-  R=calcRatios();
-  R2=hasYoY?calcRatios('Y2'):{};
-
-  const industry=t('industry')||'no especificada';
-  const period=t('period')||'período actual';
-  const company=t('companyName')||'La empresa';
-
-  document.getElementById('pageInput').style.display='none';
-  document.getElementById('loadingOverlay').classList.add('active');
-
-  const loaderPromise=stepLoader([1,2,3,4,5]);
-
-  const alt=calcAltman(R);
-  const score=calcScore(R);
-  const bm=BENCHMARKS[t('industry')]||BENCHMARKS.other;
-
-  const dataStr=`
-EMPRESA: ${company} | INDUSTRIA: ${industry} | PERÍODO: ${period} | MONEDA: ${R.cur}
-BALANCE: Activos=${R.totalAssets.toFixed(0)} | Pasivos=${R.totalLiabilities.toFixed(0)} | Patrimonio=${R.totalEquity.toFixed(0)} | Capital Trabajo=${R.workingCapital.toFixed(0)}
-P&L: Ingresos=${R.revenue.toFixed(0)} | Margen Bruto=${pct(R.grossMargin)} | EBITDA=${R.ebitda.toFixed(0)} (${pct(R.ebitdaMargin)}) | Ut.Neta=${R.netIncome.toFixed(0)} (${pct(R.netMargin)})
-RATIOS: Corriente=${ratio(R.currentRatio)} | Rápida=${ratio(R.quickRatio)} | D/E=${ratio(R.debtToEquity)} | ROE=${pct(R.roe)} | ROA=${pct(R.roa)} | Cob.Intereses=${ratio(R.interestCoverage)}
-CICLO: DSO=${days(R.dso)} | DIO=${days(R.dio)} | DPO=${days(R.dpo)} | CCC=${days(R.ccc)}
-ALTMAN Z-Score: ${alt?.Z?.toFixed(2)||'N/D'} (${alt?.Z>2.99?'Zona Segura':alt?.Z>1.81?'Zona Gris':'Zona de Peligro'})
-SALUD FINANCIERA: ${score}/100
-VS INDUSTRIA (${industry}): MgnBruto ${pct(R.grossMargin)} vs ${bm.grossMargin}% | EBITDA ${pct(R.ebitdaMargin)} vs ${bm.ebitdaMargin}% | Neto ${pct(R.netMargin)} vs ${bm.netMargin}% | ROE ${pct(R.roe)} vs ${bm.roe}%
-${hasYoY&&R2.revenue?`YOY: Ingresos ${R.revenue.toFixed(0)} vs ${R2.revenue.toFixed(0)} (${yoyDelta(R.revenue,R2.revenue)?.toFixed(1)}%) | EBITDA ${R.ebitda.toFixed(0)} vs ${R2.ebitda.toFixed(0)} | Ut.Neta ${R.netIncome.toFixed(0)} vs ${R2.netIncome.toFixed(0)}`:''}`;
-
-  let analysisText='', recsText='';
-  try {
-    const [aText, rText] = await Promise.all([
-      callGemini(`Eres un CFO con 20+ años de experiencia. Analiza con ojo crítico y perspectiva estratégica. Responde SOLO en español. Usa formato con títulos con ## y listas con guiones.\n\n${dataStr}\n\nComo CFO, proporciona un diagnóstico estratégico profundo: situación actual, problemas estructurales, calidad de earnings, ciclo operativo, estructura de capital, comparativo vs industria. Menciona el Altman Z-Score. Sé directo y usa los números del análisis.`),
-      callGemini(`Eres un CFO senior. Responde SOLO en español. Usa formato con títulos ## y listas con guiones.\n\n${dataStr}\n\nPlan de acción concreto: 6-8 iniciativas críticas priorizadas. Para cada una: acción específica, plazo (30/60/90 días o largo plazo), impacto cuantificable en indicadores financieros.`),
-      loaderPromise
-    ]);
-    analysisText=mdToHtml(aText);
-    recsText=mdToHtml(rText);
-  } catch(err) {
-    await loaderPromise;
-    analysisText='<p style="color:var(--text-muted)">No se pudo conectar con el motor de análisis IA. Los ratios calculados son válidos.</p>';
-    recsText='<p style="color:var(--text-muted)">Análisis IA no disponible.</p>';
-  }
-
-  buildKPIs(R,hasYoY?R2:null);
-  buildRatioTable(R);
-  buildScore(score);
-  buildAltman(R);
-  buildBenchmarks(R);
-  buildAlerts(R);
-  buildSimulator(R);
-  buildCharts(R,hasYoY?R2:null);
-
-  document.getElementById('aiAnalysis').innerHTML=analysisText;
-  document.getElementById('recsContent').innerHTML=recsText;
-
-  const per1=t('period')||'Período Actual', per2=t('period2'), elaboradoPor=t('elaboradoPor');
-  document.getElementById('reportSubtitle').textContent=hasYoY&&per2?`Análisis Comparativo ${per1} vs ${per2}`:per1;
-  document.getElementById('reportCompany').textContent=company!=='La empresa'?company:'';
-  document.getElementById('reportTimestamp').textContent=`Generado: ${new Date().toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'})}`;
-
-  const firmaPanel=document.getElementById('firmaPanel');
-  firmaPanel.style.display='block';
-  document.getElementById('firmaElaborado').textContent=elaboradoPor||'No especificado';
-  if(elaboradoPor) document.getElementById('reportElaborado').textContent=`Elaborado por: ${elaboradoPor}`;
-
-  document.getElementById('loadingOverlay').classList.remove('active');
-  document.getElementById('resultsWrap').classList.add('visible');
-  btn.disabled=false;
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function exportPDF() { window.print(); }
-
-function resetApp() {
-  destroyCharts();
-  document.getElementById('resultsWrap').classList.remove('visible');
-  document.getElementById('pageInput').style.display='block';
-  document.getElementById('yoyChartPanel').style.display='none';
-  document.getElementById('firmaPanel').style.display='none';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
 </script>
 
-<footer>
-  <div class="footer-brand">
-    <span style="color:var(--text-muted);font-size:11px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:1px;">Software desarrollado por</span><br>
-    <strong>Estiven Poveda</strong> &nbsp;·&nbsp; Contador Público Especialista en Finanzas &nbsp;·&nbsp; <span style="color:var(--accent3);">FinAxis v2.0</span>
-  </div>
-  <a class="footer-wa" href="https://wa.me/573228999193" target="_blank">
-    <svg class="footer-wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    <span class="footer-wa-text">+57 322 899 9193</span>
-  </a>
-</footer>
 </body>
 </html>

@@ -512,9 +512,15 @@ select option{background:var(--surface);}
           <span class="field-label">Nombre empresa (opcional)</span>
           <input type="text" id="companyName" placeholder="Mi Empresa S.A.">
         </div>
+        <div class="section-divider"></div>
+        <div class="section-header">Firma del informe</div>
         <div class="field-group">
-          <span class="field-label">Elaborado por</span>
-          <input type="text" id="elaboradoPor" placeholder="Nombre del analista o profesional">
+          <span class="field-label">Elaborado por — Nombre</span>
+          <input type="text" id="elaboradoPor" placeholder="Nombre completo del analista">
+        </div>
+        <div class="field-group">
+          <span class="field-label">Elaborado por — Cargo</span>
+          <input type="text" id="elaboradoCargo" placeholder="Ej: Auxiliar Contable, Gerente Financiero...">
         </div>
       </div>
     </div>
@@ -559,15 +565,16 @@ select option{background:var(--surface);}
         <div style="padding:20px 24px;border-right:1px solid var(--border);">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;">Elaborado por</div>
           <div style="font-size:15px;font-weight:600;color:var(--text);" id="firmaElaborado">—</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:3px;" id="firmaElaboradoCargo"></div>
         </div>
         <div style="padding:20px 24px;">
           <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:8px;">Revisado por</div>
           <div style="font-size:15px;font-weight:600;color:var(--text);">Estiven Poveda</div>
           <div style="font-size:12px;color:var(--text-muted);margin-top:3px;">Contador Público Especialista en Finanzas</div>
           <div style="display:flex;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap;">
-            <a href="https://www.pycconsultoria.com" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent3);text-decoration:none;">🌐 pycconsultoria.com</a>
-            <a href="https://wa.me/573228999193" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#25d366;text-decoration:none;">📱 322 899 9193</a>
+            <a href="https://wa.me/573228999183" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#25d366;text-decoration:none;">📱 322 899 9183</a>
           </div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:6px;font-family:'IBM Plex Mono',monospace;">P&C Consultoría Integral SAS</div>
         </div>
       </div>
     </div>
@@ -1259,40 +1266,154 @@ VS BENCHMARKS INDUSTRIA (${industry}):
 ${hasYoY && R2.revenue ? `\nCOMPARATIVO YOY vs ${period2}:\n- Ingresos: ${R.revenue.toFixed(0)} vs ${R2.revenue.toFixed(0)} (${yoyDelta(R.revenue,R2.revenue)?.toFixed(1)}%)\n- Ut. Neta: ${R.netIncome.toFixed(0)} vs ${R2.netIncome.toFixed(0)}\n- EBITDA: ${R.ebitda.toFixed(0)} vs ${R2.ebitda.toFixed(0)}` : ''}
 `;
 
-  let analysisText = '', recsText = '';
-  
-  try {
-    const [aRes, rRes] = await Promise.all([
-      fetch('https://api.anthropic.com/v1/messages', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({
-          model:'claude-sonnet-4-20250514', max_tokens:1000,
-          system:`Eres un CFO con 20+ años de experiencia. Analiza con ojo crítico y perspectiva estratégica. Usa HTML simple (<h3>, <p>, <ul><li>). Español. Sé directo y usa los números específicos del análisis.`,
-          messages:[{role:'user',content:`${dataStr}\nComo CFO, proporciona un diagnóstico estratégico profundo: situación actual, problemas estructurales, calidad de earnings, ciclo operativo, estructura de capital, y comparativo vs industria. Menciona el Altman Z-Score en tu análisis.`}]
-        })
-      }),
-      fetch('https://api.anthropic.com/v1/messages', {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({
-          model:'claude-sonnet-4-20250514', max_tokens:1000,
-          system:`Eres un CFO senior. Recomendaciones accionables priorizadas por impacto. HTML simple. Español.`,
-          messages:[{role:'user',content:`${dataStr}\nPlan de acción concreto: 6-8 iniciativas críticas priorizadas. Para cada una: acción específica, plazo (30/60/90 días o largo plazo), impacto cuantificable en indicadores financieros.`}]
-        })
-      }),
-      loaderPromise
-    ]);
-    
-    const aData = await aRes.json();
-    const rData = await rRes.json();
-    analysisText = aData.content?.map(c=>c.text||'').join('') || 'Error al generar análisis.';
-    recsText = rData.content?.map(c=>c.text||'').join('') || 'Error al generar recomendaciones.';
-  } catch(err) {
-    await loaderPromise;
-    analysisText = `<p style="color:var(--text-muted)">No se pudo conectar con el motor de análisis IA. Los ratios y métricas calculadas son válidos.</p>`;
-    recsText = `<p style="color:var(--text-muted)">Análisis IA no disponible. Revise su conexión.</p>`;
+  // Firma
+  const firmaPanel = document.getElementById('firmaPanel');
+  firmaPanel.style.display = 'block';
+  const elaboradoPorVal = t('elaboradoPor') || 'No especificado';
+  const elaboradoCargoVal = t('elaboradoCargo') || '';
+  document.getElementById('firmaElaborado').textContent = elaboradoPorVal;
+  document.getElementById('firmaElaboradoCargo').textContent = elaboradoCargoVal;
+  if (elaboradoPorVal) {
+    document.getElementById('reportElaborado').textContent = `Elaborado por: ${elaboradoPorVal}${elaboradoCargoVal ? ' · ' + elaboradoCargoVal : ''}`;
   }
+
+  // ── ANÁLISIS AUTOMÁTICO BASADO EN REGLAS ──────────────────────
+  const ind = t('industry') || 'other';
+  const bm2 = BENCHMARKS[ind] || BENCHMARKS.other;
+  const indName = document.getElementById('industry').options[document.getElementById('industry').selectedIndex]?.text || 'industria';
+  const cur2 = R.cur;
+
+  // ── DIAGNÓSTICO ESTRATÉGICO ───────────────────────────────────
+  let diag = '';
+
+  // 1. Situación general
+  const scoreLabel = score >= 80 ? 'excelente' : score >= 65 ? 'buena' : score >= 50 ? 'regular' : score >= 35 ? 'débil' : 'crítica';
+  diag += `<h3>Situación General</h3>
+  <p>Con una puntuación de salud financiera de <strong>${score}/100</strong>, la empresa presenta una situación <strong>${scoreLabel}</strong>. `;
+
+  if (R.totalAssets > 0) {
+    const debtPct = (R.totalLiabilities / R.totalAssets * 100).toFixed(1);
+    const equityPct = (R.totalEquity / R.totalAssets * 100).toFixed(1);
+    diag += `La estructura de activos muestra que el <strong>${debtPct}%</strong> está financiado con deuda y el <strong>${equityPct}%</strong> con patrimonio propio. `;
+  }
+  if (R.workingCapital !== 0) {
+    const wcSign = R.workingCapital >= 0 ? 'positivo' : 'negativo';
+    diag += `El capital de trabajo es <strong>${wcSign}</strong> con un valor de ${fmt(R.workingCapital, cur2)}, lo que ${R.workingCapital >= 0 ? 'indica capacidad para cubrir obligaciones de corto plazo' : 'representa un riesgo operativo inmediato'}.`;
+  }
+  diag += '</p>';
+
+  // 2. Liquidez
+  if (R.currentRatio !== null) {
+    diag += `<h3>Análisis de Liquidez</h3><p>`;
+    if (R.currentRatio >= 2) diag += `La razón corriente de <strong>${R.currentRatio.toFixed(2)}x</strong> refleja una posición de liquidez sólida. La empresa tiene holgura suficiente para cubrir sus obligaciones de corto plazo sin presión financiera.`;
+    else if (R.currentRatio >= 1.5) diag += `La razón corriente de <strong>${R.currentRatio.toFixed(2)}x</strong> es adecuada. Sin embargo, conviene monitorear el flujo de caja mensualmente para mantener este nivel.`;
+    else if (R.currentRatio >= 1) diag += `La razón corriente de <strong>${R.currentRatio.toFixed(2)}x</strong> es ajustada. Cualquier retraso en cobros o aumento de obligaciones puede generar presión de liquidez. Se recomienda optimizar el ciclo de cobro.`;
+    else diag += `<strong>⚠ Alerta crítica de liquidez:</strong> La razón corriente de <strong>${R.currentRatio.toFixed(2)}x</strong> indica que el pasivo corriente supera el activo corriente. Existe riesgo real de incumplimiento de obligaciones a corto plazo.`;
+    if (R.quickRatio !== null) diag += ` La razón rápida de <strong>${R.quickRatio.toFixed(2)}x</strong> ${R.quickRatio >= 1 ? 'confirma la solidez' : 'evidencia dependencia del inventario para cubrir obligaciones'}.`;
+    diag += `</p>`;
+  }
+
+  // 3. Rentabilidad
+  if (R.grossMargin !== null || R.netMargin !== null) {
+    diag += `<h3>Rentabilidad</h3><p>`;
+    if (R.grossMargin !== null) {
+      const vsInd = R.grossMargin - bm2.grossMargin;
+      diag += `El margen bruto de <strong>${pct(R.grossMargin)}</strong> está <strong>${vsInd >= 0 ? vsInd.toFixed(1) + 'pp por encima' : Math.abs(vsInd).toFixed(1) + 'pp por debajo'}</strong> del promedio de la industria ${indName} (${bm2.grossMargin}%). `;
+    }
+    if (R.ebitdaMargin !== null) diag += `El EBITDA de <strong>${fmt(R.ebitda, cur2)}</strong> representa un margen de <strong>${pct(R.ebitdaMargin)}</strong> sobre los ingresos. `;
+    if (R.netMargin !== null) {
+      if (R.netMargin < 0) diag += `<strong>La empresa registra pérdida neta</strong> con un margen negativo de ${pct(R.netMargin)}, lo que exige una revisión urgente de la estructura de costos y gastos.`;
+      else if (R.netMargin < 3) diag += `El margen neto de <strong>${pct(R.netMargin)}</strong> es muy estrecho, dejando poca capacidad de maniobra ante imprevistos.`;
+      else diag += `El margen neto de <strong>${pct(R.netMargin)}</strong> muestra ${R.netMargin >= bm2.netMargin ? 'una rentabilidad superior al promedio del sector' : 'oportunidad de mejora frente al referente sectorial de ' + bm2.netMargin + '%'}.`;
+    }
+    diag += `</p>`;
+  }
+
+  // 4. Endeudamiento
+  if (R.debtToEquity !== null) {
+    diag += `<h3>Estructura de Capital y Endeudamiento</h3><p>`;
+    if (R.debtToEquity < 0.5) diag += `El índice de endeudamiento de <strong>${ratio(R.debtToEquity)}</strong> es bajo, lo que indica una empresa financieramente conservadora con espacio para apalancarse si se requiere crecimiento.`;
+    else if (R.debtToEquity < 1) diag += `El índice D/E de <strong>${ratio(R.debtToEquity)}</strong> es moderado y manejable. La empresa mantiene un equilibrio razonable entre deuda y patrimonio.`;
+    else if (R.debtToEquity < 2) diag += `El índice D/E de <strong>${ratio(R.debtToEquity)}</strong> indica un nivel de apalancamiento elevado. Aunque aún manejable, cualquier deterioro en los ingresos puede comprometer la capacidad de pago.`;
+    else diag += `<strong>Apalancamiento excesivo:</strong> Con un D/E de <strong>${ratio(R.debtToEquity)}</strong>, la empresa depende fuertemente de financiamiento externo, lo que eleva significativamente el riesgo financiero.`;
+    if (R.interestCoverage !== null) diag += ` La cobertura de intereses de <strong>${ratio(R.interestCoverage)}</strong> ${R.interestCoverage >= 3 ? 'es adecuada' : R.interestCoverage >= 1.5 ? 'es ajustada y debe monitorearse' : 'es insuficiente y representa un riesgo de incumplimiento con acreedores'}.`;
+    diag += `</p>`;
+  }
+
+  // 5. Ciclo operativo
+  if (R.dso !== null || R.dio !== null) {
+    diag += `<h3>Eficiencia Operativa y Ciclo de Caja</h3><ul>`;
+    if (R.dso !== null) diag += `<li>DSO (Días de cobro): <strong>${days(R.dso)}</strong> — ${R.dso < 30 ? 'Excelente gestión de cartera' : R.dso < 45 ? 'Dentro de parámetros normales' : R.dso < 60 ? 'Cobros lentos, revisar política de crédito' : 'Cartera crítica, riesgo de incobrabilidad alto'}</li>`;
+    if (R.dio !== null) diag += `<li>DIO (Días de inventario): <strong>${days(R.dio)}</strong> — ${R.dio < 30 ? 'Rotación de inventario excelente' : R.dio < 60 ? 'Rotación normal' : 'Inventario acumulado, revisar política de compras y ventas'}</li>`;
+    if (R.dpo !== null) diag += `<li>DPO (Días de pago): <strong>${days(R.dpo)}</strong> — ${R.dpo > 45 ? 'Buen aprovechamiento del crédito de proveedores' : 'Posibilidad de negociar mayores plazos con proveedores'}</li>`;
+    if (R.ccc !== null) diag += `<li>CCC (Ciclo de conversión): <strong>${days(R.ccc)}</strong> — ${R.ccc < 45 ? 'Ciclo eficiente de conversión de efectivo' : R.ccc < 90 ? 'Ciclo moderado, con oportunidades de mejora' : 'Ciclo prolongado: el capital de trabajo está atrapado demasiado tiempo'}</li>`;
+    diag += `</ul>`;
+  }
+
+  // 6. ROE / ROA
+  if (R.roe !== null || R.roa !== null) {
+    diag += `<h3>Retorno sobre la Inversión</h3><p>`;
+    if (R.roe !== null) {
+      const vsIndRoe = R.roe - bm2.roe;
+      diag += `El ROE de <strong>${pct(R.roe)}</strong> indica que por cada peso de patrimonio, los accionistas obtienen ${pct(R.roe)} de retorno. Esto está <strong>${vsIndRoe >= 0 ? vsIndRoe.toFixed(1) + 'pp sobre' : Math.abs(vsIndRoe).toFixed(1) + 'pp bajo'}</strong> el referente sectorial. `;
+    }
+    if (R.roa !== null) diag += `El ROA de <strong>${pct(R.roa)}</strong> ${R.roa >= 5 ? 'refleja un uso eficiente de los activos para generar utilidades' : 'sugiere que los activos no están siendo suficientemente productivos'}.`;
+    diag += `</p>`;
+  }
+
+  // 7. YoY
+  if (hasYoY && R2.revenue) {
+    const revG = yoyDelta(R.revenue, R2.revenue);
+    const netG = yoyDelta(R.netIncome, R2.netIncome);
+    diag += `<h3>Análisis Comparativo Año vs Año</h3><p>`;
+    if (revG !== null) diag += `Los ingresos ${revG >= 0 ? `crecieron un <strong>${revG.toFixed(1)}%</strong>` : `cayeron un <strong>${Math.abs(revG).toFixed(1)}%</strong>`} frente al período anterior. `;
+    if (netG !== null) diag += `La utilidad neta ${netG >= 0 ? `mejoró un <strong>${netG.toFixed(1)}%</strong>` : `se deterioró un <strong>${Math.abs(netG).toFixed(1)}%</strong>`}, lo que ${netG >= 0 ? 'refleja una tendencia positiva en la gestión financiera' : 'requiere análisis profundo de las causas del deterioro'}.`;
+    diag += `</p>`;
+  }
+
+  // ── PLAN DE ACCIÓN ────────────────────────────────────────────
+  let recs = '<ul>';
+  const recList = [];
+
+  if (R.currentRatio !== null && R.currentRatio < 1.5)
+    recList.push({ plazo:'30 días', accion:'Implementar política de cobro acelerado: descuentos por pronto pago, factoring o anticipos de cartera para mejorar la liquidez inmediata.', impacto:'Incremento en razón corriente y reducción del DSO.' });
+
+  if (R.dso !== null && R.dso > 45)
+    recList.push({ plazo:'30–60 días', accion:`Revisar y fortalecer la política de crédito y cobranza. Con ${days(R.dso)} de cobro promedio, reducirlo a menos de 45 días liberaría capital de trabajo significativo.`, impacto:'Mejora del CCC y flujo de caja operativo.' });
+
+  if (R.grossMargin !== null && R.grossMargin < bm2.grossMargin)
+    recList.push({ plazo:'60 días', accion:`El margen bruto (${pct(R.grossMargin)}) está por debajo del sector (${bm2.grossMargin}%). Revisar estructura de costos, negociar con proveedores y evaluar ajuste de precios de venta.`, impacto:`Incremento de hasta ${(bm2.grossMargin - R.grossMargin).toFixed(1)}pp en margen bruto.` });
+
+  if (R.netMargin !== null && R.netMargin < 0)
+    recList.push({ plazo:'Inmediato', accion:'Análisis urgente de gastos operativos y financieros. Identificar y eliminar costos no esenciales. Evaluar reestructuración de deuda para reducir carga financiera.', impacto:'Recuperación de la rentabilidad neta.' });
+
+  if (R.debtToEquity !== null && R.debtToEquity > 1.5)
+    recList.push({ plazo:'90 días', accion:`Con un D/E de ${ratio(R.debtToEquity)}, se recomienda plan de desapalancamiento: refinanciar deuda a menor tasa, ampliar plazos, o evaluar inyección de capital.`, impacto:'Reducción del riesgo financiero y mejora en cobertura de intereses.' });
+
+  if (R.dio !== null && R.dio > 60)
+    recList.push({ plazo:'60 días', accion:`Inventario inmovilizado por ${days(R.dio)}. Implementar modelo de inventario Just-in-Time, liquidar stock obsoleto y revisar política de compras.`, impacto:'Liberación de capital de trabajo y reducción de costos de almacenamiento.' });
+
+  if (R.roe !== null && R.roe < bm2.roe)
+    recList.push({ plazo:'Largo plazo', accion:`ROE de ${pct(R.roe)} vs referente sectorial de ${bm2.roe}%. Evaluar estrategias de crecimiento rentable: nuevas líneas de negocio, eficiencia operativa o distribución de activos improductivos.`, impacto:`Acercamiento al ROE sectorial de ${bm2.roe}%.` });
+
+  if (R.dpo !== null && R.dpo < 30)
+    recList.push({ plazo:'60 días', accion:'Negociar con proveedores plazos de pago más amplios (45–60 días). Esto mejora el ciclo de caja sin costo financiero adicional.', impacto:'Mejora del capital de trabajo disponible.' });
+
+  if (R.interestCoverage !== null && R.interestCoverage < 3 && R.interestExp > 0)
+    recList.push({ plazo:'90 días', accion:`Cobertura de intereses de ${ratio(R.interestCoverage)} es riesgosa. Buscar refinanciación a tasas más bajas, prepagar deuda costosa o incrementar EBIT mediante eficiencia operativa.`, impacto:'Reducción del riesgo de incumplimiento financiero.' });
+
+  if (recList.length === 0)
+    recList.push({ plazo:'Continuo', accion:'Los indicadores financieros son sólidos. Mantener la disciplina financiera actual, establecer metas de mejora incremental y considerar estrategias de crecimiento o diversificación.', impacto:'Consolidación y crecimiento sostenible.' });
+
+  recList.forEach((r, i) => {
+    recs += `<li><strong>[${r.plazo}]</strong> ${r.accion}<br><em style="color:var(--accent);font-size:12px;">Impacto esperado: ${r.impacto}</em></li>`;
+  });
+  recs += '</ul>';
+
+  document.getElementById('aiAnalysis').innerHTML = diag;
+  document.getElementById('recsContent').innerHTML = recs;
+
+  await loaderPromise;
 
   // Build all UI
   buildKPIs(R, hasYoY ? R2 : null);
@@ -1303,25 +1424,19 @@ ${hasYoY && R2.revenue ? `\nCOMPARATIVO YOY vs ${period2}:\n- Ingresos: ${R.reve
   buildAlerts(R);
   buildSimulator(R);
   buildCharts(R, hasYoY ? R2 : null);
-  
-  document.getElementById('aiAnalysis').innerHTML = analysisText;
-  document.getElementById('recsContent').innerHTML = recsText;
-  
+
   // Header info
   const per1 = t('period') || 'Período Actual';
   const per2 = t('period2');
-  const elaboradoPor = t('elaboradoPor');
   document.getElementById('reportSubtitle').textContent = hasYoY && per2 ? `Análisis Comparativo ${per1} vs ${per2}` : per1;
   document.getElementById('reportCompany').textContent = company !== 'La empresa' ? company : '';
   document.getElementById('reportTimestamp').textContent = `Generado: ${new Date().toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'})}`;
 
-  // Firma
-  const firmaPanel = document.getElementById('firmaPanel');
-  firmaPanel.style.display = 'block';
-  document.getElementById('firmaElaborado').textContent = elaboradoPor || 'No especificado';
-  if (elaboradoPor) {
-    document.getElementById('reportElaborado').textContent = `Elaborado por: ${elaboradoPor}`;
-  }
+  document.getElementById('loadingOverlay').classList.remove('active');
+  document.getElementById('resultsWrap').classList.add('visible');
+  btn.disabled = false;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
   document.getElementById('loadingOverlay').classList.remove('active');
   document.getElementById('resultsWrap').classList.add('visible');
   btn.disabled = false;
@@ -1363,14 +1478,14 @@ function resetApp() {
 
 <footer>
   <div class="footer-brand">
-    <span style="color:var(--text-muted);font-size:11px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:1px;">Software desarrollado por</span><br>
-    <strong>Estiven Poveda</strong> &nbsp;·&nbsp; Contador Público Especialista en Finanzas &nbsp;·&nbsp; <span style="color:var(--accent3);">FinAxis v2.0</span>
+    <span style="color:var(--text-muted);font-size:11px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:1px;">Creado por</span><br>
+    <strong>P&C Consultoría Integral SAS</strong> &nbsp;·&nbsp; Revisado por <strong>Estiven Poveda</strong> &nbsp;·&nbsp; Contador Público Especialista en Finanzas
   </div>
-  <a class="footer-wa" href="https://wa.me/573228999193" target="_blank">
+  <a class="footer-wa" href="https://wa.me/573228999183" target="_blank">
     <svg class="footer-wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
-    <span class="footer-wa-text">+57 322 899 9193</span>
+    <span class="footer-wa-text">+57 322 899 9183</span>
   </a>
 </footer>
 

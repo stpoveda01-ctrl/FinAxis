@@ -1437,12 +1437,7 @@ ${hasYoY && R2.revenue ? `\nCOMPARATIVO YOY vs ${period2}:\n- Ingresos: ${R.reve
   btn.disabled = false;
   window.scrollTo({top:0,behavior:'smooth'});
 }
-  document.getElementById('loadingOverlay').classList.remove('active');
-  document.getElementById('resultsWrap').classList.add('visible');
-  btn.disabled = false;
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
+  
 // ─── EXPORT PDF ──────────────────────────────────────────────────
 function exportPDF() {
   const style = document.createElement('style');

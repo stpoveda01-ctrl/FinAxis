@@ -37,30 +37,32 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
 .footer-wa-text{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#25d366;font-weight:500;letter-spacing:0.5px;}
 .logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;letter-spacing:-0.5px;}
 .logo span{color:var(--accent);}
-.header-right{display:flex;align-items:center;gap:20px;}
+.header-right{display:flex;align-items:center;gap:16px;}
 .header-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;}
 .version-badge{background:rgba(0,229,176,0.1);border:1px solid rgba(0,229,176,0.3);color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;letter-spacing:1px;}
 
+/* LANGUAGE TOGGLE */
+.lang-toggle{display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:3px;gap:2px;}
+.lang-btn{padding:5px 12px;border:none;background:transparent;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:1px;cursor:pointer;border-radius:16px;transition:all 0.2s;}
+.lang-btn.active{background:var(--accent);color:var(--bg);}
+.lang-btn:hover:not(.active){color:var(--text);}
+
 .main{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:48px;}
 
-/* NAV TABS */
 .nav-tabs{display:flex;gap:4px;margin-bottom:40px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:6px;width:fit-content;}
 .nav-tab{padding:10px 22px;border:none;background:transparent;color:var(--text-muted);font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-radius:8px;transition:all 0.2s;letter-spacing:0.3px;}
 .nav-tab.active{background:var(--accent);color:var(--bg);font-weight:600;}
 .nav-tab:hover:not(.active){color:var(--text);background:var(--surface2);}
 
-/* SECTION PAGES */
 .page{display:none;animation:fadeUp 0.4s ease;}
 .page.active{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 
-/* HERO */
 .hero{margin-bottom:40px;}
 .hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,56px);font-weight:900;line-height:1.05;margin-bottom:14px;}
 .hero h1 em{font-style:italic;color:var(--accent);}
 .hero p{font-size:15px;color:var(--text-muted);max-width:560px;line-height:1.7;}
 
-/* FORM GRID */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
 .form-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;overflow:hidden;}
 .form-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);}
@@ -70,7 +72,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24
 .field-group{margin-bottom:14px;}
 .field-label{font-size:12px;color:var(--text-muted);margin-bottom:5px;display:block;font-weight:500;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 input[type="number"],input[type="text"],select{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-family:'IBM Plex Mono',monospace;font-size:13px;transition:border-color 0.2s;outline:none;-moz-appearance:textfield;}
 input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;}
 input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,229,176,0.08);}
@@ -78,7 +79,6 @@ select option{background:var(--surface);}
 .section-divider{height:1px;background:var(--border);margin:16px 0;}
 .section-header{font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;margin-top:16px;}
 
-/* YEAR TOGGLE */
 .year-toggle{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding:16px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;}
 .year-toggle label{font-size:13px;color:var(--text-muted);}
 .toggle-switch{position:relative;width:44px;height:24px;cursor:pointer;}
@@ -88,12 +88,10 @@ select option{background:var(--surface);}
 .toggle-switch input:checked + .toggle-slider{background:var(--accent);}
 .toggle-switch input:checked + .toggle-slider:before{transform:translateX(20px);background:var(--bg);}
 
-/* ANALYZE BTN */
 .analyze-btn{width:100%;padding:18px;background:var(--accent);color:var(--bg);border:none;border-radius:12px;font-family:'IBM Plex Sans',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;}
 .analyze-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,229,176,0.35);}
 .analyze-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
 
-/* LOADING */
 .loading-overlay{display:none;text-align:center;padding:60px;background:var(--surface);border:1px solid var(--border);border-radius:16px;margin-bottom:24px;}
 .loading-overlay.active{display:block;}
 .spinner{width:48px;height:48px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 24px;}
@@ -103,7 +101,6 @@ select option{background:var(--surface);}
 .loading-step.active{color:var(--accent);}
 .loading-step.done{color:var(--text-muted);}
 
-/* RESULTS */
 .results-wrap{display:none;}
 .results-wrap.visible{display:block;animation:fadeUp 0.5s ease;}
 .results-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border);}
@@ -112,7 +109,6 @@ select option{background:var(--surface);}
 .results-meta .company{font-size:13px;color:var(--text-muted);margin-bottom:4px;}
 .timestamp{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-muted);}
 
-/* KPI CARDS */
 .kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:28px;}
 .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden;transition:transform 0.2s;}
 .kpi-card:hover{transform:translateY(-2px);}
@@ -130,17 +126,14 @@ select option{background:var(--surface);}
 .kpi-yoy.up{color:var(--positive);}
 .kpi-yoy.down{color:var(--negative);}
 
-/* PANELS */
 .analysis-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;overflow:hidden;}
 .ap-label{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(--accent3);margin-bottom:10px;}
 .ap-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:20px;}
 
-/* GRID LAYOUTS */
 .grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:24px;margin-bottom:24px;}
 .grid-1-1{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-bottom:24px;}
 
-/* AI CONTENT */
 .ai-content{font-size:13.5px;line-height:1.8;color:var(--text);}
 .ai-content h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin:20px 0 8px;color:var(--accent);}
 .ai-content h4{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin:16px 0 6px;color:var(--text-muted);}
@@ -150,7 +143,6 @@ select option{background:var(--surface);}
 .ai-content ul li:last-child{border-bottom:none;}
 .ai-content ul li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:11px;}
 
-/* SCORE */
 .score-circle{width:130px;height:130px;margin:0 auto 14px;position:relative;}
 .score-circle svg{transform:rotate(-90deg);}
 .score-number{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;}
@@ -159,7 +151,6 @@ select option{background:var(--surface);}
 .score-cat{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;text-align:center;margin-bottom:6px;}
 .score-desc{font-size:12px;color:var(--text-muted);line-height:1.6;text-align:center;}
 
-/* RATIO TABLE */
 .ratio-table{width:100%;border-collapse:collapse;}
 .ratio-table tr{border-bottom:1px solid var(--border);}
 .ratio-table tr:last-child{border-bottom:none;}
@@ -172,18 +163,15 @@ select option{background:var(--surface);}
 .badge.red{background:rgba(255,77,107,0.12);color:var(--negative);}
 .badge.yellow{background:rgba(255,184,48,0.12);color:var(--warning);}
 
-/* ALERTS */
 .alert{border-radius:10px;padding:12px 16px;margin-bottom:10px;font-size:13px;line-height:1.5;border-left:3px solid;}
 .alert.critical{background:rgba(255,77,107,0.07);border-color:var(--negative);color:#ff8fa0;}
 .alert.warning{background:rgba(255,184,48,0.07);border-color:var(--warning);color:#ffd080;}
 .alert.good{background:rgba(0,229,176,0.07);border-color:var(--positive);color:#80ffda;}
 .alert-icon{font-weight:700;margin-right:6px;}
 
-/* CHARTS */
 .chart-wrap{position:relative;height:240px;}
 .chart-wrap-tall{position:relative;height:300px;}
 
-/* ALTMAN */
 .altman-score{text-align:center;padding:20px 0;}
 .altman-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;margin-bottom:4px;}
 .altman-zone{font-size:14px;font-weight:600;margin-bottom:8px;}
@@ -195,7 +183,6 @@ select option{background:var(--surface);}
 .altman-comp:last-child{border-bottom:none;}
 .altman-comp span:last-child{font-family:'IBM Plex Mono',monospace;color:var(--accent3);}
 
-/* SIMULATOR */
 .sim-controls{display:grid;gap:16px;margin-bottom:20px;}
 .sim-control{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;}
 .sim-label{font-size:12px;color:var(--text-muted);margin-bottom:8px;}
@@ -207,7 +194,6 @@ select option{background:var(--surface);}
 .sim-result-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;}
 .sim-result-delta{font-family:'IBM Plex Mono',monospace;font-size:11px;margin-top:2px;}
 
-/* BENCHMARKS */
 .benchmark-item{margin-bottom:14px;}
 .bm-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
 .bm-name{font-size:12px;color:var(--text-muted);}
@@ -217,25 +203,15 @@ select option{background:var(--surface);}
 .bm-bar-bg{height:4px;background:var(--border);border-radius:4px;position:relative;}
 .bm-bar-industry{height:4px;background:var(--text-dim);border-radius:4px;position:absolute;top:0;left:0;}
 .bm-bar-mine{height:4px;background:var(--accent3);border-radius:4px;position:absolute;top:0;left:0;transition:width 1s ease;}
-.bm-marker{position:absolute;top:-3px;width:10px;height:10px;border-radius:50%;transform:translateX(-50%);border:2px solid var(--bg);}
 
-/* PDF EXPORT BTN */
 .export-btn{background:transparent;border:1px solid var(--accent);color:var(--accent);padding:10px 24px;border-radius:8px;font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;letter-spacing:0.3px;}
 .export-btn:hover{background:var(--accent);color:var(--bg);}
-
 .reset-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:12px 32px;border-radius:8px;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-size:13px;transition:all 0.2s;}
 .reset-btn:hover{border-color:var(--accent);color:var(--accent);}
-
 .actions-row{display:flex;gap:12px;align-items:center;margin-top:32px;justify-content:center;}
-
-/* YOY SECTION */
-.yoy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
-.yoy-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
 
 @media(max-width:1100px){.kpi-grid{grid-template-columns:repeat(3,1fr)}.grid-2-1,.grid-1-1,.grid-3{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}}
 @media(max-width:700px){.main{padding:20px}.header{padding:16px 20px}.kpi-grid{grid-template-columns:1fr 1fr}}
-
-/* Print styles for PDF */
 @media print{
   body{background:white;color:#000;}
   header{display:none;}
@@ -245,21 +221,10 @@ select option{background:var(--surface);}
   .analyze-btn{display:none;}
   .loading-overlay{display:none;}
   #pageInput{display:none;}
-  footer{
-    border-top:1px solid #ddd !important;
-    background:white !important;
-    padding:16px 24px !important;
-    margin-top:24px !important;
-    display:flex !important;
-  }
+  footer{border-top:1px solid #ddd !important;background:white !important;padding:16px 24px !important;margin-top:24px !important;display:flex !important;}
   .footer-brand{color:#333 !important;font-size:13px;}
   .footer-brand strong{color:#00a87a !important;}
-  .footer-wa{
-    background:rgba(37,211,102,0.08) !important;
-    border:1px solid rgba(37,211,102,0.4) !important;
-    padding:6px 14px !important;
-    border-radius:20px !important;
-  }
+  .footer-wa{background:rgba(37,211,102,0.08) !important;border:1px solid rgba(37,211,102,0.4) !important;padding:6px 14px !important;border-radius:20px !important;}
   .footer-wa-text{color:#1a8a3a !important;}
   .footer-wa-icon{fill:#1a8a3a !important;}
 }
@@ -270,125 +235,129 @@ select option{background:var(--surface);}
 <header>
   <div class="logo">Fin<span>Axis</span></div>
   <div class="header-right">
-    <div class="header-tag">// Análisis Financiero Estratégico</div>
-    <div class="version-badge">v2.0</div>
+    <div class="header-tag" data-i18n="headerTag">// Análisis Financiero Estratégico</div>
+    <div class="version-badge">v2.1</div>
+    <!-- LANGUAGE TOGGLE -->
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnES" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
   </div>
 </header>
 
 <div class="main">
 
-  <!-- PAGE: INPUT -->
+  <!-- INPUT PAGE -->
   <div class="page active" id="pageInput">
     <div class="hero">
-      <h1>Diagnóstico<br><em>Financiero</em> Ejecutivo</h1>
-      <p>Ingresa los datos de tus estados financieros. Incluye el período anterior para análisis comparativo año vs año.</p>
+      <h1 data-i18n="heroTitle">Diagnóstico<br><em>Financiero</em> Ejecutivo</h1>
+      <p data-i18n="heroSubtitle">Ingresa los datos de tus estados financieros. Incluye el período anterior para análisis comparativo año vs año.</p>
     </div>
 
-    <!-- Year toggle -->
     <div class="year-toggle">
       <label class="toggle-switch">
         <input type="checkbox" id="yoyToggle" onchange="toggleYoY()">
         <span class="toggle-slider"></span>
       </label>
-      <label for="yoyToggle" style="cursor:pointer;font-size:13px;color:var(--text);">Activar comparativo Año vs Año</label>
-      <span style="font-size:12px;color:var(--text-muted);margin-left:8px;">Ingresa datos de dos períodos para ver variaciones y tendencias</span>
+      <label for="yoyToggle" style="cursor:pointer;font-size:13px;color:var(--text);" data-i18n="yoyLabel">Activar comparativo Año vs Año</label>
+      <span style="font-size:12px;color:var(--text-muted);margin-left:8px;" data-i18n="yoyHint">Ingresa datos de dos períodos para ver variaciones y tendencias</span>
     </div>
 
     <div class="form-grid">
       <!-- BALANCE -->
       <div class="form-panel">
-        <div class="panel-label">01 — Balance General</div>
-        <div class="panel-title">Estado de Situación Financiera</div>
+        <div class="panel-label" data-i18n="panelBalance">01 — Balance General</div>
+        <div class="panel-title" data-i18n="panelBalanceTitle">Estado de Situación Financiera</div>
 
-        <div class="section-header">Activos Corrientes</div>
+        <div class="section-header" data-i18n="secCurrentAssets">Activos Corrientes</div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Efectivo y equivalentes</span>
+            <span class="field-label" data-i18n="lCash">Efectivo y equivalentes</span>
             <input type="number" id="cash" placeholder="0" min="0">
           </div>
           <div class="field-group" id="cashY2Wrap" style="display:none;">
-            <span class="field-label" style="color:var(--accent3);">Período anterior</span>
+            <span class="field-label" style="color:var(--accent3);" data-i18n="lPriorPeriod">Período anterior</span>
             <input type="number" id="cashY2" placeholder="0" min="0">
           </div>
         </div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Cuentas por cobrar</span>
+            <span class="field-label" data-i18n="lReceivables">Cuentas por cobrar</span>
             <input type="number" id="receivables" placeholder="0" min="0">
           </div>
           <div class="field-group" id="recY2Wrap" style="display:none;">
-            <span class="field-label" style="color:var(--accent3);">Período anterior</span>
+            <span class="field-label" style="color:var(--accent3);" data-i18n="lPriorPeriod">Período anterior</span>
             <input type="number" id="receivablesY2" placeholder="0" min="0">
           </div>
         </div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Inventarios</span>
+            <span class="field-label" data-i18n="lInventory">Inventarios</span>
             <input type="number" id="inventory" placeholder="0" min="0">
           </div>
           <div class="field-group" id="invY2Wrap" style="display:none;">
-            <span class="field-label" style="color:var(--accent3);">Período anterior</span>
+            <span class="field-label" style="color:var(--accent3);" data-i18n="lPriorPeriod">Período anterior</span>
             <input type="number" id="inventoryY2" placeholder="0" min="0">
           </div>
         </div>
         <div class="field-group">
-          <span class="field-label">Otros activos corrientes</span>
+          <span class="field-label" data-i18n="lOtherCA">Otros activos corrientes</span>
           <input type="number" id="otherCA" placeholder="0" min="0">
         </div>
 
         <div class="section-divider"></div>
-        <div class="section-header">Activos No Corrientes</div>
+        <div class="section-header" data-i18n="secNonCurrentAssets">Activos No Corrientes</div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">PPE neto</span>
+            <span class="field-label" data-i18n="lPPE">PPE neto</span>
             <input type="number" id="ppe" placeholder="0" min="0">
           </div>
           <div class="field-group">
-            <span class="field-label">Intangibles / Goodwill</span>
+            <span class="field-label" data-i18n="lIntangibles">Intangibles / Goodwill</span>
             <input type="number" id="intangibles" placeholder="0" min="0">
           </div>
         </div>
         <div class="field-group">
-          <span class="field-label">Otros activos no corrientes</span>
+          <span class="field-label" data-i18n="lOtherNCA">Otros activos no corrientes</span>
           <input type="number" id="otherNCA" placeholder="0" min="0">
         </div>
 
         <div class="section-divider"></div>
-        <div class="section-header">Pasivos Corrientes</div>
+        <div class="section-header" data-i18n="secCurrentLiab">Pasivos Corrientes</div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Cuentas por pagar</span>
+            <span class="field-label" data-i18n="lPayables">Cuentas por pagar</span>
             <input type="number" id="payables" placeholder="0" min="0">
           </div>
           <div class="field-group">
-            <span class="field-label">Deuda corto plazo</span>
+            <span class="field-label" data-i18n="lSTDebt">Deuda corto plazo</span>
             <input type="number" id="stdbt" placeholder="0" min="0">
           </div>
         </div>
         <div class="field-group">
-          <span class="field-label">Otros pasivos corrientes</span>
+          <span class="field-label" data-i18n="lOtherCL">Otros pasivos corrientes</span>
           <input type="number" id="otherCL" placeholder="0" min="0">
         </div>
 
         <div class="section-divider"></div>
-        <div class="section-header">Pasivos LP & Patrimonio</div>
+        <div class="section-header" data-i18n="secLTEquity">Pasivos LP & Patrimonio</div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Deuda largo plazo</span>
+            <span class="field-label" data-i18n="lLTDebt">Deuda largo plazo</span>
             <input type="number" id="ltDebt" placeholder="0" min="0">
           </div>
           <div class="field-group">
-            <span class="field-label">Otros pasivos LP</span>
+            <span class="field-label" data-i18n="lOtherLTL">Otros pasivos LP</span>
             <input type="number" id="otherLTL" placeholder="0" min="0">
           </div>
         </div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Capital social</span>
+            <span class="field-label" data-i18n="lPaidIn">Capital social</span>
             <input type="number" id="paidIn" placeholder="0" min="0">
           </div>
           <div class="field-group">
-            <span class="field-label">Utilidades retenidas</span>
+            <span class="field-label" data-i18n="lRetained">Utilidades retenidas</span>
             <input type="number" id="retained" placeholder="0">
           </div>
         </div>
@@ -396,98 +365,98 @@ select option{background:var(--surface);}
 
       <!-- INCOME -->
       <div class="form-panel">
-        <div class="panel-label">02 — P&L</div>
-        <div class="panel-title">Estado de Resultados</div>
+        <div class="panel-label" data-i18n="panelPL">02 — P&L</div>
+        <div class="panel-title" data-i18n="panelPLTitle">Estado de Resultados</div>
 
-        <div class="section-header">Ingresos</div>
+        <div class="section-header" data-i18n="secRevenue">Ingresos</div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Ingresos / Ventas</span>
+            <span class="field-label" data-i18n="lRevenue">Ingresos / Ventas</span>
             <input type="number" id="revenue" placeholder="0" min="0">
           </div>
           <div class="field-group" id="revY2Wrap" style="display:none;">
-            <span class="field-label" style="color:var(--accent3);">Período anterior</span>
+            <span class="field-label" style="color:var(--accent3);" data-i18n="lPriorPeriod">Período anterior</span>
             <input type="number" id="revenueY2" placeholder="0" min="0">
           </div>
         </div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Costo de ventas (COGS)</span>
+            <span class="field-label" data-i18n="lCOGS">Costo de ventas (COGS)</span>
             <input type="number" id="cogs" placeholder="0" min="0">
           </div>
           <div class="field-group" id="cogsY2Wrap" style="display:none;">
-            <span class="field-label" style="color:var(--accent3);">Período anterior</span>
+            <span class="field-label" style="color:var(--accent3);" data-i18n="lPriorPeriod">Período anterior</span>
             <input type="number" id="cogsY2" placeholder="0" min="0">
           </div>
         </div>
 
         <div class="section-divider"></div>
-        <div class="section-header">Gastos Operativos</div>
+        <div class="section-header" data-i18n="secOpex">Gastos Operativos</div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Gastos de ventas</span>
+            <span class="field-label" data-i18n="lSellExp">Gastos de ventas</span>
             <input type="number" id="sellExp" placeholder="0" min="0">
           </div>
           <div class="field-group">
-            <span class="field-label">Gastos administrativos</span>
+            <span class="field-label" data-i18n="lAdminExp">Gastos administrativos</span>
             <input type="number" id="adminExp" placeholder="0" min="0">
           </div>
         </div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Depreciación y amortización</span>
+            <span class="field-label" data-i18n="lDA">Depreciación y amortización</span>
             <input type="number" id="da" placeholder="0" min="0">
           </div>
           <div class="field-group">
-            <span class="field-label">Otros gastos operativos</span>
+            <span class="field-label" data-i18n="lOtherOpex">Otros gastos operativos</span>
             <input type="number" id="otherOpex" placeholder="0" min="0">
           </div>
         </div>
 
         <div class="section-divider"></div>
-        <div class="section-header">Partidas Financieras</div>
+        <div class="section-header" data-i18n="secFinancial">Partidas Financieras</div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Gastos financieros</span>
+            <span class="field-label" data-i18n="lInterestExp">Gastos financieros</span>
             <input type="number" id="interestExp" placeholder="0" min="0">
           </div>
           <div class="field-group">
-            <span class="field-label">Ingresos financieros</span>
+            <span class="field-label" data-i18n="lInterestInc">Ingresos financieros</span>
             <input type="number" id="interestInc" placeholder="0" min="0">
           </div>
         </div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Impuesto sobre la renta</span>
+            <span class="field-label" data-i18n="lTaxes">Impuesto sobre la renta</span>
             <input type="number" id="taxes" placeholder="0" min="0">
           </div>
           <div class="field-group">
-            <span class="field-label">Otros no operativos (neto)</span>
+            <span class="field-label" data-i18n="lOtherNonOp">Otros no operativos (neto)</span>
             <input type="number" id="otherNonOp" placeholder="0">
           </div>
         </div>
 
         <div class="section-divider"></div>
-        <div class="section-header">Contexto</div>
+        <div class="section-header" data-i18n="secContext">Contexto</div>
         <div class="field-group">
-          <span class="field-label">Industria / Sector</span>
+          <span class="field-label" data-i18n="lIndustry">Industria / Sector</span>
           <select id="industry">
-            <option value="">Seleccionar...</option>
-            <option value="retail">Retail / Comercio</option>
-            <option value="manufacturing">Manufactura / Industrial</option>
-            <option value="technology">Tecnología / Software</option>
-            <option value="financial">Servicios Financieros</option>
-            <option value="healthcare">Salud / Farmacéutico</option>
-            <option value="real_estate">Inmobiliario / Construcción</option>
-            <option value="hospitality">Hospitalidad / Turismo</option>
-            <option value="services">Servicios Profesionales</option>
-            <option value="agro">Agropecuario / Alimentos</option>
-            <option value="other">Otro</option>
+            <option value="" data-i18n-opt="optSelect">Seleccionar...</option>
+            <option value="retail" data-i18n-opt="optRetail">Retail / Comercio</option>
+            <option value="manufacturing" data-i18n-opt="optMfg">Manufactura / Industrial</option>
+            <option value="technology" data-i18n-opt="optTech">Tecnología / Software</option>
+            <option value="financial" data-i18n-opt="optFin">Servicios Financieros</option>
+            <option value="healthcare" data-i18n-opt="optHealth">Salud / Farmacéutico</option>
+            <option value="real_estate" data-i18n-opt="optRE">Inmobiliario / Construcción</option>
+            <option value="hospitality" data-i18n-opt="optHosp">Hospitalidad / Turismo</option>
+            <option value="services" data-i18n-opt="optSvc">Servicios Profesionales</option>
+            <option value="agro" data-i18n-opt="optAgro">Agropecuario / Alimentos</option>
+            <option value="other" data-i18n-opt="optOther">Otro</option>
           </select>
         </div>
         <div class="field-row">
           <div class="field-group">
-            <span class="field-label">Moneda</span>
+            <span class="field-label" data-i18n="lCurrency">Moneda</span>
             <select id="currency">
               <option value="MXN">MXN</option>
               <option value="USD">USD</option>
@@ -500,32 +469,32 @@ select option{background:var(--surface);}
             </select>
           </div>
           <div class="field-group">
-            <span class="field-label">Período actual</span>
+            <span class="field-label" data-i18n="lCurrentPeriod">Período actual</span>
             <input type="text" id="period" placeholder="Ej: 2024">
           </div>
         </div>
         <div class="field-group" id="period2Wrap" style="display:none;">
-          <span class="field-label" style="color:var(--accent3);">Período anterior</span>
+          <span class="field-label" style="color:var(--accent3);" data-i18n="lPriorPeriod">Período anterior</span>
           <input type="text" id="period2" placeholder="Ej: 2023">
         </div>
         <div class="field-group">
-          <span class="field-label">Nombre empresa (opcional)</span>
+          <span class="field-label" data-i18n="lCompany">Nombre empresa (opcional)</span>
           <input type="text" id="companyName" placeholder="Mi Empresa S.A.">
         </div>
         <div class="section-divider"></div>
-        <div class="section-header">Firma del informe</div>
+        <div class="section-header" data-i18n="secSignature">Firma del informe</div>
         <div class="field-group">
-          <span class="field-label">Elaborado por — Nombre</span>
+          <span class="field-label" data-i18n="lElaboradoPor">Elaborado por — Nombre</span>
           <input type="text" id="elaboradoPor" placeholder="Nombre completo del analista">
         </div>
         <div class="field-group">
-          <span class="field-label">Elaborado por — Cargo</span>
+          <span class="field-label" data-i18n="lElaboradoCargo">Elaborado por — Cargo</span>
           <input type="text" id="elaboradoCargo" placeholder="Ej: Auxiliar Contable, Gerente Financiero...">
         </div>
       </div>
     </div>
 
-    <button class="analyze-btn" onclick="runAnalysis()" id="analyzeBtn">
+    <button class="analyze-btn" onclick="runAnalysis()" id="analyzeBtn" data-i18n="btnAnalyze">
       ⟳ &nbsp; Ejecutar Análisis Financiero Completo
     </button>
   </div>
@@ -533,29 +502,29 @@ select option{background:var(--surface);}
   <!-- LOADING -->
   <div class="loading-overlay" id="loadingOverlay">
     <div class="spinner"></div>
-    <div style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:20px;">Procesando Estados Financieros</div>
+    <div style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:20px;" data-i18n="loadingTitle">Procesando Estados Financieros</div>
     <div class="loading-steps">
-      <div class="loading-step" id="ls1">○ Calculando ratios financieros...</div>
-      <div class="loading-step" id="ls2">○ Computando Altman Z-Score...</div>
-      <div class="loading-step" id="ls3">○ Generando benchmarks de industria...</div>
-      <div class="loading-step" id="ls4">○ Analizando con IA — Perspectiva CFO...</div>
-      <div class="loading-step" id="ls5">○ Construyendo plan de acción...</div>
+      <div class="loading-step" id="ls1" data-i18n="ls1">○ Calculando ratios financieros...</div>
+      <div class="loading-step" id="ls2" data-i18n="ls2">○ Computando Altman Z-Score...</div>
+      <div class="loading-step" id="ls3" data-i18n="ls3">○ Generando benchmarks de industria...</div>
+      <div class="loading-step" id="ls4" data-i18n="ls4">○ Generando diagnóstico estratégico...</div>
+      <div class="loading-step" id="ls5" data-i18n="ls5">○ Construyendo plan de acción...</div>
     </div>
   </div>
 
-  <!-- PAGE: RESULTS -->
+  <!-- RESULTS -->
   <div class="results-wrap" id="resultsWrap">
 
     <div class="results-header">
       <div>
-        <div class="results-title">Informe Ejecutivo <span style="color:var(--accent)">CFO</span></div>
+        <div class="results-title"><span data-i18n="reportTitle">Informe Ejecutivo</span> <span style="color:var(--accent)">CFO</span></div>
         <div style="font-size:13px;color:var(--text-muted);margin-top:6px;" id="reportSubtitle"></div>
       </div>
       <div class="results-meta">
         <div class="company" id="reportCompany"></div>
         <div class="timestamp" id="reportTimestamp"></div>
         <div id="reportElaborado" style="font-size:12px;color:var(--text-muted);margin-top:6px;font-family:'IBM Plex Mono',monospace;"></div>
-        <button class="export-btn" style="margin-top:10px;" onclick="exportPDF()">⬇ Exportar PDF</button>
+        <button class="export-btn" style="margin-top:10px;" onclick="exportPDF()" data-i18n="btnExport">⬇ Exportar PDF</button>
       </div>
     </div>
 
@@ -563,14 +532,14 @@ select option{background:var(--surface);}
     <div class="analysis-panel" id="firmaPanel" style="margin-bottom:24px;display:none;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:10px;overflow:hidden;">
         <div style="padding:20px 24px;border-right:1px solid var(--border);">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;">Elaborado por</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:8px;" data-i18n="firmaElaboradoLabel">Elaborado por</div>
           <div style="font-size:15px;font-weight:600;color:var(--text);" id="firmaElaborado">—</div>
           <div style="font-size:12px;color:var(--text-muted);margin-top:3px;" id="firmaElaboradoCargo"></div>
         </div>
         <div style="padding:20px 24px;">
-          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:8px;">Revisado por</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:8px;" data-i18n="firmaRevisadoLabel">Revisado por</div>
           <div style="font-size:15px;font-weight:600;color:var(--text);">Estiven Poveda</div>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:3px;">Contador Público Especialista en Finanzas</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:3px;" data-i18n="firmaTitle">Contador Público Especialista en Finanzas</div>
           <div style="display:flex;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap;">
             <a href="https://wa.me/573228999183" target="_blank" style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#25d366;text-decoration:none;">📱 322 899 9183</a>
           </div>
@@ -579,41 +548,36 @@ select option{background:var(--surface);}
       </div>
     </div>
 
-    <!-- KPIs -->
     <div class="kpi-grid" id="kpiGrid"></div>
 
-    <!-- Charts Row -->
     <div class="grid-1-1">
       <div class="analysis-panel">
-        <div class="ap-label">// Estructura Financiera</div>
-        <div class="ap-title">Composición del Balance</div>
+        <div class="ap-label" data-i18n="apBalanceLabel">// Estructura Financiera</div>
+        <div class="ap-title" data-i18n="apBalanceTitle">Composición del Balance</div>
         <div class="chart-wrap"><canvas id="balanceChart"></canvas></div>
       </div>
       <div class="analysis-panel">
-        <div class="ap-label">// Cascada de Rentabilidad</div>
-        <div class="ap-title">Waterfall P&L</div>
+        <div class="ap-label" data-i18n="apPLLabel">// Cascada de Rentabilidad</div>
+        <div class="ap-title" data-i18n="apPLTitle">Waterfall P&L</div>
         <div class="chart-wrap"><canvas id="plChart"></canvas></div>
       </div>
     </div>
 
-    <!-- YoY Chart (conditional) -->
     <div class="analysis-panel" id="yoyChartPanel" style="display:none;margin-bottom:24px;">
-      <div class="ap-label">// Comparativo</div>
-      <div class="ap-title">Año vs Año — Métricas Clave</div>
+      <div class="ap-label" data-i18n="apYoYLabel">// Comparativo</div>
+      <div class="ap-title" data-i18n="apYoYTitle">Año vs Año — Métricas Clave</div>
       <div class="chart-wrap-tall"><canvas id="yoyChart"></canvas></div>
     </div>
 
-    <!-- Main Analysis + Score + Ratios -->
     <div class="grid-2-1" style="align-items:start;">
       <div class="analysis-panel">
-        <div class="ap-label">// Análisis IA — Director Financiero</div>
-        <div class="ap-title">Diagnóstico Estratégico</div>
-        <div class="ai-content" id="aiAnalysis"><em style="color:var(--text-muted)">Generando análisis...</em></div>
+        <div class="ap-label" data-i18n="apDiagLabel">// Análisis — Director Financiero</div>
+        <div class="ap-title" data-i18n="apDiagTitle">Diagnóstico Estratégico</div>
+        <div class="ai-content" id="aiAnalysis"></div>
       </div>
       <div style="display:grid;gap:24px;">
-        <!-- Score -->
         <div class="analysis-panel">
-          <div class="ap-label">// Salud Financiera</div>
+          <div class="ap-label" data-i18n="apScoreLabel">// Salud Financiera</div>
           <div class="score-circle">
             <svg width="130" height="130" viewBox="0 0 130 130">
               <circle cx="65" cy="65" r="54" fill="none" stroke="var(--border)" stroke-width="7"/>
@@ -629,78 +593,832 @@ select option{background:var(--surface);}
           <div class="score-cat" id="scoreCat"></div>
           <div class="score-desc" id="scoreDesc"></div>
         </div>
-        <!-- Ratio Table -->
         <div class="analysis-panel">
-          <div class="ap-label">// Ratios Clave</div>
+          <div class="ap-label" data-i18n="apRatiosLabel">// Ratios Clave</div>
           <table class="ratio-table" id="ratioTable"></table>
         </div>
       </div>
     </div>
 
-    <!-- Altman + Benchmarks -->
     <div class="grid-1-1">
-      <!-- Altman Z-Score -->
       <div class="analysis-panel">
-        <div class="ap-label">// Riesgo de Quiebra</div>
-        <div class="ap-title">Altman Z-Score</div>
+        <div class="ap-label" data-i18n="apAltmanLabel">// Riesgo de Quiebra</div>
+        <div class="ap-title" data-i18n="apAltmanTitle">Altman Z-Score</div>
         <div class="altman-score" id="altmanScore"></div>
       </div>
-      <!-- Benchmarks -->
       <div class="analysis-panel">
-        <div class="ap-label">// Benchmarking</div>
-        <div class="ap-title">vs Promedio de Industria</div>
+        <div class="ap-label" data-i18n="apBenchLabel">// Benchmarking</div>
+        <div class="ap-title" data-i18n="apBenchTitle">vs Promedio de Industria</div>
         <div id="benchmarkContent"></div>
       </div>
     </div>
 
-    <!-- Simulator -->
     <div class="analysis-panel" style="margin-bottom:24px;">
-      <div class="ap-label">// Simulador Estratégico</div>
-      <div class="ap-title">¿Qué Pasaría Si...?</div>
+      <div class="ap-label" data-i18n="apSimLabel">// Simulador Estratégico</div>
+      <div class="ap-title" data-i18n="apSimTitle">¿Qué Pasaría Si...?</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
         <div class="sim-controls" id="simControls"></div>
         <div>
-          <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;">Impacto Proyectado</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;" data-i18n="simImpactLabel">Impacto Proyectado</div>
           <div class="sim-results" id="simResults"></div>
         </div>
       </div>
     </div>
 
-    <!-- Alerts + Recommendations -->
     <div class="grid-1-1">
       <div class="analysis-panel">
-        <div class="ap-label">// Alertas & Riesgos</div>
-        <div class="ap-title">Puntos Críticos</div>
+        <div class="ap-label" data-i18n="apAlertsLabel">// Alertas & Riesgos</div>
+        <div class="ap-title" data-i18n="apAlertsTitle">Puntos Críticos</div>
         <div id="alertsContainer"></div>
       </div>
       <div class="analysis-panel">
-        <div class="ap-label">// Plan de Acción CFO</div>
-        <div class="ap-title">Iniciativas Prioritarias</div>
-        <div class="ai-content" id="recsContent"><em style="color:var(--text-muted)">Generando recomendaciones...</em></div>
+        <div class="ap-label" data-i18n="apPlanLabel">// Plan de Acción CFO</div>
+        <div class="ap-title" data-i18n="apPlanTitle">Iniciativas Prioritarias</div>
+        <div class="ai-content" id="recsContent"></div>
       </div>
     </div>
 
-    <!-- Radar Chart -->
     <div class="analysis-panel" style="margin-bottom:24px;">
-      <div class="ap-label">// Perfil Financiero</div>
-      <div class="ap-title">Análisis Multidimensional</div>
+      <div class="ap-label" data-i18n="apRadarLabel">// Perfil Financiero</div>
+      <div class="ap-title" data-i18n="apRadarTitle">Análisis Multidimensional</div>
       <div style="max-width:400px;margin:0 auto;"><div style="position:relative;height:320px;"><canvas id="radarChart"></canvas></div></div>
     </div>
 
     <div class="actions-row">
-      <button class="reset-btn" onclick="resetApp()">← Nuevo Análisis</button>
-      <button class="export-btn" onclick="exportPDF()">⬇ Exportar Informe PDF</button>
+      <button class="reset-btn" onclick="resetApp()" data-i18n="btnReset">← Nuevo Análisis</button>
+      <button class="export-btn" onclick="exportPDF()" data-i18n="btnExport">⬇ Exportar Informe PDF</button>
     </div>
   </div>
 
 </div>
 
+<footer>
+  <div class="footer-brand">
+    <span style="color:var(--text-muted);font-size:11px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:1px;" data-i18n="footerCreatedBy">Creado por</span><br>
+    <strong>P&C Consultoría Integral SAS</strong> &nbsp;·&nbsp; <span data-i18n="footerReviewed">Revisado por</span> <strong>Estiven Poveda</strong> &nbsp;·&nbsp; <span data-i18n="footerTitle">Contador Público Especialista en Finanzas</span>
+  </div>
+  <a class="footer-wa" href="https://wa.me/573228999183" target="_blank">
+    <svg class="footer-wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="footer-wa-text">+57 322 899 9183</span>
+  </a>
+</footer>
+
 <script>
-// ─── STATE ───────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// TRANSLATIONS DICTIONARY
+// ═══════════════════════════════════════════════════════════════
+const TRANSLATIONS = {
+  es: {
+    headerTag: '// Análisis Financiero Estratégico',
+    heroTitle: 'Diagnóstico<br><em>Financiero</em> Ejecutivo',
+    heroSubtitle: 'Ingresa los datos de tus estados financieros. Incluye el período anterior para análisis comparativo año vs año.',
+    yoyLabel: 'Activar comparativo Año vs Año',
+    yoyHint: 'Ingresa datos de dos períodos para ver variaciones y tendencias',
+    panelBalance: '01 — Balance General',
+    panelBalanceTitle: 'Estado de Situación Financiera',
+    secCurrentAssets: 'Activos Corrientes',
+    lCash: 'Efectivo y equivalentes',
+    lPriorPeriod: 'Período anterior',
+    lReceivables: 'Cuentas por cobrar',
+    lInventory: 'Inventarios',
+    lOtherCA: 'Otros activos corrientes',
+    secNonCurrentAssets: 'Activos No Corrientes',
+    lPPE: 'PPE neto',
+    lIntangibles: 'Intangibles / Goodwill',
+    lOtherNCA: 'Otros activos no corrientes',
+    secCurrentLiab: 'Pasivos Corrientes',
+    lPayables: 'Cuentas por pagar',
+    lSTDebt: 'Deuda corto plazo',
+    lOtherCL: 'Otros pasivos corrientes',
+    secLTEquity: 'Pasivos LP & Patrimonio',
+    lLTDebt: 'Deuda largo plazo',
+    lOtherLTL: 'Otros pasivos LP',
+    lPaidIn: 'Capital social',
+    lRetained: 'Utilidades retenidas',
+    panelPL: '02 — P&L',
+    panelPLTitle: 'Estado de Resultados',
+    secRevenue: 'Ingresos',
+    lRevenue: 'Ingresos / Ventas',
+    lCOGS: 'Costo de ventas (COGS)',
+    secOpex: 'Gastos Operativos',
+    lSellExp: 'Gastos de ventas',
+    lAdminExp: 'Gastos administrativos',
+    lDA: 'Depreciación y amortización',
+    lOtherOpex: 'Otros gastos operativos',
+    secFinancial: 'Partidas Financieras',
+    lInterestExp: 'Gastos financieros',
+    lInterestInc: 'Ingresos financieros',
+    lTaxes: 'Impuesto sobre la renta',
+    lOtherNonOp: 'Otros no operativos (neto)',
+    secContext: 'Contexto',
+    lIndustry: 'Industria / Sector',
+    optSelect: 'Seleccionar...',
+    optRetail: 'Retail / Comercio',
+    optMfg: 'Manufactura / Industrial',
+    optTech: 'Tecnología / Software',
+    optFin: 'Servicios Financieros',
+    optHealth: 'Salud / Farmacéutico',
+    optRE: 'Inmobiliario / Construcción',
+    optHosp: 'Hospitalidad / Turismo',
+    optSvc: 'Servicios Profesionales',
+    optAgro: 'Agropecuario / Alimentos',
+    optOther: 'Otro',
+    lCurrency: 'Moneda',
+    lCurrentPeriod: 'Período actual',
+    lCompany: 'Nombre empresa (opcional)',
+    secSignature: 'Firma del informe',
+    lElaboradoPor: 'Elaborado por — Nombre',
+    lElaboradoCargo: 'Elaborado por — Cargo',
+    btnAnalyze: '⟳ &nbsp; Ejecutar Análisis Financiero Completo',
+    loadingTitle: 'Procesando Estados Financieros',
+    ls1: '○ Calculando ratios financieros...',
+    ls2: '○ Computando Altman Z-Score...',
+    ls3: '○ Generando benchmarks de industria...',
+    ls4: '○ Generando diagnóstico estratégico...',
+    ls5: '○ Construyendo plan de acción...',
+    reportTitle: 'Informe Ejecutivo',
+    btnExport: '⬇ Exportar PDF',
+    btnReset: '← Nuevo Análisis',
+    firmaElaboradoLabel: 'Elaborado por',
+    firmaRevisadoLabel: 'Revisado por',
+    firmaTitle: 'Contador Público Especialista en Finanzas',
+    apBalanceLabel: '// Estructura Financiera',
+    apBalanceTitle: 'Composición del Balance',
+    apPLLabel: '// Cascada de Rentabilidad',
+    apPLTitle: 'Waterfall P&L',
+    apYoYLabel: '// Comparativo',
+    apYoYTitle: 'Año vs Año — Métricas Clave',
+    apDiagLabel: '// Análisis — Director Financiero',
+    apDiagTitle: 'Diagnóstico Estratégico',
+    apScoreLabel: '// Salud Financiera',
+    apRatiosLabel: '// Ratios Clave',
+    apAltmanLabel: '// Riesgo de Quiebra',
+    apAltmanTitle: 'Altman Z-Score',
+    apBenchLabel: '// Benchmarking',
+    apBenchTitle: 'vs Promedio de Industria',
+    apSimLabel: '// Simulador Estratégico',
+    apSimTitle: '¿Qué Pasaría Si...?',
+    simImpactLabel: 'Impacto Proyectado',
+    apAlertsLabel: '// Alertas & Riesgos',
+    apAlertsTitle: 'Puntos Críticos',
+    apPlanLabel: '// Plan de Acción CFO',
+    apPlanTitle: 'Iniciativas Prioritarias',
+    apRadarLabel: '// Perfil Financiero',
+    apRadarTitle: 'Análisis Multidimensional',
+    footerCreatedBy: 'Creado por',
+    footerReviewed: 'Revisado por',
+    footerTitle: 'Contador Público Especialista en Finanzas',
+    // KPI labels
+    kpiRevenue: 'Ingresos Netos',
+    kpiNetIncome: 'Utilidad Neta',
+    kpiEBITDA: 'EBITDA',
+    kpiLiquidity: 'Liquidez Corriente',
+    kpiDebtEquity: 'Deuda / Patrimonio',
+    kpiCOGS: 'COGS',
+    kpiMargin: 'Margen',
+    kpiGoodCoverage: 'Buena cobertura',
+    kpiTightCoverage: 'Cobertura ajustada',
+    kpiLiqRisk: '⚠ Riesgo liquidez',
+    kpiLowLev: 'Bajo apalancamiento',
+    kpiModLev: 'Moderado',
+    kpiHighLev: 'Alto apalancamiento',
+    // Ratio table
+    ratioCurrentRatio: 'Razón Corriente',
+    ratioQuickRatio: 'Razón Rápida',
+    ratioGrossMargin: 'Margen Bruto',
+    ratioEBITDAMargin: 'Margen EBITDA',
+    ratioNetMargin: 'Margen Neto',
+    ratioROE: 'ROE',
+    ratioROA: 'ROA',
+    ratioDE: 'Deuda/Patrimonio',
+    ratioInterestCov: 'Cobertura Intereses',
+    ratioDSO: 'DSO',
+    ratioDIO: 'DIO',
+    ratioDPO: 'DPO',
+    ratioCCC: 'CCC',
+    // Days / units
+    unitDays: ' días',
+    // Score labels
+    scoreExcellent: 'Excelente',
+    scoreGood: 'Bueno',
+    scoreRegular: 'Regular',
+    scoreWeak: 'Débil',
+    scoreCritical: 'Crítico',
+    scoreDescExcellent: 'Empresa financieramente robusta con capacidad de crecimiento sostenible.',
+    scoreDescGood: 'Situación sólida con áreas específicas de mejora que pueden fortalecer el negocio.',
+    scoreDescRegular: 'Situación aceptable con vulnerabilidades que requieren atención estratégica.',
+    scoreDescWeak: 'Indicadores preocupantes. Plan de mejora financiera urgente es necesario.',
+    scoreDescCritical: 'Situación de alto riesgo. Requiere reestructuración inmediata.',
+    // Altman
+    altmanSafe: 'Zona Segura',
+    altmanGrey: 'Zona Gris',
+    altmanDanger: 'Zona de Peligro',
+    altmanSafeDesc: 'Riesgo de quiebra muy bajo en los próximos 2 años.',
+    altmanGreyDesc: 'Empresa en zona de incertidumbre. Monitoreo estrecho requerido.',
+    altmanDangerDesc: 'Alto riesgo de insolvencia. Acción inmediata necesaria.',
+    altmanDangerLbl: 'Peligro (<1.81)',
+    altmanGreyLbl: 'Gris (1.81–2.99)',
+    altmanSafeLbl: 'Seguro (>2.99)',
+    altmanCompTitle: 'Componentes del Z-Score',
+    altmanX1: 'X1 — Capital de Trabajo / Activos',
+    altmanX2: 'X2 — Ut. Retenidas / Activos',
+    altmanX3: 'X3 — EBIT / Activos',
+    altmanX4: 'X4 — Patrimonio / Pasivos',
+    altmanX5: 'X5 — Ventas / Activos',
+    altmanInsufficient: 'Datos insuficientes para calcular Z-Score',
+    // Benchmark
+    bmComparing: 'Comparando vs promedio de',
+    bmMyCompany: 'Tu empresa',
+    bmIndustry: 'Industria',
+    // Simulator
+    simRevLabel: 'Incremento en Ingresos',
+    simCostLabel: 'Reducción en Costos Operativos',
+    simDebtLabel: 'Reducción en Deuda',
+    simRevProj: 'Ingresos Proyectados',
+    simEBITDAProj: 'EBITDA Proyectado',
+    simNetProj: 'Utilidad Neta Proyectada',
+    simNetMarginProj: 'Margen Neto Proyectado',
+    // Alerts
+    alertLiqCrit: 'Riesgo de liquidez crítico: el activo corriente no cubre el pasivo corriente.',
+    alertLiqWarn: 'ajustada. Monitorear flujo de efectivo mensualmente.',
+    alertNetLoss: 'La empresa opera con pérdida neta. Medidas urgentes de reducción de costos requeridas.',
+    alertHighDebt: 'Apalancamiento excesivo',
+    alertIntCov: 'Cobertura de intereses insuficiente',
+    alertLowGross: 'Margen bruto bajo. Revisar estrategia de precios y costos.',
+    alertHighDSO: 'Ciclo de cobro prolongado. Riesgo de cartera vencida y presión en capital de trabajo.',
+    alertHighCCC: 'Ciclo de conversión de efectivo elevado. Capital de trabajo atrapado.',
+    alertLowROE: 'ROE bajo. Retorno insuficiente para los accionistas.',
+    alertRevDown: 'Caída en ingresos de',
+    alertRevUp: 'Crecimiento de ingresos de',
+    alertRevDownSuffix: 'vs período anterior. Revisar estrategia comercial.',
+    alertRevUpSuffix: 'vs período anterior. Tendencia positiva.',
+    alertHealthy: 'Los indicadores principales muestran una situación financiera saludable.',
+    liquidezAjustada: 'Liquidez ajustada',
+    altaDeuda: 'Alta dependencia de deuda.',
+    riesgoIncumplimiento: 'Riesgo de incumplimiento.',
+    // Radar labels
+    radarLiquidity: 'Liquidez',
+    radarGrossMargin: 'Margen Bruto',
+    radarNetMargin: 'Margen Neto',
+    radarROE: 'ROE',
+    radarDebtCov: 'Cobertura Deuda',
+    radarSolvency: 'Solvencia',
+    // Report subtitles
+    repComparative: 'Análisis Comparativo',
+    repGenerated: 'Generado',
+    repElaboratedBy: 'Elaborado por',
+    // Balance chart labels
+    chartCA: 'Activos Corrientes',
+    chartNCA: 'Activos No Corrientes',
+    chartCL: 'Pasivos Corrientes',
+    chartLTL: 'Pasivos LP',
+    chartEquity: 'Patrimonio',
+    // P&L chart labels
+    plRevenue: 'Ingresos',
+    plGrossProfit: 'Margen Bruto',
+    plEBITDA: 'EBITDA',
+    plEBIT: 'EBIT',
+    plNetIncome: 'Ut. Neta',
+    // YoY chart labels
+    yoyRevenue: 'Ingresos',
+    yoyGrossProfit: 'Utilidad Bruta',
+    yoyEBITDA: 'EBITDA',
+    yoyNetIncome: 'Ut. Neta',
+    yoyTotalAssets: 'Activos Totales',
+    yoyEquity: 'Patrimonio',
+    yoyTitle: 'Año vs Año — Métricas Clave',
+    // Diagnostic headings
+    diagGeneral: 'Situación General',
+    diagLiquidity: 'Análisis de Liquidez',
+    diagProfitability: 'Rentabilidad',
+    diagDebt: 'Estructura de Capital y Endeudamiento',
+    diagEfficiency: 'Eficiencia Operativa y Ciclo de Caja',
+    diagReturn: 'Retorno sobre la Inversión',
+    diagYoY: 'Análisis Comparativo Año vs Año',
+    // Diagnostic text snippets
+    diagScorePrefix: 'Con una puntuación de salud financiera de',
+    diagScoreSuffix: 'la empresa presenta una situación',
+    diagDebtPct: 'La estructura de activos muestra que el',
+    diagDebtPctSuffix: 'está financiado con deuda y el',
+    diagDebtPctSuffix2: 'con patrimonio propio.',
+    diagWCPositive: 'positivo',
+    diagWCNegative: 'negativo',
+    diagWCPrefix: 'El capital de trabajo es',
+    diagWCValue: 'con un valor de',
+    diagWCPosSuffix: 'indica capacidad para cubrir obligaciones de corto plazo',
+    diagWCNegSuffix: 'representa un riesgo operativo inmediato',
+    diagWC_lo: 'lo que',
+    diagCR_solid: 'La razón corriente de',
+    diagCR_solidSuffix: 'refleja una posición de liquidez sólida. La empresa tiene holgura suficiente para cubrir sus obligaciones de corto plazo sin presión financiera.',
+    diagCR_ok: 'es adecuada. Sin embargo, conviene monitorear el flujo de caja mensualmente para mantener este nivel.',
+    diagCR_tight: 'es ajustada. Cualquier retraso en cobros o aumento de obligaciones puede generar presión de liquidez. Se recomienda optimizar el ciclo de cobro.',
+    diagCR_crit: '⚠ Alerta crítica de liquidez: La razón corriente de',
+    diagCR_critSuffix: 'indica que el pasivo corriente supera el activo corriente. Existe riesgo real de incumplimiento de obligaciones a corto plazo.',
+    diagQR_confirm: 'La razón rápida de',
+    diagQR_good: 'confirma la solidez',
+    diagQR_bad: 'evidencia dependencia del inventario para cubrir obligaciones',
+    diagGM_above: 'pp por encima',
+    diagGM_below: 'pp por debajo',
+    diagGM_prefix: 'El margen bruto de',
+    diagGM_vs: 'está',
+    diagGM_industry: 'del promedio de la industria',
+    diagEBITDA_prefix: 'El EBITDA de',
+    diagEBITDA_mid: 'representa un margen de',
+    diagEBITDA_suffix: 'sobre los ingresos.',
+    diagNM_loss: 'La empresa registra pérdida neta con un margen negativo de',
+    diagNM_lossSuffix: ', lo que exige una revisión urgente de la estructura de costos y gastos.',
+    diagNM_thin: 'El margen neto de',
+    diagNM_thinSuffix: 'es muy estrecho, dejando poca capacidad de maniobra ante imprevistos.',
+    diagNM_good: 'muestra',
+    diagNM_aboveSector: 'una rentabilidad superior al promedio del sector',
+    diagNM_belowSector: 'oportunidad de mejora frente al referente sectorial de',
+    diagDE_low: 'El índice de endeudamiento de',
+    diagDE_lowSuffix: 'es bajo, lo que indica una empresa financieramente conservadora con espacio para apalancarse si se requiere crecimiento.',
+    diagDE_mod: 'El índice D/E de',
+    diagDE_modSuffix: 'es moderado y manejable. La empresa mantiene un equilibrio razonable entre deuda y patrimonio.',
+    diagDE_high: 'indica un nivel de apalancamiento elevado. Aunque aún manejable, cualquier deterioro en los ingresos puede comprometer la capacidad de pago.',
+    diagDE_extr: 'Apalancamiento excesivo: Con un D/E de',
+    diagDE_extrSuffix: ', la empresa depende fuertemente de financiamiento externo, lo que eleva significativamente el riesgo financiero.',
+    diagIC_good: 'es adecuada',
+    diagIC_tight: 'es ajustada y debe monitorearse',
+    diagIC_bad: 'es insuficiente y representa un riesgo de incumplimiento con acreedores',
+    diagIC_prefix: 'La cobertura de intereses de',
+    diagDSO_exc: 'Excelente gestión de cartera',
+    diagDSO_ok: 'Dentro de parámetros normales',
+    diagDSO_slow: 'Cobros lentos, revisar política de crédito',
+    diagDSO_crit: 'Cartera crítica, riesgo de incobrabilidad alto',
+    diagDIO_exc: 'Rotación de inventario excelente',
+    diagDIO_ok: 'Rotación normal',
+    diagDIO_slow: 'Inventario acumulado, revisar política de compras y ventas',
+    diagDPO_good: 'Buen aprovechamiento del crédito de proveedores',
+    diagDPO_opp: 'Posibilidad de negociar mayores plazos con proveedores',
+    diagCCC_eff: 'Ciclo eficiente de conversión de efectivo',
+    diagCCC_mod: 'Ciclo moderado, con oportunidades de mejora',
+    diagCCC_slow: 'Ciclo prolongado: el capital de trabajo está atrapado demasiado tiempo',
+    diagDSO_lbl: 'DSO (Días de cobro)',
+    diagDIO_lbl: 'DIO (Días de inventario)',
+    diagDPO_lbl: 'DPO (Días de pago)',
+    diagCCC_lbl: 'CCC (Ciclo de conversión)',
+    diagROE_prefix: 'El ROE de',
+    diagROE_mid: 'indica que por cada peso de patrimonio, los accionistas obtienen',
+    diagROE_suffix: 'de retorno. Esto está',
+    diagROE_above: 'pp sobre',
+    diagROE_below: 'pp bajo',
+    diagROE_sector: 'el referente sectorial.',
+    diagROA_prefix: 'El ROA de',
+    diagROA_good: 'refleja un uso eficiente de los activos para generar utilidades',
+    diagROA_bad: 'sugiere que los activos no están siendo suficientemente productivos',
+    diagYoY_revGrew: 'Los ingresos crecieron un',
+    diagYoY_revFell: 'Los ingresos cayeron un',
+    diagYoY_frente: 'frente al período anterior.',
+    diagYoY_netImpr: 'La utilidad neta mejoró un',
+    diagYoY_netDet: 'La utilidad neta se deterioró un',
+    diagYoY_posSuffix: ', lo que refleja una tendencia positiva en la gestión financiera',
+    diagYoY_negSuffix: ', lo que requiere análisis profundo de las causas del deterioro',
+    // Score quality labels
+    scoreQuality: { excellent: 'excelente', good: 'buena', regular: 'regular', weak: 'débil', critical: 'crítica' },
+    // Recommendations
+    recImmediate: 'Inmediato',
+    rec30: '30 días',
+    rec60: '60 días',
+    rec90: '90 días',
+    rec3060: '30–60 días',
+    recLT: 'Largo plazo',
+    recContinuous: 'Continuo',
+    recExpectedImpact: 'Impacto esperado',
+    rec_liq: 'Implementar política de cobro acelerado: descuentos por pronto pago, factoring o anticipos de cartera para mejorar la liquidez inmediata.',
+    rec_liqImpact: 'Incremento en razón corriente y reducción del DSO.',
+    rec_dsoSuffix: 'de cobro promedio, reducirlo a menos de 45 días liberaría capital de trabajo significativo.',
+    rec_dsoPrefix: 'Revisar y fortalecer la política de crédito y cobranza. Con',
+    rec_dsoImpact: 'Mejora del CCC y flujo de caja operativo.',
+    rec_gmPrefix: 'El margen bruto',
+    rec_gmMid: 'está por debajo del sector',
+    rec_gmSuffix: 'Revisar estructura de costos, negociar con proveedores y evaluar ajuste de precios de venta.',
+    rec_gmImpact: 'Incremento de hasta',
+    rec_gmImpactSuffix: 'pp en margen bruto.',
+    rec_netLoss: 'Análisis urgente de gastos operativos y financieros. Identificar y eliminar costos no esenciales. Evaluar reestructuración de deuda para reducir carga financiera.',
+    rec_netLossImpact: 'Recuperación de la rentabilidad neta.',
+    rec_debtPrefix: 'Con un D/E de',
+    rec_debtSuffix: ', se recomienda plan de desapalancamiento: refinanciar deuda a menor tasa, ampliar plazos, o evaluar inyección de capital.',
+    rec_debtImpact: 'Reducción del riesgo financiero y mejora en cobertura de intereses.',
+    rec_dioPrefix: 'Inventario inmovilizado por',
+    rec_dioSuffix: '. Implementar modelo de inventario Just-in-Time, liquidar stock obsoleto y revisar política de compras.',
+    rec_dioImpact: 'Liberación de capital de trabajo y reducción de costos de almacenamiento.',
+    rec_roePrefix: 'ROE de',
+    rec_roeMid: 'vs referente sectorial de',
+    rec_roeSuffix: '%. Evaluar estrategias de crecimiento rentable: nuevas líneas de negocio, eficiencia operativa o distribución de activos improductivos.',
+    rec_roeImpact: 'Acercamiento al ROE sectorial de',
+    rec_dpo: 'Negociar con proveedores plazos de pago más amplios (45–60 días). Esto mejora el ciclo de caja sin costo financiero adicional.',
+    rec_dpoImpact: 'Mejora del capital de trabajo disponible.',
+    rec_icPrefix: 'Cobertura de intereses de',
+    rec_icSuffix: 'es riesgosa. Buscar refinanciación a tasas más bajas, prepagar deuda costosa o incrementar EBIT mediante eficiencia operativa.',
+    rec_icImpact: 'Reducción del riesgo de incumplimiento financiero.',
+    rec_healthy: 'Los indicadores financieros son sólidos. Mantener la disciplina financiera actual, establecer metas de mejora incremental y considerar estrategias de crecimiento o diversificación.',
+    rec_healthyImpact: 'Consolidación y crecimiento sostenible.',
+  },
+  en: {
+    headerTag: '// Strategic Financial Analysis',
+    heroTitle: 'Executive<br><em>Financial</em> Diagnostic',
+    heroSubtitle: 'Enter your financial statement data. Include the prior period for year-over-year comparative analysis.',
+    yoyLabel: 'Enable Year-over-Year Comparison',
+    yoyHint: 'Enter data for two periods to see variances and trends',
+    panelBalance: '01 — Balance Sheet',
+    panelBalanceTitle: 'Statement of Financial Position',
+    secCurrentAssets: 'Current Assets',
+    lCash: 'Cash & equivalents',
+    lPriorPeriod: 'Prior period',
+    lReceivables: 'Accounts receivable',
+    lInventory: 'Inventories',
+    lOtherCA: 'Other current assets',
+    secNonCurrentAssets: 'Non-Current Assets',
+    lPPE: 'Net PP&E',
+    lIntangibles: 'Intangibles / Goodwill',
+    lOtherNCA: 'Other non-current assets',
+    secCurrentLiab: 'Current Liabilities',
+    lPayables: 'Accounts payable',
+    lSTDebt: 'Short-term debt',
+    lOtherCL: 'Other current liabilities',
+    secLTEquity: 'LT Liabilities & Equity',
+    lLTDebt: 'Long-term debt',
+    lOtherLTL: 'Other LT liabilities',
+    lPaidIn: 'Paid-in capital',
+    lRetained: 'Retained earnings',
+    panelPL: '02 — P&L',
+    panelPLTitle: 'Income Statement',
+    secRevenue: 'Revenue',
+    lRevenue: 'Revenue / Sales',
+    lCOGS: 'Cost of goods sold (COGS)',
+    secOpex: 'Operating Expenses',
+    lSellExp: 'Selling expenses',
+    lAdminExp: 'Administrative expenses',
+    lDA: 'Depreciation & amortization',
+    lOtherOpex: 'Other operating expenses',
+    secFinancial: 'Financial Items',
+    lInterestExp: 'Interest expense',
+    lInterestInc: 'Interest income',
+    lTaxes: 'Income tax',
+    lOtherNonOp: 'Other non-operating (net)',
+    secContext: 'Context',
+    lIndustry: 'Industry / Sector',
+    optSelect: 'Select...',
+    optRetail: 'Retail / Commerce',
+    optMfg: 'Manufacturing / Industrial',
+    optTech: 'Technology / Software',
+    optFin: 'Financial Services',
+    optHealth: 'Healthcare / Pharma',
+    optRE: 'Real Estate / Construction',
+    optHosp: 'Hospitality / Tourism',
+    optSvc: 'Professional Services',
+    optAgro: 'Agriculture / Food',
+    optOther: 'Other',
+    lCurrency: 'Currency',
+    lCurrentPeriod: 'Current period',
+    lCompany: 'Company name (optional)',
+    secSignature: 'Report signature',
+    lElaboradoPor: 'Prepared by — Name',
+    lElaboradoCargo: 'Prepared by — Title',
+    btnAnalyze: '⟳ &nbsp; Run Complete Financial Analysis',
+    loadingTitle: 'Processing Financial Statements',
+    ls1: '○ Calculating financial ratios...',
+    ls2: '○ Computing Altman Z-Score...',
+    ls3: '○ Generating industry benchmarks...',
+    ls4: '○ Generating strategic diagnostic...',
+    ls5: '○ Building action plan...',
+    reportTitle: 'Executive Report',
+    btnExport: '⬇ Export PDF',
+    btnReset: '← New Analysis',
+    firmaElaboradoLabel: 'Prepared by',
+    firmaRevisadoLabel: 'Reviewed by',
+    firmaTitle: 'Certified Public Accountant — Finance Specialist',
+    apBalanceLabel: '// Financial Structure',
+    apBalanceTitle: 'Balance Sheet Composition',
+    apPLLabel: '// Profitability Waterfall',
+    apPLTitle: 'P&L Waterfall',
+    apYoYLabel: '// Year-over-Year',
+    apYoYTitle: 'YoY — Key Metrics',
+    apDiagLabel: '// Analysis — CFO Perspective',
+    apDiagTitle: 'Strategic Diagnostic',
+    apScoreLabel: '// Financial Health',
+    apRatiosLabel: '// Key Ratios',
+    apAltmanLabel: '// Bankruptcy Risk',
+    apAltmanTitle: 'Altman Z-Score',
+    apBenchLabel: '// Benchmarking',
+    apBenchTitle: 'vs Industry Average',
+    apSimLabel: '// Strategic Simulator',
+    apSimTitle: 'What If...?',
+    simImpactLabel: 'Projected Impact',
+    apAlertsLabel: '// Alerts & Risks',
+    apAlertsTitle: 'Critical Points',
+    apPlanLabel: '// CFO Action Plan',
+    apPlanTitle: 'Priority Initiatives',
+    apRadarLabel: '// Financial Profile',
+    apRadarTitle: 'Multidimensional Analysis',
+    footerCreatedBy: 'Created by',
+    footerReviewed: 'Reviewed by',
+    footerTitle: 'Certified Public Accountant — Finance Specialist',
+    // KPI labels
+    kpiRevenue: 'Net Revenue',
+    kpiNetIncome: 'Net Income',
+    kpiEBITDA: 'EBITDA',
+    kpiLiquidity: 'Current Ratio',
+    kpiDebtEquity: 'Debt / Equity',
+    kpiCOGS: 'COGS',
+    kpiMargin: 'Margin',
+    kpiGoodCoverage: 'Good coverage',
+    kpiTightCoverage: 'Tight coverage',
+    kpiLiqRisk: '⚠ Liquidity risk',
+    kpiLowLev: 'Low leverage',
+    kpiModLev: 'Moderate',
+    kpiHighLev: 'High leverage',
+    // Ratio table
+    ratioCurrentRatio: 'Current Ratio',
+    ratioQuickRatio: 'Quick Ratio',
+    ratioGrossMargin: 'Gross Margin',
+    ratioEBITDAMargin: 'EBITDA Margin',
+    ratioNetMargin: 'Net Margin',
+    ratioROE: 'ROE',
+    ratioROA: 'ROA',
+    ratioDE: 'Debt/Equity',
+    ratioInterestCov: 'Interest Coverage',
+    ratioDSO: 'DSO',
+    ratioDIO: 'DIO',
+    ratioDPO: 'DPO',
+    ratioCCC: 'CCC',
+    unitDays: ' days',
+    // Score labels
+    scoreExcellent: 'Excellent',
+    scoreGood: 'Good',
+    scoreRegular: 'Fair',
+    scoreWeak: 'Weak',
+    scoreCritical: 'Critical',
+    scoreDescExcellent: 'Financially robust company with capacity for sustainable growth.',
+    scoreDescGood: 'Solid situation with specific improvement areas that can strengthen the business.',
+    scoreDescRegular: 'Acceptable situation with vulnerabilities requiring strategic attention.',
+    scoreDescWeak: 'Concerning indicators. An urgent financial improvement plan is necessary.',
+    scoreDescCritical: 'High-risk situation. Immediate restructuring required.',
+    // Altman
+    altmanSafe: 'Safe Zone',
+    altmanGrey: 'Grey Zone',
+    altmanDanger: 'Danger Zone',
+    altmanSafeDesc: 'Very low bankruptcy risk over the next 2 years.',
+    altmanGreyDesc: 'Company in uncertainty zone. Close monitoring required.',
+    altmanDangerDesc: 'High insolvency risk. Immediate action necessary.',
+    altmanDangerLbl: 'Danger (<1.81)',
+    altmanGreyLbl: 'Grey (1.81–2.99)',
+    altmanSafeLbl: 'Safe (>2.99)',
+    altmanCompTitle: 'Z-Score Components',
+    altmanX1: 'X1 — Working Capital / Assets',
+    altmanX2: 'X2 — Retained Earnings / Assets',
+    altmanX3: 'X3 — EBIT / Assets',
+    altmanX4: 'X4 — Equity / Liabilities',
+    altmanX5: 'X5 — Sales / Assets',
+    altmanInsufficient: 'Insufficient data to calculate Z-Score',
+    // Benchmark
+    bmComparing: 'Comparing vs average of',
+    bmMyCompany: 'Your company',
+    bmIndustry: 'Industry',
+    // Simulator
+    simRevLabel: 'Revenue Increase',
+    simCostLabel: 'Operating Cost Reduction',
+    simDebtLabel: 'Debt Reduction',
+    simRevProj: 'Projected Revenue',
+    simEBITDAProj: 'Projected EBITDA',
+    simNetProj: 'Projected Net Income',
+    simNetMarginProj: 'Projected Net Margin',
+    // Alerts
+    alertLiqCrit: 'Critical liquidity risk: current assets do not cover current liabilities.',
+    alertLiqWarn: 'tight. Monitor cash flow monthly.',
+    alertNetLoss: 'The company operates at a net loss. Urgent cost reduction measures required.',
+    alertHighDebt: 'Excessive leverage',
+    alertIntCov: 'Insufficient interest coverage',
+    alertLowGross: 'Low gross margin. Revisit pricing strategy and cost structure.',
+    alertHighDSO: 'Extended collection cycle. Risk of overdue receivables and working capital pressure.',
+    alertHighCCC: 'High cash conversion cycle. Working capital trapped.',
+    alertLowROE: 'Low ROE. Insufficient return for shareholders.',
+    alertRevDown: 'Revenue decline of',
+    alertRevUp: 'Revenue growth of',
+    alertRevDownSuffix: 'vs prior period. Review commercial strategy.',
+    alertRevUpSuffix: 'vs prior period. Positive trend.',
+    alertHealthy: 'Key indicators show a healthy financial situation.',
+    liquidezAjustada: 'Tight liquidity',
+    altaDeuda: 'High debt dependency.',
+    riesgoIncumplimiento: 'Default risk.',
+    // Radar labels
+    radarLiquidity: 'Liquidity',
+    radarGrossMargin: 'Gross Margin',
+    radarNetMargin: 'Net Margin',
+    radarROE: 'ROE',
+    radarDebtCov: 'Debt Coverage',
+    radarSolvency: 'Solvency',
+    // Report subtitles
+    repComparative: 'Comparative Analysis',
+    repGenerated: 'Generated',
+    repElaboratedBy: 'Prepared by',
+    // Balance chart labels
+    chartCA: 'Current Assets',
+    chartNCA: 'Non-Current Assets',
+    chartCL: 'Current Liabilities',
+    chartLTL: 'LT Liabilities',
+    chartEquity: 'Equity',
+    // P&L chart labels
+    plRevenue: 'Revenue',
+    plGrossProfit: 'Gross Profit',
+    plEBITDA: 'EBITDA',
+    plEBIT: 'EBIT',
+    plNetIncome: 'Net Income',
+    // YoY chart labels
+    yoyRevenue: 'Revenue',
+    yoyGrossProfit: 'Gross Profit',
+    yoyEBITDA: 'EBITDA',
+    yoyNetIncome: 'Net Income',
+    yoyTotalAssets: 'Total Assets',
+    yoyEquity: 'Equity',
+    yoyTitle: 'YoY — Key Metrics',
+    // Diagnostic headings
+    diagGeneral: 'General Situation',
+    diagLiquidity: 'Liquidity Analysis',
+    diagProfitability: 'Profitability',
+    diagDebt: 'Capital Structure & Leverage',
+    diagEfficiency: 'Operational Efficiency & Cash Cycle',
+    diagReturn: 'Return on Investment',
+    diagYoY: 'Year-over-Year Comparative Analysis',
+    // Diagnostic snippets
+    diagScorePrefix: 'With a financial health score of',
+    diagScoreSuffix: 'the company presents a',
+    diagDebtPct: 'The asset structure shows that',
+    diagDebtPctSuffix: 'is debt-financed and',
+    diagDebtPctSuffix2: 'is equity-financed.',
+    diagWCPositive: 'positive',
+    diagWCNegative: 'negative',
+    diagWCPrefix: 'Working capital is',
+    diagWCValue: 'with a value of',
+    diagWCPosSuffix: 'indicating capacity to meet short-term obligations',
+    diagWCNegSuffix: 'representing an immediate operational risk',
+    diagWC_lo: 'which',
+    diagCR_solid: 'The current ratio of',
+    diagCR_solidSuffix: 'reflects a solid liquidity position. The company has sufficient room to meet its short-term obligations without financial pressure.',
+    diagCR_ok: 'is adequate. However, monthly cash flow monitoring is advisable to maintain this level.',
+    diagCR_tight: 'is tight. Any delay in collections or increase in obligations could generate liquidity pressure. Optimizing the collection cycle is recommended.',
+    diagCR_crit: '⚠ Critical liquidity alert: The current ratio of',
+    diagCR_critSuffix: 'indicates that current liabilities exceed current assets. There is a real risk of short-term default.',
+    diagQR_confirm: 'The quick ratio of',
+    diagQR_good: 'confirms the solid position',
+    diagQR_bad: 'reveals dependence on inventory to meet obligations',
+    diagGM_above: 'pp above',
+    diagGM_below: 'pp below',
+    diagGM_prefix: 'The gross margin of',
+    diagGM_vs: 'is',
+    diagGM_industry: 'the industry average for',
+    diagEBITDA_prefix: 'EBITDA of',
+    diagEBITDA_mid: 'represents a margin of',
+    diagEBITDA_suffix: 'on revenue.',
+    diagNM_loss: 'The company records a net loss with a negative margin of',
+    diagNM_lossSuffix: ', requiring an urgent review of the cost and expense structure.',
+    diagNM_thin: 'The net margin of',
+    diagNM_thinSuffix: 'is very thin, leaving little room to maneuver against unexpected events.',
+    diagNM_good: 'shows',
+    diagNM_aboveSector: 'profitability above the sector average',
+    diagNM_belowSector: 'room for improvement vs the sector benchmark of',
+    diagDE_low: 'The leverage ratio of',
+    diagDE_lowSuffix: 'is low, indicating a financially conservative company with room to leverage if growth requires it.',
+    diagDE_mod: 'The D/E ratio of',
+    diagDE_modSuffix: 'is moderate and manageable. The company maintains a reasonable balance between debt and equity.',
+    diagDE_high: 'indicates a high leverage level. Although still manageable, any revenue deterioration could compromise repayment capacity.',
+    diagDE_extr: 'Excessive leverage: With a D/E of',
+    diagDE_extrSuffix: ', the company relies heavily on external financing, significantly increasing financial risk.',
+    diagIC_good: 'is adequate',
+    diagIC_tight: 'is tight and should be monitored',
+    diagIC_bad: 'is insufficient and represents a default risk with creditors',
+    diagIC_prefix: 'Interest coverage of',
+    diagDSO_exc: 'Excellent receivables management',
+    diagDSO_ok: 'Within normal parameters',
+    diagDSO_slow: 'Slow collections, review credit policy',
+    diagDSO_crit: 'Critical receivables, high bad debt risk',
+    diagDIO_exc: 'Excellent inventory turnover',
+    diagDIO_ok: 'Normal turnover',
+    diagDIO_slow: 'Accumulated inventory, review purchasing and sales policies',
+    diagDPO_good: 'Good use of supplier credit',
+    diagDPO_opp: 'Opportunity to negotiate longer payment terms with suppliers',
+    diagCCC_eff: 'Efficient cash conversion cycle',
+    diagCCC_mod: 'Moderate cycle, with improvement opportunities',
+    diagCCC_slow: 'Prolonged cycle: working capital is trapped too long',
+    diagDSO_lbl: 'DSO (Days sales outstanding)',
+    diagDIO_lbl: 'DIO (Days inventory outstanding)',
+    diagDPO_lbl: 'DPO (Days payable outstanding)',
+    diagCCC_lbl: 'CCC (Cash conversion cycle)',
+    diagROE_prefix: 'ROE of',
+    diagROE_mid: 'indicates that for each unit of equity, shareholders earn',
+    diagROE_suffix: 'in return. This is',
+    diagROE_above: 'pp above',
+    diagROE_below: 'pp below',
+    diagROE_sector: 'the sector benchmark.',
+    diagROA_prefix: 'ROA of',
+    diagROA_good: 'reflects efficient use of assets to generate profits',
+    diagROA_bad: 'suggests that assets are not being sufficiently productive',
+    diagYoY_revGrew: 'Revenue grew by',
+    diagYoY_revFell: 'Revenue fell by',
+    diagYoY_frente: 'compared to the prior period.',
+    diagYoY_netImpr: 'Net income improved by',
+    diagYoY_netDet: 'Net income deteriorated by',
+    diagYoY_posSuffix: ', reflecting a positive trend in financial management',
+    diagYoY_negSuffix: ', requiring a deep analysis of the causes of deterioration',
+    scoreQuality: { excellent: 'excellent', good: 'good', regular: 'fair', weak: 'weak', critical: 'critical' },
+    // Recommendations
+    recImmediate: 'Immediate',
+    rec30: '30 days',
+    rec60: '60 days',
+    rec90: '90 days',
+    rec3060: '30–60 days',
+    recLT: 'Long term',
+    recContinuous: 'Ongoing',
+    recExpectedImpact: 'Expected impact',
+    rec_liq: 'Implement an accelerated collections policy: early payment discounts, factoring or receivables advances to improve immediate liquidity.',
+    rec_liqImpact: 'Improvement in current ratio and reduction of DSO.',
+    rec_dsoSuffix: 'average collection days — reducing to under 45 days would release significant working capital.',
+    rec_dsoPrefix: 'Strengthen credit and collections policy. With',
+    rec_dsoImpact: 'Improvement of CCC and operating cash flow.',
+    rec_gmPrefix: 'Gross margin',
+    rec_gmMid: 'is below the sector average',
+    rec_gmSuffix: 'Review cost structure, negotiate with suppliers, and evaluate price adjustments.',
+    rec_gmImpact: 'Increase of up to',
+    rec_gmImpactSuffix: 'pp in gross margin.',
+    rec_netLoss: 'Urgent review of operating and financial expenses. Identify and eliminate non-essential costs. Evaluate debt restructuring to reduce financial burden.',
+    rec_netLossImpact: 'Recovery of net profitability.',
+    rec_debtPrefix: 'With a D/E of',
+    rec_debtSuffix: ', a deleveraging plan is recommended: refinance debt at lower rates, extend maturities, or evaluate capital injection.',
+    rec_debtImpact: 'Reduction of financial risk and improvement in interest coverage.',
+    rec_dioPrefix: 'Inventory tied up for',
+    rec_dioSuffix: '. Implement Just-in-Time inventory model, liquidate obsolete stock, and review purchasing policy.',
+    rec_dioImpact: 'Working capital release and reduction of storage costs.',
+    rec_roePrefix: 'ROE of',
+    rec_roeMid: 'vs sector benchmark of',
+    rec_roeSuffix: '%. Evaluate profitable growth strategies: new business lines, operational efficiency, or reallocation of unproductive assets.',
+    rec_roeImpact: 'Closing the gap to the sector ROE of',
+    rec_dpo: 'Negotiate extended payment terms with suppliers (45–60 days). This improves the cash cycle with no additional financial cost.',
+    rec_dpoImpact: 'Improvement of available working capital.',
+    rec_icPrefix: 'Interest coverage of',
+    rec_icSuffix: 'is risky. Seek refinancing at lower rates, prepay expensive debt, or increase EBIT through operational efficiency.',
+    rec_icImpact: 'Reduction of financial default risk.',
+    rec_healthy: 'Financial indicators are solid. Maintain current financial discipline, set incremental improvement targets, and consider growth or diversification strategies.',
+    rec_healthyImpact: 'Consolidation and sustainable growth.',
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+let LANG = 'es';
 let R = {}, R2 = {}, hasYoY = false;
 let charts = {};
 
-// ─── YOY TOGGLE ──────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// i18n ENGINE
+// ═══════════════════════════════════════════════════════════════
+function T(key) {
+  return TRANSLATIONS[LANG][key] || TRANSLATIONS['es'][key] || key;
+}
+
+function setLang(lang) {
+  LANG = lang;
+  document.getElementById('btnES').classList.toggle('active', lang === 'es');
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+  applyTranslations();
+}
+
+function applyTranslations() {
+  // Translate all elements with data-i18n attribute
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = T(key);
+    if (val) el.innerHTML = val;
+  });
+  // Translate select options
+  document.querySelectorAll('[data-i18n-opt]').forEach(el => {
+    const key = el.getAttribute('data-i18n-opt');
+    const val = T(key);
+    if (val) el.textContent = val;
+  });
+  // Update period placeholder
+  const periodInput = document.getElementById('period');
+  const period2Input = document.getElementById('period2');
+  if (periodInput) periodInput.placeholder = LANG === 'en' ? 'e.g. 2024' : 'Ej: 2024';
+  if (period2Input) period2Input.placeholder = LANG === 'en' ? 'e.g. 2023' : 'Ej: 2023';
+  // Update company placeholder
+  const companyInput = document.getElementById('companyName');
+  if (companyInput) companyInput.placeholder = LANG === 'en' ? 'My Company Inc.' : 'Mi Empresa S.A.';
+  // Update cargo placeholder
+  const cargoInput = document.getElementById('elaboradoCargo');
+  if (cargoInput) cargoInput.placeholder = LANG === 'en' ? 'e.g. Financial Analyst, CFO...' : 'Ej: Auxiliar Contable, Gerente Financiero...';
+  const elaboradoInput = document.getElementById('elaboradoPor');
+  if (elaboradoInput) elaboradoInput.placeholder = LANG === 'en' ? 'Full name of analyst' : 'Nombre completo del analista';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// YOY TOGGLE
+// ═══════════════════════════════════════════════════════════════
 function toggleYoY() {
   hasYoY = document.getElementById('yoyToggle').checked;
   const wraps = ['cashY2Wrap','recY2Wrap','invY2Wrap','revY2Wrap','cogsY2Wrap','period2Wrap'];
@@ -710,7 +1428,9 @@ function toggleYoY() {
   });
 }
 
-// ─── HELPERS ─────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════
 const v = id => parseFloat(document.getElementById(id)?.value) || 0;
 const t = id => document.getElementById(id)?.value || '';
 
@@ -724,9 +1444,9 @@ function fmt(n, cur) {
   return `${sign}${cur} ${abs.toFixed(0)}`;
 }
 
-function pct(n, dec=1) { return n !== null && !isNaN(n) ? n.toFixed(dec) + '%' : 'N/D'; }
-function ratio(n, dec=2) { return n !== null && !isNaN(n) ? n.toFixed(dec) + 'x' : 'N/D'; }
-function days(n) { return n !== null && !isNaN(n) ? n.toFixed(0) + ' días' : 'N/D'; }
+function pct(n, dec=1) { return n !== null && !isNaN(n) ? n.toFixed(dec) + '%' : 'N/A'; }
+function ratio(n, dec=2) { return n !== null && !isNaN(n) ? n.toFixed(dec) + 'x' : 'N/A'; }
+function days(n) { return n !== null && !isNaN(n) ? n.toFixed(0) + T('unitDays') : 'N/A'; }
 
 function yoyDelta(curr, prev) {
   if (!prev || prev === 0) return null;
@@ -740,14 +1460,15 @@ function yoyTag(delta) {
   return `<div class="kpi-yoy ${cls}">${dir} ${Math.abs(delta).toFixed(1)}% YoY</div>`;
 }
 
-// ─── CALC RATIOS ─────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// CALC RATIOS
+// ═══════════════════════════════════════════════════════════════
 function calcRatios(sfx = '') {
   const s = sfx === 'Y2' ? 'Y2' : '';
   const cash = v('cash'+s), rec = v('receivables'+s), inv = v('inventory'+s);
   const otherCA = v('otherCA'), ppe = v('ppe'), intang = v('intangibles'), otherNCA = v('otherNCA');
   const payables = v('payables'), stdbt = v('stdbt'), otherCL = v('otherCL');
   const ltDebt = v('ltDebt'), otherLTL = v('otherLTL'), paidIn = v('paidIn'), retained = v('retained');
-
   const revenue = v('revenue'+s), cogs = v('cogs'+s);
   const sellExp = v('sellExp'), adminExp = v('adminExp'), da = v('da'), otherOpex = v('otherOpex');
   const interestExp = v('interestExp'), interestInc = v('interestInc'), taxes = v('taxes'), otherNonOp = v('otherNonOp');
@@ -766,7 +1487,6 @@ function calcRatios(sfx = '') {
   const ebit = ebitda - da;
   const ebt = ebit - interestExp + interestInc + otherNonOp;
   const netIncome = ebt - taxes;
-
   const workingCapital = totalCA - totalCL;
 
   return {
@@ -776,7 +1496,6 @@ function calcRatios(sfx = '') {
     revenue, cogs, grossProfit, sellExp, adminExp, da, otherOpex,
     ebitda, ebit, ebt, netIncome, interestExp, interestInc, taxes,
     workingCapital, cur,
-    // Ratios
     currentRatio: totalCL > 0 ? totalCA / totalCL : null,
     quickRatio: totalCL > 0 ? (cash + rec) / totalCL : null,
     cashRatio: totalCL > 0 ? cash / totalCL : null,
@@ -796,7 +1515,9 @@ function calcRatios(sfx = '') {
   };
 }
 
-// ─── ALTMAN Z-SCORE ──────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// ALTMAN Z-SCORE
+// ═══════════════════════════════════════════════════════════════
 function calcAltman(r) {
   if (!r.totalAssets) return null;
   const X1 = r.workingCapital / r.totalAssets;
@@ -808,7 +1529,9 @@ function calcAltman(r) {
   return { Z, X1, X2, X3, X4, X5 };
 }
 
-// ─── BENCHMARKS ──────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// BENCHMARKS
+// ═══════════════════════════════════════════════════════════════
 const BENCHMARKS = {
   retail:       { grossMargin: 28, ebitdaMargin: 8, netMargin: 3, roe: 12, currentRatio: 1.4, debtToEquity: 1.2 },
   manufacturing:{ grossMargin: 32, ebitdaMargin: 12, netMargin: 6, roe: 10, currentRatio: 1.8, debtToEquity: 0.9 },
@@ -822,7 +1545,9 @@ const BENCHMARKS = {
   other:        { grossMargin: 40, ebitdaMargin: 14, netMargin: 6, roe: 12, currentRatio: 1.5, debtToEquity: 1.0 },
 };
 
-// ─── HEALTH SCORE ────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// HEALTH SCORE
+// ═══════════════════════════════════════════════════════════════
 function calcScore(r) {
   let s = 50;
   if (r.currentRatio !== null) s += r.currentRatio >= 2 ? 10 : r.currentRatio >= 1.5 ? 7 : r.currentRatio >= 1 ? 3 : -15;
@@ -833,15 +1558,17 @@ function calcScore(r) {
   return Math.max(0, Math.min(100, Math.round(s)));
 }
 
-// ─── BUILD UI ────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// BUILD KPIs
+// ═══════════════════════════════════════════════════════════════
 function buildKPIs(r, r2) {
   const cur = r.cur;
   const kpis = [
-    { label:'Ingresos Netos', val: fmt(r.revenue,cur), sub: r.cogs>0?`COGS: ${fmt(r.cogs,cur)}`:'', cls: r.revenue>0?'positive':'', delta: r2?yoyDelta(r.revenue,r2.revenue):null },
-    { label:'Utilidad Neta', val: fmt(r.netIncome,cur), sub: r.netMargin!==null?`Margen: ${pct(r.netMargin)}`:'', cls: r.netIncome>0?'positive':r.netIncome<0?'negative':'warning', delta: r2?yoyDelta(r.netIncome,r2.netIncome):null },
-    { label:'EBITDA', val: fmt(r.ebitda,cur), sub: r.ebitdaMargin!==null?`Margen: ${pct(r.ebitdaMargin)}`:'', cls: r.ebitda>0?'positive':'negative', delta: r2?yoyDelta(r.ebitda,r2.ebitda):null },
-    { label:'Liquidez Corriente', val: ratio(r.currentRatio), sub: r.currentRatio?r.currentRatio>=1.5?'Buena cobertura':r.currentRatio>=1?'Cobertura ajustada':'⚠ Riesgo liquidez':'', cls: r.currentRatio?(r.currentRatio>=1.5?'positive':r.currentRatio>=1?'warning':'negative'):'' },
-    { label:'Deuda / Patrimonio', val: ratio(r.debtToEquity), sub: r.debtToEquity!==null?r.debtToEquity<1?'Bajo apalancamiento':r.debtToEquity<2?'Moderado':'Alto apalancamiento':'', cls: r.debtToEquity!==null?(r.debtToEquity<1?'positive':r.debtToEquity<2?'warning':'negative'):'' },
+    { label: T('kpiRevenue'), val: fmt(r.revenue,cur), sub: r.cogs>0?`${T('kpiCOGS')}: ${fmt(r.cogs,cur)}`:'', cls: r.revenue>0?'positive':'', delta: r2?yoyDelta(r.revenue,r2.revenue):null },
+    { label: T('kpiNetIncome'), val: fmt(r.netIncome,cur), sub: r.netMargin!==null?`${T('kpiMargin')}: ${pct(r.netMargin)}`:'', cls: r.netIncome>0?'positive':r.netIncome<0?'negative':'warning', delta: r2?yoyDelta(r.netIncome,r2.netIncome):null },
+    { label: T('kpiEBITDA'), val: fmt(r.ebitda,cur), sub: r.ebitdaMargin!==null?`${T('kpiMargin')}: ${pct(r.ebitdaMargin)}`:'', cls: r.ebitda>0?'positive':'negative', delta: r2?yoyDelta(r.ebitda,r2.ebitda):null },
+    { label: T('kpiLiquidity'), val: ratio(r.currentRatio), sub: r.currentRatio?(r.currentRatio>=1.5?T('kpiGoodCoverage'):r.currentRatio>=1?T('kpiTightCoverage'):T('kpiLiqRisk')):'', cls: r.currentRatio?(r.currentRatio>=1.5?'positive':r.currentRatio>=1?'warning':'negative'):'' },
+    { label: T('kpiDebtEquity'), val: ratio(r.debtToEquity), sub: r.debtToEquity!==null?(r.debtToEquity<1?T('kpiLowLev'):r.debtToEquity<2?T('kpiModLev'):T('kpiHighLev')):'', cls: r.debtToEquity!==null?(r.debtToEquity<1?'positive':r.debtToEquity<2?'warning':'negative'):'' },
   ];
   document.getElementById('kpiGrid').innerHTML = kpis.map(k=>`
     <div class="kpi-card ${k.cls}">
@@ -853,21 +1580,24 @@ function buildKPIs(r, r2) {
   `).join('');
 }
 
+// ═══════════════════════════════════════════════════════════════
+// BUILD RATIO TABLE
+// ═══════════════════════════════════════════════════════════════
 function buildRatioTable(r, r2) {
   const rows = [
-    { n:'Razón Corriente', v:r.currentRatio, f:ratio, good:v=>v>=1.5, v2:r2?.currentRatio },
-    { n:'Razón Rápida', v:r.quickRatio, f:ratio, good:v=>v>=1, v2:r2?.quickRatio },
-    { n:'Margen Bruto', v:r.grossMargin, f:pct, good:v=>v>=30, v2:r2?.grossMargin },
-    { n:'Margen EBITDA', v:r.ebitdaMargin, f:pct, good:v=>v>=15, v2:r2?.ebitdaMargin },
-    { n:'Margen Neto', v:r.netMargin, f:pct, good:v=>v>=5, v2:r2?.netMargin },
-    { n:'ROE', v:r.roe, f:pct, good:v=>v>=10, v2:r2?.roe },
-    { n:'ROA', v:r.roa, f:pct, good:v=>v>=5, v2:r2?.roa },
-    { n:'Deuda/Patrimonio', v:r.debtToEquity, f:ratio, good:v=>v<1, v2:r2?.debtToEquity },
-    { n:'Cobertura Intereses', v:r.interestCoverage, f:ratio, good:v=>v>=3, v2:r2?.interestCoverage },
-    { n:'DSO', v:r.dso, f:days, good:v=>v<45, v2:r2?.dso },
-    { n:'DIO', v:r.dio, f:days, good:v=>v<60, v2:r2?.dio },
-    { n:'DPO', v:r.dpo, f:days, good:v=>v>30, v2:r2?.dpo },
-    { n:'CCC', v:r.ccc, f:days, good:v=>v<60, v2:r2?.ccc },
+    { n:T('ratioCurrentRatio'), v:r.currentRatio, f:ratio, good:v=>v>=1.5, v2:r2?.currentRatio },
+    { n:T('ratioQuickRatio'), v:r.quickRatio, f:ratio, good:v=>v>=1, v2:r2?.quickRatio },
+    { n:T('ratioGrossMargin'), v:r.grossMargin, f:pct, good:v=>v>=30, v2:r2?.grossMargin },
+    { n:T('ratioEBITDAMargin'), v:r.ebitdaMargin, f:pct, good:v=>v>=15, v2:r2?.ebitdaMargin },
+    { n:T('ratioNetMargin'), v:r.netMargin, f:pct, good:v=>v>=5, v2:r2?.netMargin },
+    { n:T('ratioROE'), v:r.roe, f:pct, good:v=>v>=10, v2:r2?.roe },
+    { n:T('ratioROA'), v:r.roa, f:pct, good:v=>v>=5, v2:r2?.roa },
+    { n:T('ratioDE'), v:r.debtToEquity, f:ratio, good:v=>v<1, v2:r2?.debtToEquity },
+    { n:T('ratioInterestCov'), v:r.interestCoverage, f:ratio, good:v=>v>=3, v2:r2?.interestCoverage },
+    { n:T('ratioDSO'), v:r.dso, f:days, good:v=>v<45, v2:r2?.dso },
+    { n:T('ratioDIO'), v:r.dio, f:days, good:v=>v<60, v2:r2?.dio },
+    { n:T('ratioDPO'), v:r.dpo, f:days, good:v=>v>30, v2:r2?.dpo },
+    { n:T('ratioCCC'), v:r.ccc, f:days, good:v=>v<60, v2:r2?.ccc },
   ].filter(row=>row.v!==null&&row.v!==undefined&&!isNaN(row.v));
 
   document.getElementById('ratioTable').innerHTML = rows.map(row=>{
@@ -877,8 +1607,6 @@ function buildRatioTable(r, r2) {
     if (hasYoY && row.v2 !== undefined && row.v2 !== null) {
       const d = yoyDelta(row.v, row.v2);
       if (d !== null) {
-        const better = row.good(row.v) && !row.good(row.v2);
-        const cls = (d >= 0) === (row.good(1.5) !== undefined) ? 'up' : 'down';
         yoyCell = `<td class="yoy" style="color:${d>=0?'var(--positive)':'var(--negative)'}">${d>=0?'▲':'▼'}${Math.abs(d).toFixed(1)}%</td>`;
       }
     }
@@ -886,18 +1614,21 @@ function buildRatioTable(r, r2) {
   }).join('');
 }
 
+// ═══════════════════════════════════════════════════════════════
+// BUILD SCORE
+// ═══════════════════════════════════════════════════════════════
 function buildScore(score) {
   const ring = document.getElementById('scoreRing');
   const offset = 339 - (339 * score / 100);
   setTimeout(()=>{ ring.style.strokeDashoffset = offset; }, 100);
-  
+
   let cat, desc, color;
-  if (score>=80){cat='Excelente';desc='Empresa financieramente robusta con capacidad de crecimiento sostenible.';color='var(--positive)';}
-  else if (score>=65){cat='Bueno';desc='Situación sólida con áreas específicas de mejora que pueden fortalecer el negocio.';color='var(--positive)';}
-  else if (score>=50){cat='Regular';desc='Situación aceptable con vulnerabilidades que requieren atención estratégica.';color='var(--warning)';}
-  else if (score>=35){cat='Débil';desc='Indicadores preocupantes. Plan de mejora financiera urgente es necesario.';color='var(--warning)';}
-  else{cat='Crítico';desc='Situación de alto riesgo. Requiere reestructuración inmediata.';color='var(--negative)';}
-  
+  if (score>=80){cat=T('scoreExcellent');desc=T('scoreDescExcellent');color='var(--positive)';}
+  else if (score>=65){cat=T('scoreGood');desc=T('scoreDescGood');color='var(--positive)';}
+  else if (score>=50){cat=T('scoreRegular');desc=T('scoreDescRegular');color='var(--warning)';}
+  else if (score>=35){cat=T('scoreWeak');desc=T('scoreDescWeak');color='var(--warning)';}
+  else{cat=T('scoreCritical');desc=T('scoreDescCritical');color='var(--negative)';}
+
   ring.style.stroke = color;
   document.getElementById('scoreNum').textContent = score;
   document.getElementById('scoreNum').style.color = color;
@@ -906,18 +1637,21 @@ function buildScore(score) {
   document.getElementById('scoreDesc').textContent = desc;
 }
 
+// ═══════════════════════════════════════════════════════════════
+// BUILD ALTMAN
+// ═══════════════════════════════════════════════════════════════
 function buildAltman(r) {
   const alt = calcAltman(r);
-  if (!alt) { document.getElementById('altmanScore').innerHTML = '<p style="color:var(--text-muted);text-align:center">Datos insuficientes para calcular Z-Score</p>'; return; }
-  
+  if (!alt) { document.getElementById('altmanScore').innerHTML = `<p style="color:var(--text-muted);text-align:center">${T('altmanInsufficient')}</p>`; return; }
+
   const Z = alt.Z;
   let zone, color, desc;
-  if (Z > 2.99) { zone='Zona Segura'; color='var(--positive)'; desc='Riesgo de quiebra muy bajo en los próximos 2 años.'; }
-  else if (Z > 1.81) { zone='Zona Gris'; color='var(--warning)'; desc='Empresa en zona de incertidumbre. Monitoreo estrecho requerido.'; }
-  else { zone='Zona de Peligro'; color='var(--negative)'; desc='Alto riesgo de insolvencia. Acción inmediata necesaria.'; }
+  if (Z > 2.99) { zone=T('altmanSafe'); color='var(--positive)'; desc=T('altmanSafeDesc'); }
+  else if (Z > 1.81) { zone=T('altmanGrey'); color='var(--warning)'; desc=T('altmanGreyDesc'); }
+  else { zone=T('altmanDanger'); color='var(--negative)'; desc=T('altmanDangerDesc'); }
 
   const pct_pos = Math.min(100, Math.max(0, ((Z - 0) / 4) * 100));
-  
+
   document.getElementById('altmanScore').innerHTML = `
     <div class="altman-num" style="color:${color}">${Z.toFixed(2)}</div>
     <div class="altman-zone" style="color:${color}">${zone}</div>
@@ -926,40 +1660,43 @@ function buildAltman(r) {
       <div class="altman-marker" style="left:${pct_pos}%;background:${color}"></div>
     </div>
     <div class="altman-labels">
-      <span>Peligro (&lt;1.81)</span><span>Gris (1.81–2.99)</span><span>Seguro (&gt;2.99)</span>
+      <span>${T('altmanDangerLbl')}</span><span>${T('altmanGreyLbl')}</span><span>${T('altmanSafeLbl')}</span>
     </div>
     <div class="altman-components">
-      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px;">Componentes del Z-Score</div>
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin:12px 0 8px;">${T('altmanCompTitle')}</div>
       ${[
-        ['X1 — Capital de Trabajo / Activos', alt.X1.toFixed(4)],
-        ['X2 — Ut. Retenidas / Activos', alt.X2.toFixed(4)],
-        ['X3 — EBIT / Activos', alt.X3.toFixed(4)],
-        ['X4 — Patrimonio / Pasivos', alt.X4.toFixed(4)],
-        ['X5 — Ventas / Activos', alt.X5.toFixed(4)],
-      ].map(([l,v])=>`<div class="altman-comp"><span>${l}</span><span>${v}</span></div>`).join('')}
+        [T('altmanX1'), alt.X1.toFixed(4)],
+        [T('altmanX2'), alt.X2.toFixed(4)],
+        [T('altmanX3'), alt.X3.toFixed(4)],
+        [T('altmanX4'), alt.X4.toFixed(4)],
+        [T('altmanX5'), alt.X5.toFixed(4)],
+      ].map(([l,val])=>`<div class="altman-comp"><span>${l}</span><span>${val}</span></div>`).join('')}
     </div>
   `;
 }
 
+// ═══════════════════════════════════════════════════════════════
+// BUILD BENCHMARKS
+// ═══════════════════════════════════════════════════════════════
 function buildBenchmarks(r) {
   const industry = t('industry') || 'other';
   const bm = BENCHMARKS[industry] || BENCHMARKS.other;
   const industryName = document.getElementById('industry').options[document.getElementById('industry').selectedIndex].text;
 
   const items = [
-    { n:'Margen Bruto', mine:r.grossMargin, ind:bm.grossMargin, fmt:v=>pct(v) },
-    { n:'Margen EBITDA', mine:r.ebitdaMargin, ind:bm.ebitdaMargin, fmt:v=>pct(v) },
-    { n:'Margen Neto', mine:r.netMargin, ind:bm.netMargin, fmt:v=>pct(v) },
-    { n:'ROE', mine:r.roe, ind:bm.roe, fmt:v=>pct(v) },
-    { n:'Razón Corriente', mine:r.currentRatio, ind:bm.currentRatio, fmt:v=>ratio(v) },
-    { n:'Deuda/Patrimonio', mine:r.debtToEquity, ind:bm.debtToEquity, fmt:v=>ratio(v), inverted:true },
+    { n:T('ratioGrossMargin'), mine:r.grossMargin, ind:bm.grossMargin, fmt:v=>pct(v) },
+    { n:T('ratioEBITDAMargin'), mine:r.ebitdaMargin, ind:bm.ebitdaMargin, fmt:v=>pct(v) },
+    { n:T('ratioNetMargin'), mine:r.netMargin, ind:bm.netMargin, fmt:v=>pct(v) },
+    { n:T('ratioROE'), mine:r.roe, ind:bm.roe, fmt:v=>pct(v) },
+    { n:T('ratioCurrentRatio'), mine:r.currentRatio, ind:bm.currentRatio, fmt:v=>ratio(v) },
+    { n:T('ratioDE'), mine:r.debtToEquity, ind:bm.debtToEquity, fmt:v=>ratio(v), inverted:true },
   ].filter(i=>i.mine!==null&&i.mine!==undefined&&!isNaN(i.mine));
 
   document.getElementById('benchmarkContent').innerHTML = `
-    <div style="font-size:11px;color:var(--text-muted);margin-bottom:16px;">Comparando vs promedio de <strong style="color:var(--text)">${industryName}</strong></div>
+    <div style="font-size:11px;color:var(--text-muted);margin-bottom:16px;">${T('bmComparing')} <strong style="color:var(--text)">${industryName}</strong></div>
     <div style="display:flex;gap:16px;margin-bottom:16px;font-size:11px;">
-      <span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:3px;background:var(--accent3);display:inline-block;border-radius:2px;"></span>Tu empresa</span>
-      <span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:3px;background:var(--text-dim);display:inline-block;border-radius:2px;"></span>Industria</span>
+      <span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:3px;background:var(--accent3);display:inline-block;border-radius:2px;"></span>${T('bmMyCompany')}</span>
+      <span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:3px;background:var(--text-dim);display:inline-block;border-radius:2px;"></span>${T('bmIndustry')}</span>
     </div>
     ${items.map(item=>{
       const maxVal = Math.max(item.mine||0, item.ind||0, 0.1) * 1.3;
@@ -972,7 +1709,7 @@ function buildBenchmarks(r) {
             <span class="bm-name">${item.n}</span>
             <div class="bm-vals">
               <span class="bm-mine" style="color:${better?'var(--positive)':'var(--negative)'}">${item.fmt(item.mine)}</span>
-              <span class="bm-industry">Ind: ${item.fmt(item.ind)}</span>
+              <span class="bm-industry">${T('bmIndustry')}: ${item.fmt(item.ind)}</span>
             </div>
           </div>
           <div class="bm-bar-bg" style="height:6px;">
@@ -985,26 +1722,29 @@ function buildBenchmarks(r) {
   `;
 }
 
+// ═══════════════════════════════════════════════════════════════
+// BUILD ALERTS
+// ═══════════════════════════════════════════════════════════════
 function buildAlerts(r) {
   const alerts = [];
-  if (r.currentRatio!==null && r.currentRatio<1) alerts.push({type:'critical',msg:'Riesgo de liquidez crítico: el activo corriente no cubre el pasivo corriente.'});
-  else if (r.currentRatio!==null && r.currentRatio<1.5) alerts.push({type:'warning',msg:`Liquidez ajustada (${ratio(r.currentRatio)}). Monitorear flujo de efectivo mensualmente.`});
-  if (r.netMargin!==null && r.netMargin<0) alerts.push({type:'critical',msg:'La empresa opera con pérdida neta. Medidas urgentes de reducción de costos requeridas.'});
-  if (r.debtToEquity!==null && r.debtToEquity>2) alerts.push({type:'critical',msg:`Apalancamiento excesivo (${ratio(r.debtToEquity)} D/E). Alta dependencia de deuda.`});
-  if (r.interestCoverage!==null && r.interestCoverage<2) alerts.push({type:'critical',msg:`Cobertura de intereses insuficiente (${ratio(r.interestCoverage)}). Riesgo de incumplimiento.`});
-  if (r.grossMargin!==null && r.grossMargin<20) alerts.push({type:'warning',msg:`Margen bruto bajo (${pct(r.grossMargin)}). Revisar estrategia de precios y costos.`});
-  if (r.dso!==null && r.dso>60) alerts.push({type:'warning',msg:`Ciclo de cobro prolongado (${days(r.dso)}). Riesgo de cartera vencida y presión en capital de trabajo.`});
-  if (r.ccc!==null && r.ccc>90) alerts.push({type:'warning',msg:`Ciclo de conversión de efectivo elevado (${days(r.ccc)}). Capital de trabajo atrapado.`});
-  if (r.roe!==null && r.roe<5 && r.roe>=0) alerts.push({type:'warning',msg:`ROE bajo (${pct(r.roe)}). Retorno insuficiente para los accionistas.`});
-  
+  if (r.currentRatio!==null && r.currentRatio<1) alerts.push({type:'critical',msg:T('alertLiqCrit')});
+  else if (r.currentRatio!==null && r.currentRatio<1.5) alerts.push({type:'warning',msg:`${T('liquidezAjustada')} (${ratio(r.currentRatio)}). ${T('alertLiqWarn')}`});
+  if (r.netMargin!==null && r.netMargin<0) alerts.push({type:'critical',msg:T('alertNetLoss')});
+  if (r.debtToEquity!==null && r.debtToEquity>2) alerts.push({type:'critical',msg:`${T('alertHighDebt')} (${ratio(r.debtToEquity)} D/E). ${T('altaDeuda')}`});
+  if (r.interestCoverage!==null && r.interestCoverage<2) alerts.push({type:'critical',msg:`${T('alertIntCov')} (${ratio(r.interestCoverage)}). ${T('riesgoIncumplimiento')}`});
+  if (r.grossMargin!==null && r.grossMargin<20) alerts.push({type:'warning',msg:`${T('alertLowGross').replace('.',` (${pct(r.grossMargin)}).`)}`});
+  if (r.dso!==null && r.dso>60) alerts.push({type:'warning',msg:`${T('alertHighDSO').replace('.',` (${days(r.dso)}).`)}`});
+  if (r.ccc!==null && r.ccc>90) alerts.push({type:'warning',msg:`${T('alertHighCCC').replace('.',` (${days(r.ccc)}).`)}`});
+  if (r.roe!==null && r.roe<5 && r.roe>=0) alerts.push({type:'warning',msg:`${T('alertLowROE').replace('.',` (${pct(r.roe)}).`)}`});
+
   if (hasYoY && R2.revenue) {
     const revG = yoyDelta(r.revenue, R2.revenue);
-    if (revG!==null && revG<0) alerts.push({type:'warning',msg:`Caída en ingresos de ${Math.abs(revG).toFixed(1)}% vs período anterior. Revisar estrategia comercial.`});
-    if (revG!==null && revG>0) alerts.push({type:'good',msg:`Crecimiento de ingresos de ${revG.toFixed(1)}% vs período anterior. Tendencia positiva.`});
+    if (revG!==null && revG<0) alerts.push({type:'warning',msg:`${T('alertRevDown')} ${Math.abs(revG).toFixed(1)}% ${T('alertRevDownSuffix')}`});
+    if (revG!==null && revG>0) alerts.push({type:'good',msg:`${T('alertRevUp')} ${revG.toFixed(1)}% ${T('alertRevUpSuffix')}`});
   }
-  
-  if (alerts.length===0) alerts.push({type:'good',msg:'Los indicadores principales muestran una situación financiera saludable.'});
-  
+
+  if (alerts.length===0) alerts.push({type:'good',msg:T('alertHealthy')});
+
   document.getElementById('alertsContainer').innerHTML = alerts.map(a=>`
     <div class="alert ${a.type}">
       <span class="alert-icon">${a.type==='critical'?'🔴':a.type==='warning'?'🟡':'🟢'}</span>${a.msg}
@@ -1012,19 +1752,21 @@ function buildAlerts(r) {
   `).join('');
 }
 
-// ─── SIMULATOR ───────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// SIMULATOR
+// ═══════════════════════════════════════════════════════════════
 function buildSimulator(r) {
   document.getElementById('simControls').innerHTML = `
     <div class="sim-control">
-      <div class="sim-label">Incremento en Ingresos <span class="sim-value" id="simRevVal">+0%</span></div>
+      <div class="sim-label">${T('simRevLabel')} <span class="sim-value" id="simRevVal">+0%</span></div>
       <input type="range" class="sim-slider" id="simRev" min="-20" max="50" value="0" oninput="updateSim()">
     </div>
     <div class="sim-control">
-      <div class="sim-label">Reducción en Costos Operativos <span class="sim-value" id="simCostVal">+0%</span></div>
+      <div class="sim-label">${T('simCostLabel')} <span class="sim-value" id="simCostVal">+0%</span></div>
       <input type="range" class="sim-slider" id="simCost" min="-30" max="30" value="0" oninput="updateSim()">
     </div>
     <div class="sim-control">
-      <div class="sim-label">Reducción en Deuda <span class="sim-value" id="simDebtVal">+0%</span></div>
+      <div class="sim-label">${T('simDebtLabel')} <span class="sim-value" id="simDebtVal">+0%</span></div>
       <input type="range" class="sim-slider" id="simDebt" min="0" max="50" value="0" oninput="updateSim()">
     </div>
   `;
@@ -1035,7 +1777,7 @@ function updateSim() {
   const revChange = parseInt(document.getElementById('simRev').value) / 100;
   const costChange = parseInt(document.getElementById('simCost').value) / 100;
   const debtChange = parseInt(document.getElementById('simDebt').value) / 100;
-  
+
   document.getElementById('simRevVal').textContent = (revChange>=0?'+':'')+((revChange*100).toFixed(0))+'%';
   document.getElementById('simCostVal').textContent = (costChange>=0?'+':'')+((costChange*100).toFixed(0))+'%';
   document.getElementById('simDebtVal').textContent = (debtChange>=0?'+':'')+((debtChange*100).toFixed(0))+'%';
@@ -1048,20 +1790,18 @@ function updateSim() {
   const simInterest = R.interestExp * (1 - debtChange);
   const simNet = simEbit - simInterest + R.interestInc - R.taxes;
   const simNetMargin = simR > 0 ? (simNet / simR) * 100 : 0;
-  const simDebt = R.totalLiabilities * (1 - debtChange);
-  const simDE = R.totalEquity > 0 ? simDebt / R.totalEquity : 0;
 
   const fields = [
-    { l:'Ingresos Proyectados', v:fmt(simR,R.cur), delta:simR-R.revenue, cur:R.cur },
-    { l:'EBITDA Proyectado', v:fmt(simEbitda,R.cur), delta:simEbitda-R.ebitda, cur:R.cur },
-    { l:'Utilidad Neta Proyectada', v:fmt(simNet,R.cur), delta:simNet-R.netIncome, cur:R.cur },
-    { l:'Margen Neto Proyectado', v:pct(simNetMargin), delta:simNetMargin-(R.netMargin||0), pct:true },
+    { l:T('simRevProj'), v:fmt(simR,R.cur), delta:simR-R.revenue, cur:R.cur },
+    { l:T('simEBITDAProj'), v:fmt(simEbitda,R.cur), delta:simEbitda-R.ebitda, cur:R.cur },
+    { l:T('simNetProj'), v:fmt(simNet,R.cur), delta:simNet-R.netIncome, cur:R.cur },
+    { l:T('simNetMarginProj'), v:pct(simNetMargin), delta:simNetMargin-(R.netMargin||0), isPct:true },
   ];
 
   document.getElementById('simResults').innerHTML = fields.map(f=>{
     const sign = f.delta >= 0 ? '+' : '';
     const cls = f.delta >= 0 ? 'var(--positive)' : 'var(--negative)';
-    const deltaStr = f.pct ? `${sign}${f.delta.toFixed(1)}pp` : `${sign}${fmt(f.delta, f.cur)}`;
+    const deltaStr = f.isPct ? `${sign}${f.delta.toFixed(1)}pp` : `${sign}${fmt(f.delta, f.cur)}`;
     return `
       <div class="sim-result">
         <div class="sim-result-label">${f.l}</div>
@@ -1072,7 +1812,9 @@ function updateSim() {
   }).join('');
 }
 
-// ─── CHARTS ──────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// CHARTS
+// ═══════════════════════════════════════════════════════════════
 function destroyCharts() {
   Object.values(charts).forEach(c => { try { c.destroy(); } catch(e){} });
   charts = {};
@@ -1083,18 +1825,16 @@ function buildCharts(r, r2) {
   const gridColor = 'rgba(30,36,48,0.8)';
   const textColor = '#6b7a99';
 
-  // Balance Chart (Donut)
+  // Balance Chart
   const bCtx = document.getElementById('balanceChart').getContext('2d');
   charts.balance = new Chart(bCtx, {
     type: 'doughnut',
     data: {
-      labels: ['Activos Corrientes','Activos No Corrientes','Pasivos Corrientes','Pasivos LP','Patrimonio'],
+      labels: [T('chartCA'), T('chartNCA'), T('chartCL'), T('chartLTL'), T('chartEquity')],
       datasets: [{
         data: [r.totalCA, r.totalNCA, r.totalCL, r.totalLTL, r.totalEquity].map(v=>Math.max(0,v)),
         backgroundColor: ['#00e5b0','#4d9fff','#ff4d6b','#ff6b35','#a855f7'],
-        borderColor: '#0a0c0f',
-        borderWidth: 3,
-        hoverOffset: 8
+        borderColor: '#0a0c0f', borderWidth: 3, hoverOffset: 8
       }]
     },
     options: {
@@ -1106,9 +1846,9 @@ function buildCharts(r, r2) {
     }
   });
 
-  // P&L Waterfall (Bar)
+  // P&L Waterfall
   const plCtx = document.getElementById('plChart').getContext('2d');
-  const plLabels = ['Ingresos','Margen Bruto','EBITDA','EBIT','Ut. Neta'];
+  const plLabels = [T('plRevenue'), T('plGrossProfit'), T('plEBITDA'), T('plEBIT'), T('plNetIncome')];
   const plVals = [r.revenue, r.grossProfit, r.ebitda, r.ebit, r.netIncome];
   charts.pl = new Chart(plCtx, {
     type: 'bar',
@@ -1118,8 +1858,7 @@ function buildCharts(r, r2) {
         data: plVals,
         backgroundColor: plVals.map(v => v >= 0 ? 'rgba(0,229,176,0.7)' : 'rgba(255,77,107,0.7)'),
         borderColor: plVals.map(v => v >= 0 ? '#00e5b0' : '#ff4d6b'),
-        borderWidth: 1.5,
-        borderRadius: 6,
+        borderWidth: 1.5, borderRadius: 6,
       }]
     },
     options: {
@@ -1136,11 +1875,11 @@ function buildCharts(r, r2) {
   if (hasYoY && r2 && r2.revenue) {
     document.getElementById('yoyChartPanel').style.display = 'block';
     const yCtx = document.getElementById('yoyChart').getContext('2d');
-    const yLabels = ['Ingresos','Utilidad Bruta','EBITDA','Ut. Neta','Activos Totales','Patrimonio'];
+    const yLabels = [T('yoyRevenue'), T('yoyGrossProfit'), T('yoyEBITDA'), T('yoyNetIncome'), T('yoyTotalAssets'), T('yoyEquity')];
     const y1 = [r.revenue, r.grossProfit, r.ebitda, r.netIncome, r.totalAssets, r.totalEquity];
     const y2 = [r2.revenue, r2.grossProfit, r2.ebitda, r2.netIncome, r2.totalAssets, r2.totalEquity];
-    const per1 = t('period') || 'Actual';
-    const per2 = t('period2') || 'Anterior';
+    const per1 = t('period') || (LANG==='en'?'Current':'Actual');
+    const per2 = t('period2') || (LANG==='en'?'Prior':'Anterior');
     charts.yoy = new Chart(yCtx, {
       type: 'bar',
       data: {
@@ -1152,7 +1891,7 @@ function buildCharts(r, r2) {
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        plugins: { legend:{ labels:{color:textColor,font:{size:12}} } , tooltip:{ callbacks:{label:ctx=>` ${fmt(ctx.raw,r.cur)}`} } },
+        plugins: { legend:{ labels:{color:textColor,font:{size:12}} }, tooltip:{ callbacks:{label:ctx=>` ${fmt(ctx.raw,r.cur)}`} } },
         scales: {
           x:{grid:{color:gridColor},ticks:{color:textColor}},
           y:{grid:{color:gridColor},ticks:{color:textColor,font:{family:'IBM Plex Mono',size:11},callback:v=>fmt(v,r.cur)}}
@@ -1164,45 +1903,39 @@ function buildCharts(r, r2) {
   // Radar Chart
   const rCtx = document.getElementById('radarChart').getContext('2d');
   function normalize(val, min, max) { if (val===null||isNaN(val)) return 0; return Math.max(0, Math.min(100, ((val-min)/(max-min))*100)); }
-  const radarData = [
-    normalize(r.currentRatio,0,3),
-    normalize(r.grossMargin,0,80),
-    normalize(r.netMargin,-20,30),
-    normalize(r.roe,-10,30),
-    normalize(r.interestCoverage!==null?r.interestCoverage:0,0,10),
-    normalize(r.debtToEquity!==null?Math.max(0,3-r.debtToEquity):0,0,3),
-  ];
   charts.radar = new Chart(rCtx, {
     type: 'radar',
     data: {
-      labels: ['Liquidez','Margen Bruto','Margen Neto','ROE','Cobertura Deuda','Solvencia'],
+      labels: [T('radarLiquidity'),T('radarGrossMargin'),T('radarNetMargin'),T('radarROE'),T('radarDebtCov'),T('radarSolvency')],
       datasets: [{
-        label: t('period')||'Tu empresa',
-        data: radarData,
+        label: t('period')||(LANG==='en'?'Your company':'Tu empresa'),
+        data: [
+          normalize(r.currentRatio,0,3),
+          normalize(r.grossMargin,0,80),
+          normalize(r.netMargin,-20,30),
+          normalize(r.roe,-10,30),
+          normalize(r.interestCoverage!==null?r.interestCoverage:0,0,10),
+          normalize(r.debtToEquity!==null?Math.max(0,3-r.debtToEquity):0,0,3),
+        ],
         backgroundColor: 'rgba(0,229,176,0.15)',
-        borderColor: '#00e5b0',
-        borderWidth: 2,
-        pointBackgroundColor: '#00e5b0',
-        pointRadius: 4,
+        borderColor: '#00e5b0', borderWidth: 2,
+        pointBackgroundColor: '#00e5b0', pointRadius: 4,
       }]
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend:{display:false} },
       scales: {
-        r: {
-          min: 0, max: 100,
-          grid:{color:gridColor},
-          angleLines:{color:gridColor},
-          ticks:{display:false},
-          pointLabels:{color:textColor,font:{size:12,family:'IBM Plex Sans'}}
-        }
+        r: { min:0, max:100, grid:{color:gridColor}, angleLines:{color:gridColor}, ticks:{display:false},
+          pointLabels:{color:textColor,font:{size:12,family:'IBM Plex Sans'}} }
       }
     }
   });
 }
 
-// ─── LOADING STEPS ────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// LOADING STEPS
+// ═══════════════════════════════════════════════════════════════
 async function stepLoader(steps) {
   for (let i = 0; i < steps.length; i++) {
     const el = document.getElementById('ls'+(i+1));
@@ -1212,206 +1945,187 @@ async function stepLoader(steps) {
   }
 }
 
-// ─── MAIN ANALYSIS ───────────────────────────────────────────────
-async function runAnalysis() {
-  const btn = document.getElementById('analyzeBtn');
-  btn.disabled = true;
-  
-  R = calcRatios();
-  R2 = hasYoY ? calcRatios('Y2') : {};
-
-  const industry = t('industry') || 'no especificada';
-  const period = t('period') || 'período actual';
-  const period2 = t('period2') || 'período anterior';
-  const company = t('companyName') || 'La empresa';
-
-  // Show loading
-  document.getElementById('pageInput').style.display = 'none';
-  document.getElementById('loadingOverlay').classList.add('active');
-
-  // Run loaders in parallel with API calls
-  const loaderPromise = stepLoader([1,2,3,4,5]);
-
-  const alt = calcAltman(R);
-  const score = calcScore(R);
-  const bm = BENCHMARKS[t('industry')] || BENCHMARKS.other;
-
-  const dataStr = `
-EMPRESA: ${company} | INDUSTRIA: ${industry} | PERÍODO: ${period} | MONEDA: ${R.cur}
-
-ESTADO DE SITUACIÓN FINANCIERA:
-- Activos Corrientes: ${R.totalCA.toFixed(0)} (Efectivo: ${R.cash.toFixed(0)}, CxC: ${R.rec.toFixed(0)}, Inventario: ${R.inv.toFixed(0)})
-- Activos No Corrientes: ${R.totalNCA.toFixed(0)} | Total Activos: ${R.totalAssets.toFixed(0)}
-- Pasivos Corrientes: ${R.totalCL.toFixed(0)} | Pasivos LP: ${R.totalLTL.toFixed(0)} | Total Pasivos: ${R.totalLiabilities.toFixed(0)}
-- Patrimonio: ${R.totalEquity.toFixed(0)} | Capital de Trabajo: ${R.workingCapital.toFixed(0)}
-
-ESTADO DE RESULTADOS:
-- Ingresos: ${R.revenue.toFixed(0)} | COGS: ${R.cogs.toFixed(0)} | Margen Bruto: ${R.grossProfit.toFixed(0)} (${R.grossMargin?.toFixed(1)}%)
-- EBITDA: ${R.ebitda.toFixed(0)} (${R.ebitdaMargin?.toFixed(1)}%) | EBIT: ${R.ebit.toFixed(0)} | Ut. Neta: ${R.netIncome.toFixed(0)} (${R.netMargin?.toFixed(1)}%)
-- Intereses: ${R.interestExp.toFixed(0)} | D&A: ${R.da.toFixed(0)} | Impuestos: ${R.taxes.toFixed(0)}
-
-RATIOS CLAVE:
-- Liquidez Corriente: ${R.currentRatio?.toFixed(2)} | Rápida: ${R.quickRatio?.toFixed(2)}
-- ROE: ${R.roe?.toFixed(1)}% | ROA: ${R.roa?.toFixed(1)}%
-- D/E: ${R.debtToEquity?.toFixed(2)}x | Cobertura Intereses: ${R.interestCoverage?.toFixed(1)}x
-- DSO: ${R.dso?.toFixed(0)} días | DIO: ${R.dio?.toFixed(0)} días | DPO: ${R.dpo?.toFixed(0)} días | CCC: ${R.ccc?.toFixed(0)} días
-- Altman Z-Score: ${alt?.Z.toFixed(2)} (${alt?.Z>2.99?'Zona Segura':alt?.Z>1.81?'Zona Gris':'Zona de Peligro'})
-- Salud Financiera: ${score}/100
-
-VS BENCHMARKS INDUSTRIA (${industry}):
-- Margen Bruto: Empresa ${R.grossMargin?.toFixed(1)}% vs Industria ${bm.grossMargin}%
-- EBITDA: ${R.ebitdaMargin?.toFixed(1)}% vs ${bm.ebitdaMargin}%  
-- Margen Neto: ${R.netMargin?.toFixed(1)}% vs ${bm.netMargin}%
-- ROE: ${R.roe?.toFixed(1)}% vs ${bm.roe}%
-${hasYoY && R2.revenue ? `\nCOMPARATIVO YOY vs ${period2}:\n- Ingresos: ${R.revenue.toFixed(0)} vs ${R2.revenue.toFixed(0)} (${yoyDelta(R.revenue,R2.revenue)?.toFixed(1)}%)\n- Ut. Neta: ${R.netIncome.toFixed(0)} vs ${R2.netIncome.toFixed(0)}\n- EBITDA: ${R.ebitda.toFixed(0)} vs ${R2.ebitda.toFixed(0)}` : ''}
-`;
-
-  // Firma
-  const firmaPanel = document.getElementById('firmaPanel');
-  firmaPanel.style.display = 'block';
-  const elaboradoPorVal = t('elaboradoPor') || 'No especificado';
-  const elaboradoCargoVal = t('elaboradoCargo') || '';
-  document.getElementById('firmaElaborado').textContent = elaboradoPorVal;
-  document.getElementById('firmaElaboradoCargo').textContent = elaboradoCargoVal;
-  if (elaboradoPorVal) {
-    document.getElementById('reportElaborado').textContent = `Elaborado por: ${elaboradoPorVal}${elaboradoCargoVal ? ' · ' + elaboradoCargoVal : ''}`;
-  }
-
-  // ── ANÁLISIS AUTOMÁTICO BASADO EN REGLAS ──────────────────────
+// ═══════════════════════════════════════════════════════════════
+// DIAGNOSTIC GENERATOR (bilingual)
+// ═══════════════════════════════════════════════════════════════
+function generateDiagnostic(r) {
+  const cur = r.cur;
   const ind = t('industry') || 'other';
-  const bm2 = BENCHMARKS[ind] || BENCHMARKS.other;
-  const indName = document.getElementById('industry').options[document.getElementById('industry').selectedIndex]?.text || 'industria';
-  const cur2 = R.cur;
-
-  // ── DIAGNÓSTICO ESTRATÉGICO ───────────────────────────────────
+  const bm = BENCHMARKS[ind] || BENCHMARKS.other;
+  const indName = document.getElementById('industry').options[document.getElementById('industry').selectedIndex]?.text || '';
   let diag = '';
 
-  // 1. Situación general
-  const scoreLabel = score >= 80 ? 'excelente' : score >= 65 ? 'buena' : score >= 50 ? 'regular' : score >= 35 ? 'débil' : 'crítica';
-  diag += `<h3>Situación General</h3>
-  <p>Con una puntuación de salud financiera de <strong>${score}/100</strong>, la empresa presenta una situación <strong>${scoreLabel}</strong>. `;
-
-  if (R.totalAssets > 0) {
-    const debtPct = (R.totalLiabilities / R.totalAssets * 100).toFixed(1);
-    const equityPct = (R.totalEquity / R.totalAssets * 100).toFixed(1);
-    diag += `La estructura de activos muestra que el <strong>${debtPct}%</strong> está financiado con deuda y el <strong>${equityPct}%</strong> con patrimonio propio. `;
+  // 1. General
+  const score = calcScore(r);
+  const sq = T('scoreQuality');
+  const scoreLabel = score>=80?sq.excellent:score>=65?sq.good:score>=50?sq.regular:score>=35?sq.weak:sq.critical;
+  diag += `<h3>${T('diagGeneral')}</h3><p>${T('diagScorePrefix')} <strong>${score}/100</strong>, ${T('diagScoreSuffix')} <strong>${scoreLabel}</strong>. `;
+  if (r.totalAssets > 0) {
+    const debtPct = (r.totalLiabilities / r.totalAssets * 100).toFixed(1);
+    const equityPct = (r.totalEquity / r.totalAssets * 100).toFixed(1);
+    diag += `${T('diagDebtPct')} <strong>${debtPct}%</strong> ${T('diagDebtPctSuffix')} <strong>${equityPct}%</strong> ${T('diagDebtPctSuffix2')} `;
   }
-  if (R.workingCapital !== 0) {
-    const wcSign = R.workingCapital >= 0 ? 'positivo' : 'negativo';
-    diag += `El capital de trabajo es <strong>${wcSign}</strong> con un valor de ${fmt(R.workingCapital, cur2)}, lo que ${R.workingCapital >= 0 ? 'indica capacidad para cubrir obligaciones de corto plazo' : 'representa un riesgo operativo inmediato'}.`;
+  if (r.workingCapital !== 0) {
+    const wcSign = r.workingCapital >= 0 ? T('diagWCPositive') : T('diagWCNegative');
+    diag += `${T('diagWCPrefix')} <strong>${wcSign}</strong> ${T('diagWCValue')} ${fmt(r.workingCapital, cur)}, ${T('diagWC_lo')} ${r.workingCapital >= 0 ? T('diagWCPosSuffix') : T('diagWCNegSuffix')}.`;
   }
   diag += '</p>';
 
-  // 2. Liquidez
-  if (R.currentRatio !== null) {
-    diag += `<h3>Análisis de Liquidez</h3><p>`;
-    if (R.currentRatio >= 2) diag += `La razón corriente de <strong>${R.currentRatio.toFixed(2)}x</strong> refleja una posición de liquidez sólida. La empresa tiene holgura suficiente para cubrir sus obligaciones de corto plazo sin presión financiera.`;
-    else if (R.currentRatio >= 1.5) diag += `La razón corriente de <strong>${R.currentRatio.toFixed(2)}x</strong> es adecuada. Sin embargo, conviene monitorear el flujo de caja mensualmente para mantener este nivel.`;
-    else if (R.currentRatio >= 1) diag += `La razón corriente de <strong>${R.currentRatio.toFixed(2)}x</strong> es ajustada. Cualquier retraso en cobros o aumento de obligaciones puede generar presión de liquidez. Se recomienda optimizar el ciclo de cobro.`;
-    else diag += `<strong>⚠ Alerta crítica de liquidez:</strong> La razón corriente de <strong>${R.currentRatio.toFixed(2)}x</strong> indica que el pasivo corriente supera el activo corriente. Existe riesgo real de incumplimiento de obligaciones a corto plazo.`;
-    if (R.quickRatio !== null) diag += ` La razón rápida de <strong>${R.quickRatio.toFixed(2)}x</strong> ${R.quickRatio >= 1 ? 'confirma la solidez' : 'evidencia dependencia del inventario para cubrir obligaciones'}.`;
+  // 2. Liquidity
+  if (r.currentRatio !== null) {
+    diag += `<h3>${T('diagLiquidity')}</h3><p>`;
+    if (r.currentRatio >= 2) diag += `${T('diagCR_solid')} <strong>${r.currentRatio.toFixed(2)}x</strong> ${T('diagCR_solidSuffix')}`;
+    else if (r.currentRatio >= 1.5) diag += `${T('diagCR_solid')} <strong>${r.currentRatio.toFixed(2)}x</strong> ${T('diagCR_ok')}`;
+    else if (r.currentRatio >= 1) diag += `${T('diagCR_solid')} <strong>${r.currentRatio.toFixed(2)}x</strong> ${T('diagCR_tight')}`;
+    else diag += `${T('diagCR_crit')} <strong>${r.currentRatio.toFixed(2)}x</strong> ${T('diagCR_critSuffix')}`;
+    if (r.quickRatio !== null) diag += ` ${T('diagQR_confirm')} <strong>${r.quickRatio.toFixed(2)}x</strong> ${r.quickRatio >= 1 ? T('diagQR_good') : T('diagQR_bad')}.`;
     diag += `</p>`;
   }
 
-  // 3. Rentabilidad
-  if (R.grossMargin !== null || R.netMargin !== null) {
-    diag += `<h3>Rentabilidad</h3><p>`;
-    if (R.grossMargin !== null) {
-      const vsInd = R.grossMargin - bm2.grossMargin;
-      diag += `El margen bruto de <strong>${pct(R.grossMargin)}</strong> está <strong>${vsInd >= 0 ? vsInd.toFixed(1) + 'pp por encima' : Math.abs(vsInd).toFixed(1) + 'pp por debajo'}</strong> del promedio de la industria ${indName} (${bm2.grossMargin}%). `;
+  // 3. Profitability
+  if (r.grossMargin !== null || r.netMargin !== null) {
+    diag += `<h3>${T('diagProfitability')}</h3><p>`;
+    if (r.grossMargin !== null) {
+      const vsInd = r.grossMargin - bm.grossMargin;
+      diag += `${T('diagGM_prefix')} <strong>${pct(r.grossMargin)}</strong> ${T('diagGM_vs')} <strong>${vsInd >= 0 ? vsInd.toFixed(1) + T('diagGM_above') : Math.abs(vsInd).toFixed(1) + T('diagGM_below')}</strong> ${T('diagGM_industry')} ${indName} (${bm.grossMargin}%). `;
     }
-    if (R.ebitdaMargin !== null) diag += `El EBITDA de <strong>${fmt(R.ebitda, cur2)}</strong> representa un margen de <strong>${pct(R.ebitdaMargin)}</strong> sobre los ingresos. `;
-    if (R.netMargin !== null) {
-      if (R.netMargin < 0) diag += `<strong>La empresa registra pérdida neta</strong> con un margen negativo de ${pct(R.netMargin)}, lo que exige una revisión urgente de la estructura de costos y gastos.`;
-      else if (R.netMargin < 3) diag += `El margen neto de <strong>${pct(R.netMargin)}</strong> es muy estrecho, dejando poca capacidad de maniobra ante imprevistos.`;
-      else diag += `El margen neto de <strong>${pct(R.netMargin)}</strong> muestra ${R.netMargin >= bm2.netMargin ? 'una rentabilidad superior al promedio del sector' : 'oportunidad de mejora frente al referente sectorial de ' + bm2.netMargin + '%'}.`;
+    if (r.ebitdaMargin !== null) diag += `${T('diagEBITDA_prefix')} <strong>${fmt(r.ebitda, cur)}</strong> ${T('diagEBITDA_mid')} <strong>${pct(r.ebitdaMargin)}</strong> ${T('diagEBITDA_suffix')} `;
+    if (r.netMargin !== null) {
+      if (r.netMargin < 0) diag += `<strong>${T('diagNM_loss')} ${pct(r.netMargin)}</strong>${T('diagNM_lossSuffix')}`;
+      else if (r.netMargin < 3) diag += `${T('diagNM_thin')} <strong>${pct(r.netMargin)}</strong> ${T('diagNM_thinSuffix')}`;
+      else diag += `${T('diagNM_thin')} <strong>${pct(r.netMargin)}</strong> ${T('diagNM_good')} ${r.netMargin >= bm.netMargin ? T('diagNM_aboveSector') : T('diagNM_belowSector') + ' ' + bm.netMargin + '%'}.`;
     }
     diag += `</p>`;
   }
 
-  // 4. Endeudamiento
-  if (R.debtToEquity !== null) {
-    diag += `<h3>Estructura de Capital y Endeudamiento</h3><p>`;
-    if (R.debtToEquity < 0.5) diag += `El índice de endeudamiento de <strong>${ratio(R.debtToEquity)}</strong> es bajo, lo que indica una empresa financieramente conservadora con espacio para apalancarse si se requiere crecimiento.`;
-    else if (R.debtToEquity < 1) diag += `El índice D/E de <strong>${ratio(R.debtToEquity)}</strong> es moderado y manejable. La empresa mantiene un equilibrio razonable entre deuda y patrimonio.`;
-    else if (R.debtToEquity < 2) diag += `El índice D/E de <strong>${ratio(R.debtToEquity)}</strong> indica un nivel de apalancamiento elevado. Aunque aún manejable, cualquier deterioro en los ingresos puede comprometer la capacidad de pago.`;
-    else diag += `<strong>Apalancamiento excesivo:</strong> Con un D/E de <strong>${ratio(R.debtToEquity)}</strong>, la empresa depende fuertemente de financiamiento externo, lo que eleva significativamente el riesgo financiero.`;
-    if (R.interestCoverage !== null) diag += ` La cobertura de intereses de <strong>${ratio(R.interestCoverage)}</strong> ${R.interestCoverage >= 3 ? 'es adecuada' : R.interestCoverage >= 1.5 ? 'es ajustada y debe monitorearse' : 'es insuficiente y representa un riesgo de incumplimiento con acreedores'}.`;
+  // 4. Debt
+  if (r.debtToEquity !== null) {
+    diag += `<h3>${T('diagDebt')}</h3><p>`;
+    if (r.debtToEquity < 0.5) diag += `${T('diagDE_low')} <strong>${ratio(r.debtToEquity)}</strong> ${T('diagDE_lowSuffix')}`;
+    else if (r.debtToEquity < 1) diag += `${T('diagDE_mod')} <strong>${ratio(r.debtToEquity)}</strong> ${T('diagDE_modSuffix')}`;
+    else if (r.debtToEquity < 2) diag += `${T('diagDE_mod')} <strong>${ratio(r.debtToEquity)}</strong> ${T('diagDE_high')}`;
+    else diag += `${T('diagDE_extr')} <strong>${ratio(r.debtToEquity)}</strong>${T('diagDE_extrSuffix')}`;
+    if (r.interestCoverage !== null) diag += ` ${T('diagIC_prefix')} <strong>${ratio(r.interestCoverage)}</strong> ${r.interestCoverage >= 3 ? T('diagIC_good') : r.interestCoverage >= 1.5 ? T('diagIC_tight') : T('diagIC_bad')}.`;
     diag += `</p>`;
   }
 
-  // 5. Ciclo operativo
-  if (R.dso !== null || R.dio !== null) {
-    diag += `<h3>Eficiencia Operativa y Ciclo de Caja</h3><ul>`;
-    if (R.dso !== null) diag += `<li>DSO (Días de cobro): <strong>${days(R.dso)}</strong> — ${R.dso < 30 ? 'Excelente gestión de cartera' : R.dso < 45 ? 'Dentro de parámetros normales' : R.dso < 60 ? 'Cobros lentos, revisar política de crédito' : 'Cartera crítica, riesgo de incobrabilidad alto'}</li>`;
-    if (R.dio !== null) diag += `<li>DIO (Días de inventario): <strong>${days(R.dio)}</strong> — ${R.dio < 30 ? 'Rotación de inventario excelente' : R.dio < 60 ? 'Rotación normal' : 'Inventario acumulado, revisar política de compras y ventas'}</li>`;
-    if (R.dpo !== null) diag += `<li>DPO (Días de pago): <strong>${days(R.dpo)}</strong> — ${R.dpo > 45 ? 'Buen aprovechamiento del crédito de proveedores' : 'Posibilidad de negociar mayores plazos con proveedores'}</li>`;
-    if (R.ccc !== null) diag += `<li>CCC (Ciclo de conversión): <strong>${days(R.ccc)}</strong> — ${R.ccc < 45 ? 'Ciclo eficiente de conversión de efectivo' : R.ccc < 90 ? 'Ciclo moderado, con oportunidades de mejora' : 'Ciclo prolongado: el capital de trabajo está atrapado demasiado tiempo'}</li>`;
+  // 5. Efficiency
+  if (r.dso !== null || r.dio !== null) {
+    diag += `<h3>${T('diagEfficiency')}</h3><ul>`;
+    if (r.dso !== null) diag += `<li>${T('diagDSO_lbl')}: <strong>${days(r.dso)}</strong> — ${r.dso < 30 ? T('diagDSO_exc') : r.dso < 45 ? T('diagDSO_ok') : r.dso < 60 ? T('diagDSO_slow') : T('diagDSO_crit')}</li>`;
+    if (r.dio !== null) diag += `<li>${T('diagDIO_lbl')}: <strong>${days(r.dio)}</strong> — ${r.dio < 30 ? T('diagDIO_exc') : r.dio < 60 ? T('diagDIO_ok') : T('diagDIO_slow')}</li>`;
+    if (r.dpo !== null) diag += `<li>${T('diagDPO_lbl')}: <strong>${days(r.dpo)}</strong> — ${r.dpo > 45 ? T('diagDPO_good') : T('diagDPO_opp')}</li>`;
+    if (r.ccc !== null) diag += `<li>${T('diagCCC_lbl')}: <strong>${days(r.ccc)}</strong> — ${r.ccc < 45 ? T('diagCCC_eff') : r.ccc < 90 ? T('diagCCC_mod') : T('diagCCC_slow')}</li>`;
     diag += `</ul>`;
   }
 
-  // 6. ROE / ROA
-  if (R.roe !== null || R.roa !== null) {
-    diag += `<h3>Retorno sobre la Inversión</h3><p>`;
-    if (R.roe !== null) {
-      const vsIndRoe = R.roe - bm2.roe;
-      diag += `El ROE de <strong>${pct(R.roe)}</strong> indica que por cada peso de patrimonio, los accionistas obtienen ${pct(R.roe)} de retorno. Esto está <strong>${vsIndRoe >= 0 ? vsIndRoe.toFixed(1) + 'pp sobre' : Math.abs(vsIndRoe).toFixed(1) + 'pp bajo'}</strong> el referente sectorial. `;
+  // 6. ROE/ROA
+  if (r.roe !== null || r.roa !== null) {
+    diag += `<h3>${T('diagReturn')}</h3><p>`;
+    if (r.roe !== null) {
+      const vsInd = r.roe - bm.roe;
+      diag += `${T('diagROE_prefix')} <strong>${pct(r.roe)}</strong> ${T('diagROE_mid')} ${pct(r.roe)} ${T('diagROE_suffix')} <strong>${vsInd >= 0 ? vsInd.toFixed(1) + T('diagROE_above') : Math.abs(vsInd).toFixed(1) + T('diagROE_below')}</strong> ${T('diagROE_sector')} `;
     }
-    if (R.roa !== null) diag += `El ROA de <strong>${pct(R.roa)}</strong> ${R.roa >= 5 ? 'refleja un uso eficiente de los activos para generar utilidades' : 'sugiere que los activos no están siendo suficientemente productivos'}.`;
+    if (r.roa !== null) diag += `${T('diagROA_prefix')} <strong>${pct(r.roa)}</strong> ${r.roa >= 5 ? T('diagROA_good') : T('diagROA_bad')}.`;
     diag += `</p>`;
   }
 
   // 7. YoY
   if (hasYoY && R2.revenue) {
-    const revG = yoyDelta(R.revenue, R2.revenue);
-    const netG = yoyDelta(R.netIncome, R2.netIncome);
-    diag += `<h3>Análisis Comparativo Año vs Año</h3><p>`;
-    if (revG !== null) diag += `Los ingresos ${revG >= 0 ? `crecieron un <strong>${revG.toFixed(1)}%</strong>` : `cayeron un <strong>${Math.abs(revG).toFixed(1)}%</strong>`} frente al período anterior. `;
-    if (netG !== null) diag += `La utilidad neta ${netG >= 0 ? `mejoró un <strong>${netG.toFixed(1)}%</strong>` : `se deterioró un <strong>${Math.abs(netG).toFixed(1)}%</strong>`}, lo que ${netG >= 0 ? 'refleja una tendencia positiva en la gestión financiera' : 'requiere análisis profundo de las causas del deterioro'}.`;
+    const revG = yoyDelta(r.revenue, R2.revenue);
+    const netG = yoyDelta(r.netIncome, R2.netIncome);
+    diag += `<h3>${T('diagYoY')}</h3><p>`;
+    if (revG !== null) diag += `${revG >= 0 ? T('diagYoY_revGrew') : T('diagYoY_revFell')} <strong>${Math.abs(revG).toFixed(1)}%</strong> ${T('diagYoY_frente')} `;
+    if (netG !== null) diag += `${netG >= 0 ? T('diagYoY_netImpr') : T('diagYoY_netDet')} <strong>${Math.abs(netG).toFixed(1)}%</strong>${netG >= 0 ? T('diagYoY_posSuffix') : T('diagYoY_negSuffix')}.`;
     diag += `</p>`;
   }
 
-  // ── PLAN DE ACCIÓN ────────────────────────────────────────────
-  let recs = '<ul>';
+  return diag;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RECOMMENDATIONS GENERATOR (bilingual)
+// ═══════════════════════════════════════════════════════════════
+function generateRecommendations(r) {
+  const bm = BENCHMARKS[t('industry')] || BENCHMARKS.other;
   const recList = [];
 
-  if (R.currentRatio !== null && R.currentRatio < 1.5)
-    recList.push({ plazo:'30 días', accion:'Implementar política de cobro acelerado: descuentos por pronto pago, factoring o anticipos de cartera para mejorar la liquidez inmediata.', impacto:'Incremento en razón corriente y reducción del DSO.' });
+  if (r.currentRatio !== null && r.currentRatio < 1.5)
+    recList.push({ plazo:T('rec30'), accion:T('rec_liq'), impacto:T('rec_liqImpact') });
 
-  if (R.dso !== null && R.dso > 45)
-    recList.push({ plazo:'30–60 días', accion:`Revisar y fortalecer la política de crédito y cobranza. Con ${days(R.dso)} de cobro promedio, reducirlo a menos de 45 días liberaría capital de trabajo significativo.`, impacto:'Mejora del CCC y flujo de caja operativo.' });
+  if (r.dso !== null && r.dso > 45)
+    recList.push({ plazo:T('rec3060'), accion:`${T('rec_dsoPrefix')} ${days(r.dso)} ${T('rec_dsoSuffix')}`, impacto:T('rec_dsoImpact') });
 
-  if (R.grossMargin !== null && R.grossMargin < bm2.grossMargin)
-    recList.push({ plazo:'60 días', accion:`El margen bruto (${pct(R.grossMargin)}) está por debajo del sector (${bm2.grossMargin}%). Revisar estructura de costos, negociar con proveedores y evaluar ajuste de precios de venta.`, impacto:`Incremento de hasta ${(bm2.grossMargin - R.grossMargin).toFixed(1)}pp en margen bruto.` });
+  if (r.grossMargin !== null && r.grossMargin < bm.grossMargin)
+    recList.push({ plazo:T('rec60'), accion:`${T('rec_gmPrefix')} (${pct(r.grossMargin)}) ${T('rec_gmMid')} (${bm.grossMargin}%). ${T('rec_gmSuffix')}`, impacto:`${T('rec_gmImpact')} ${(bm.grossMargin - r.grossMargin).toFixed(1)}${T('rec_gmImpactSuffix')}` });
 
-  if (R.netMargin !== null && R.netMargin < 0)
-    recList.push({ plazo:'Inmediato', accion:'Análisis urgente de gastos operativos y financieros. Identificar y eliminar costos no esenciales. Evaluar reestructuración de deuda para reducir carga financiera.', impacto:'Recuperación de la rentabilidad neta.' });
+  if (r.netMargin !== null && r.netMargin < 0)
+    recList.push({ plazo:T('recImmediate'), accion:T('rec_netLoss'), impacto:T('rec_netLossImpact') });
 
-  if (R.debtToEquity !== null && R.debtToEquity > 1.5)
-    recList.push({ plazo:'90 días', accion:`Con un D/E de ${ratio(R.debtToEquity)}, se recomienda plan de desapalancamiento: refinanciar deuda a menor tasa, ampliar plazos, o evaluar inyección de capital.`, impacto:'Reducción del riesgo financiero y mejora en cobertura de intereses.' });
+  if (r.debtToEquity !== null && r.debtToEquity > 1.5)
+    recList.push({ plazo:T('rec90'), accion:`${T('rec_debtPrefix')} ${ratio(r.debtToEquity)}${T('rec_debtSuffix')}`, impacto:T('rec_debtImpact') });
 
-  if (R.dio !== null && R.dio > 60)
-    recList.push({ plazo:'60 días', accion:`Inventario inmovilizado por ${days(R.dio)}. Implementar modelo de inventario Just-in-Time, liquidar stock obsoleto y revisar política de compras.`, impacto:'Liberación de capital de trabajo y reducción de costos de almacenamiento.' });
+  if (r.dio !== null && r.dio > 60)
+    recList.push({ plazo:T('rec60'), accion:`${T('rec_dioPrefix')} ${days(r.dio)}${T('rec_dioSuffix')}`, impacto:T('rec_dioImpact') });
 
-  if (R.roe !== null && R.roe < bm2.roe)
-    recList.push({ plazo:'Largo plazo', accion:`ROE de ${pct(R.roe)} vs referente sectorial de ${bm2.roe}%. Evaluar estrategias de crecimiento rentable: nuevas líneas de negocio, eficiencia operativa o distribución de activos improductivos.`, impacto:`Acercamiento al ROE sectorial de ${bm2.roe}%.` });
+  if (r.roe !== null && r.roe < bm.roe)
+    recList.push({ plazo:T('recLT'), accion:`${T('rec_roePrefix')} ${pct(r.roe)} ${T('rec_roeMid')} ${bm.roe}${T('rec_roeSuffix')}`, impacto:`${T('rec_roeImpact')} ${bm.roe}%.` });
 
-  if (R.dpo !== null && R.dpo < 30)
-    recList.push({ plazo:'60 días', accion:'Negociar con proveedores plazos de pago más amplios (45–60 días). Esto mejora el ciclo de caja sin costo financiero adicional.', impacto:'Mejora del capital de trabajo disponible.' });
+  if (r.dpo !== null && r.dpo < 30)
+    recList.push({ plazo:T('rec60'), accion:T('rec_dpo'), impacto:T('rec_dpoImpact') });
 
-  if (R.interestCoverage !== null && R.interestCoverage < 3 && R.interestExp > 0)
-    recList.push({ plazo:'90 días', accion:`Cobertura de intereses de ${ratio(R.interestCoverage)} es riesgosa. Buscar refinanciación a tasas más bajas, prepagar deuda costosa o incrementar EBIT mediante eficiencia operativa.`, impacto:'Reducción del riesgo de incumplimiento financiero.' });
+  if (r.interestCoverage !== null && r.interestCoverage < 3 && r.interestExp > 0)
+    recList.push({ plazo:T('rec90'), accion:`${T('rec_icPrefix')} ${ratio(r.interestCoverage)} ${T('rec_icSuffix')}`, impacto:T('rec_icImpact') });
 
   if (recList.length === 0)
-    recList.push({ plazo:'Continuo', accion:'Los indicadores financieros son sólidos. Mantener la disciplina financiera actual, establecer metas de mejora incremental y considerar estrategias de crecimiento o diversificación.', impacto:'Consolidación y crecimiento sostenible.' });
+    recList.push({ plazo:T('recContinuous'), accion:T('rec_healthy'), impacto:T('rec_healthyImpact') });
 
-  recList.forEach((r, i) => {
-    recs += `<li><strong>[${r.plazo}]</strong> ${r.accion}<br><em style="color:var(--accent);font-size:12px;">Impacto esperado: ${r.impacto}</em></li>`;
-  });
-  recs += '</ul>';
+  return '<ul>' + recList.map(rec =>
+    `<li><strong>[${rec.plazo}]</strong> ${rec.accion}<br><em style="color:var(--accent);font-size:12px;">${T('recExpectedImpact')}: ${rec.impacto}</em></li>`
+  ).join('') + '</ul>';
+}
 
-  document.getElementById('aiAnalysis').innerHTML = diag;
-  document.getElementById('recsContent').innerHTML = recs;
+// ═══════════════════════════════════════════════════════════════
+// MAIN ANALYSIS
+// ═══════════════════════════════════════════════════════════════
+async function runAnalysis() {
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = true;
+
+  R = calcRatios();
+  R2 = hasYoY ? calcRatios('Y2') : {};
+
+  const company = t('companyName') || (LANG==='en'?'The Company':'La empresa');
+  const period = t('period') || (LANG==='en'?'Current Period':'Período Actual');
+  const period2 = t('period2') || (LANG==='en'?'Prior Period':'Período Anterior');
+
+  document.getElementById('pageInput').style.display = 'none';
+  document.getElementById('loadingOverlay').classList.add('active');
+  // Reset loading steps text from translations
+  for (let i=1;i<=5;i++) {
+    const el = document.getElementById('ls'+i);
+    if(el){ el.className='loading-step'; el.textContent = T('ls'+i); }
+  }
+
+  const loaderPromise = stepLoader([1,2,3,4,5]);
+
+  const score = calcScore(R);
+
+  // Firma panel
+  const firmaPanel = document.getElementById('firmaPanel');
+  firmaPanel.style.display = 'block';
+  const elaboradoPorVal = t('elaboradoPor') || (LANG==='en'?'Not specified':'No especificado');
+  const elaboradoCargoVal = t('elaboradoCargo') || '';
+  document.getElementById('firmaElaborado').textContent = elaboradoPorVal;
+  document.getElementById('firmaElaboradoCargo').textContent = elaboradoCargoVal;
+  if (elaboradoPorVal) {
+    const prefix = LANG==='en'?'Prepared by':'Elaborado por';
+    document.getElementById('reportElaborado').textContent = `${prefix}: ${elaboradoPorVal}${elaboradoCargoVal ? ' · ' + elaboradoCargoVal : ''}`;
+  }
+
+  // Generate bilingual content
+  document.getElementById('aiAnalysis').innerHTML = generateDiagnostic(R);
+  document.getElementById('recsContent').innerHTML = generateRecommendations(R);
 
   await loaderPromise;
 
@@ -1425,20 +2139,27 @@ ${hasYoY && R2.revenue ? `\nCOMPARATIVO YOY vs ${period2}:\n- Ingresos: ${R.reve
   buildSimulator(R);
   buildCharts(R, hasYoY ? R2 : null);
 
-  // Header info
-  const per1 = t('period') || 'Período Actual';
+  // Apply translations to static result elements
+  applyTranslations();
+
+  // Header
+  const per1 = t('period') || period;
   const per2 = t('period2');
-  document.getElementById('reportSubtitle').textContent = hasYoY && per2 ? `Análisis Comparativo ${per1} vs ${per2}` : per1;
-  document.getElementById('reportCompany').textContent = company !== 'La empresa' ? company : '';
-  document.getElementById('reportTimestamp').textContent = `Generado: ${new Date().toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'})}`;
+  const compLabel = hasYoY && per2 ? `${T('repComparative')} ${per1} vs ${per2}` : per1;
+  document.getElementById('reportSubtitle').textContent = compLabel;
+  document.getElementById('reportCompany').textContent = company !== (LANG==='en'?'The Company':'La empresa') ? company : '';
+  const genLabel = LANG==='en'?'Generated':'Generado';
+  document.getElementById('reportTimestamp').textContent = `${genLabel}: ${new Date().toLocaleDateString(LANG==='en'?'en-US':'es-ES',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'})}`;
 
   document.getElementById('loadingOverlay').classList.remove('active');
   document.getElementById('resultsWrap').classList.add('visible');
   btn.disabled = false;
   window.scrollTo({top:0,behavior:'smooth'});
 }
-  
-// ─── EXPORT PDF ──────────────────────────────────────────────────
+
+// ═══════════════════════════════════════════════════════════════
+// EXPORT PDF
+// ═══════════════════════════════════════════════════════════════
 function exportPDF() {
   const style = document.createElement('style');
   style.textContent = `
@@ -1460,7 +2181,9 @@ function exportPDF() {
   setTimeout(() => document.head.removeChild(style), 1000);
 }
 
-// ─── RESET ───────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+// RESET
+// ═══════════════════════════════════════════════════════════════
 function resetApp() {
   destroyCharts();
   document.getElementById('resultsWrap').classList.remove('visible');
@@ -1470,19 +2193,6 @@ function resetApp() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
-
-<footer>
-  <div class="footer-brand">
-    <span style="color:var(--text-muted);font-size:11px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:1px;">Creado por</span><br>
-    <strong>P&C Consultoría Integral SAS</strong> &nbsp;·&nbsp; Revisado por <strong>Estiven Poveda</strong> &nbsp;·&nbsp; Contador Público Especialista en Finanzas
-  </div>
-  <a class="footer-wa" href="https://wa.me/573228999183" target="_blank">
-    <svg class="footer-wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-    <span class="footer-wa-text">+57 322 899 9183</span>
-  </a>
-</footer>
 
 </body>
 </html>
